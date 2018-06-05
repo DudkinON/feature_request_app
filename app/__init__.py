@@ -44,6 +44,12 @@ def login_required(f):
 
 
 def csrf_protection(f):
+    """
+    CSRF protection
+
+    :param f: function
+    :return: function if csrf tokens are match else send error in JSON format
+    """
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
