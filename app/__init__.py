@@ -43,6 +43,20 @@ def login_required(f):
     return decorated_function
 
 
+def csrf_protection(f):
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        # CSRF protection
+        if not request.args.get('csrf') == login_session.get('csrf_token'):
+            return jsonify({'error': 'The attack of CSRF was prevented'}), 200
+        else:
+            return f(*args, **kwargs)
+
+    return decorated_function
+
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
