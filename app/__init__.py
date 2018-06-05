@@ -23,6 +23,12 @@ auth = HTTPBasicAuth()
 
 
 def login_required(f):
+    """
+    Checking the user is logged in
+
+    :param f: function
+    :return: function if user legged in else send error in JSON format
+    """
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
