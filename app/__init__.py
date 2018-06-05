@@ -63,6 +63,26 @@ def csrf_protection(f):
     return decorated_function
 
 
+# TODO: Verification of password
+@auth.verify_password
+def verify_password(_login, password):
+
+    # Try to see if it's a token first
+    user_id = User.verify_auth_token(_login)
+    if user_id:
+        user = get_user_by_id(user_id)
+    else:
+        # if not try to find a user by email
+        user = get_user_by_email(_login)
+        if not user:
+            return False
+        else:
+            if not user.verify_password(password):
+                return False
+    g.user = user
+    return True
+
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
