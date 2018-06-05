@@ -66,6 +66,13 @@ def csrf_protection(f):
 # TODO: Verification of password
 @auth.verify_password
 def verify_password(_login, password):
+    """
+    Verification of password
+
+    :param _login: string
+    :param password: string
+    :return bool:
+    """
 
     # Try to see if it's a token first
     user_id = User.verify_auth_token(_login)
