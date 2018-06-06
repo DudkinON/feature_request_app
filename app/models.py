@@ -42,6 +42,10 @@ class User(Base):
     status = Column(Integer, default=3)
     role = Column(String(10), default='user')
 
+    def hash_password(self, password):
+
+        self.hash = ph.hash(password)
+
 
 # create an engine
 if POSTGRES:
