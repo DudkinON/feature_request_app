@@ -29,6 +29,20 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 query = session.query
 
+
+class User(Base):
+
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String(60))
+    last_name = Column(String(60))
+    email = Column(String(45))
+    hash = Column(String(250))
+    is_active = Column(Boolean, default=True)
+    status = Column(Integer, default=3)
+    role = Column(String(10), default='user')
+
+
 # create an engine
 if POSTGRES:
     engine = create_engine(CONNECT_SETTINGS)
