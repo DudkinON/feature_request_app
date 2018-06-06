@@ -43,7 +43,12 @@ class User(Base):
     role = Column(String(10), default='user')
 
     def hash_password(self, password):
+        """
+        Get a password string and hashing it
 
+        :param password: (str)
+        :return void:
+        """
         self.hash = ph.hash(password)
 
 
