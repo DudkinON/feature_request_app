@@ -63,6 +63,11 @@ class User(Base):
         except VerifyMismatchError:
             return False
 
+    def generate_auth_token(self):
+
+        s = Serializer(secret_key)
+        return s.dumps({'uid': self.id})
+
 
 # create an engine
 if POSTGRES:
