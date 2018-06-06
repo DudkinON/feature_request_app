@@ -51,6 +51,13 @@ class User(Base):
         """
         self.hash = ph.hash(password)
 
+    def verify_password(self, password):
+
+        try:
+            return ph.verify(self.hash, password)
+        except VerifyMismatchError:
+            return False
+
 
 # create an engine
 if POSTGRES:
