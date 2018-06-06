@@ -64,7 +64,11 @@ class User(Base):
             return False
 
     def generate_auth_token(self):
+        """
+        Generate authentication token
 
+        :return string: (token)
+        """
         s = Serializer(secret_key)
         return s.dumps({'uid': self.id})
 
