@@ -72,6 +72,21 @@ class User(Base):
         s = Serializer(secret_key)
         return s.dumps({'uid': self.id})
 
+    @staticmethod
+    def verify_auth_token(token):
+
+        s = Serializer(secret_key)
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            # Valid Token, but expired
+            return None
+        except BadSignature:
+            # Invalid Token
+            return None
+        uid = data['uid']
+        return uid
+
 
 # create an engine
 if POSTGRES:
