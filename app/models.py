@@ -52,7 +52,12 @@ class User(Base):
         self.hash = ph.hash(password)
 
     def verify_password(self, password):
+        """
+        Password verification
 
+        :param password:
+        :return bool:
+        """
         try:
             return ph.verify(self.hash, password)
         except VerifyMismatchError:
