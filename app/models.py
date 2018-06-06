@@ -74,7 +74,12 @@ class User(Base):
 
     @staticmethod
     def verify_auth_token(token):
+        """
+        Try to load token, success return user id false return None
 
+        :param token:
+        :return mix:
+        """
         s = Serializer(secret_key)
         try:
             data = s.loads(token)
