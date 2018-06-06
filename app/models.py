@@ -94,7 +94,11 @@ class User(Base):
 
     @property
     def serialize(self):
-        
+        """
+        Return serialized user info
+
+        :return dict:
+        """
         return {
             'uid': self.id,
             'first_name': self.first_name,
