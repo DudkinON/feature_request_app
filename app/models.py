@@ -164,6 +164,18 @@ class Client(Base):
         }
 
 
+class Request(Base):
+    __tablename__ = 'request'
+    id = Column('id', Integer, primary_key=True)
+    title = Column('title', String(80))
+    description = Column('description', String(250))
+    client = Column('client', ForeignKey("client.id"), nullable=False)
+    client_priority = Column('client_priority', ForeignKey("priority.id"))
+    target_date = Column('target_date', Date)
+    product_area = Column('product_area', ForeignKey("product_area.id"))
+    is_active = Column('is_active', Boolean, default=True)
+
+
 # create an engine
 if POSTGRES:
     engine = create_engine(CONNECT_SETTINGS)
