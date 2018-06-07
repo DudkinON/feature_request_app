@@ -128,6 +128,12 @@ class ProductArea(Base):
         }
 
 
+class Priority(Base):
+
+    __tablename__ = 'priority'
+    id = Column('id', Integer, primary_key=True)
+
+
 # create an engine
 if POSTGRES:
     engine = create_engine(CONNECT_SETTINGS)
