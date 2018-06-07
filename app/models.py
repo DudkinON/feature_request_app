@@ -140,6 +140,12 @@ class Client(Base):
     id = Column('id', Integer, primary_key=True)
     name = Column('name', String(50))
 
+    @property
+    def count_requests(self):
+        
+        amount = len(query(Request.id).filter_by(client=self.id).all())
+        return amount + 1
+
 
 # create an engine
 if POSTGRES:
