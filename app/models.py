@@ -150,6 +150,15 @@ class Client(Base):
         amount = len(query(Request.id).filter_by(client=self.id).all())
         return amount + 1
 
+    @property
+    def serialize(self):
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'client_priority': self.count_requests
+        }
+
 
 # create an engine
 if POSTGRES:
