@@ -117,7 +117,11 @@ class ProductArea(Base):
 
     @property
     def serialize(self):
+        """
+        Return client info
 
+        :return dict:
+        """
         return {
             'id': self.id,
             'name': self.name
