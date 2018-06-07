@@ -142,7 +142,11 @@ class Client(Base):
 
     @property
     def count_requests(self):
-        
+        """
+        Count requests by client
+
+        :return integer:
+        """
         amount = len(query(Request.id).filter_by(client=self.id).all())
         return amount + 1
 
