@@ -195,6 +195,19 @@ class Request(Base):
         area = query(ProductArea).filter_by(id=self.product_area).first()
         return area.serialize
 
+    @property
+    def serialize(self):
+
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'client': self.get_client,
+            'client_priority': self.client_priority,
+            'target_date': self.target_date,
+            'product_area': self.get_product_area
+        }
+
 
 # create an engine
 if POSTGRES:
