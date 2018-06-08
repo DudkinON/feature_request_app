@@ -197,7 +197,11 @@ class Request(Base):
 
     @property
     def serialize(self):
+        """
+        Return request info
 
+        :return dict:
+        """
         return {
             'id': self.id,
             'title': self.title,
