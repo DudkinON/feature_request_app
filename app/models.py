@@ -177,7 +177,11 @@ class Request(Base):
 
     @property
     def get_client(self):
+        """
+        Returns request's client
 
+        :return:
+        """
         client = query(Client).filter_by(id=self.client).first()
         return client.serialize if client else None
 
