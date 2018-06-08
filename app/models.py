@@ -175,6 +175,12 @@ class Request(Base):
     product_area = Column('product_area', ForeignKey("product_area.id"))
     is_active = Column('is_active', Boolean, default=True)
 
+    @property
+    def get_client(self):
+
+        client = query(Client).filter_by(id=self.client).first()
+        return client.serialize if client else None
+
 
 # create an engine
 if POSTGRES:
