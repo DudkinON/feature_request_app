@@ -185,6 +185,12 @@ class Request(Base):
         client = query(Client).filter_by(id=self.client).first()
         return client.serialize if client else None
 
+    @property
+    def get_product_area(self):
+
+        area = query(ProductArea).filter_by(id=self.product_area).first()
+        return area.serialize
+
 
 # create an engine
 if POSTGRES:
