@@ -187,7 +187,11 @@ class Request(Base):
 
     @property
     def get_product_area(self):
+        """
+        Returns request's product area
 
+        :return dict:
+        """
         area = query(ProductArea).filter_by(id=self.product_area).first()
         return area.serialize
 
