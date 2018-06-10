@@ -185,6 +185,7 @@ def front_end():
     login_session['csrf_token'] = csrf_token
     return render("index.html", csrf=csrf_token)
 
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
