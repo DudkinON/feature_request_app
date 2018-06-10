@@ -91,7 +91,15 @@ def verify_password(_login, password):
 
 
 def check_request(f):
+    """
+    Check validity of fields and clean data from the front-end
+    if date is not valid return error to front-end else save
+    cleaned data to global variable g and return decorated
+    function
 
+    :param f: function
+    :return mix:
+    """
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -100,7 +108,6 @@ def check_request(f):
         data = request.get_json()
 
         user_request = dict()
-
 
 
         # validate fields
