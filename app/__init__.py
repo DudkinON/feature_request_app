@@ -110,7 +110,12 @@ def check_request(f):
         user_request = dict()
 
         def field_validation(field):
-            
+            """
+            Checks the field on existing, not too short and not an integer.
+
+            :param field: string
+            :return object:
+            """
             if not data.get(field):
                 return jsonify(
                     {'error': '%s is empty' % field.capitalize()}), 200
@@ -172,6 +177,13 @@ def check_request(f):
 
     return decorated_function
 
+
+@app.route('/')
+def front_end():
+
+    csrf_token = get_unique_str(36)
+    login_session['csrf_token'] = csrf_token
+    return render("index.html", csrf=csrf_token)
 
 if __name__ == '__main__':
     app.debug = app_debug
