@@ -109,6 +109,19 @@ def check_request(f):
 
         user_request = dict()
 
+        def field_validation(field):
+            
+            if not data.get(field):
+                return jsonify(
+                    {'error': '%s is empty' % field.capitalize()}), 200
+
+            if len(data.get(field)) < 3:
+                return jsonify(
+                    {'error': '%s is too short' % field.capitalize()})
+
+            if isinstance(data.get(field), (int, long)):
+                msg = "$s can not be an integer" % field.capitalize()
+                return jsonify({'error': msg})
 
         # validate fields
         field_validation("title")
