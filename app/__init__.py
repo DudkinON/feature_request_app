@@ -180,7 +180,11 @@ def check_request(f):
 
 @app.route('/')
 def front_end():
+    """
+    Front-end template
 
+    :return: a rendered HTML template
+    """
     csrf_token = get_unique_str(36)
     login_session['csrf_token'] = csrf_token
     return render("index.html", csrf=csrf_token)
