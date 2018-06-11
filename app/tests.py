@@ -50,5 +50,10 @@ class Storage(object):
         self.token = token
 
     def set_cookies(self, cookies):
+        """
+        Setter for cookies
 
+        :param cookies: dictionary
+        :return void:
+        """
         self.cookies = cookies
