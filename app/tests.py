@@ -97,3 +97,8 @@ storage = Storage()
 
 class TestApp(TestCase):
 
+    def setUp(self):
+        # configure tests class
+        self.credentials = CREDENTIALS
+        self.url = HOST + '%s?csrf=%s'
+        self.headers = {'content-type': 'application/json'}
