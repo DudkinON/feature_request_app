@@ -57,3 +57,7 @@ class Storage(object):
         :return void:
         """
         self.cookies = cookies
+
+    def get_uid(self):
+
+        return self.uid
