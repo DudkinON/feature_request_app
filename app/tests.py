@@ -89,3 +89,11 @@ class Storage(object):
         :return dict:
         """
         return self.cookies
+
+
+# create storage
+storage = Storage()
+
+
+class TestApp(TestCase):
+
