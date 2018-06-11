@@ -12,4 +12,6 @@ req_session = Session()
 
 
 class Storage(object):
-    pass
+    """
+    Provide storage for data like uid, csrf, token, and cookies
+    """
