@@ -32,5 +32,10 @@ class Storage(object):
         self.uid = uid
 
     def set_csrf(self, csrf_token):
+        """
+        Setter for csrf token
 
+        :param csrf_token: string
+        :return void:
+        """
         self.csrf = csrf_token
