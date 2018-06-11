@@ -11,7 +11,8 @@ from itsdangerous import BadSignature, SignatureExpired
 from argon2.exceptions import VerifyMismatchError
 from argon2 import PasswordHasher
 from resource import get_unique_str
-from settings import CONNECT_SETTINGS, POSTGRES
+from settings import POSTGRES
+from configure import DB_SETTINGS
 
 Base = declarative_base()
 secret_key = get_unique_str(32)
@@ -19,10 +20,7 @@ ph = PasswordHasher()
 
 
 # create session
-if POSTGRES:
-    engine = create_engine(CONNECT_SETTINGS)
-else:
-    engine = create_engine('sqlite:///request.db?check_same_thread=False')
+engine = create_engine(DB_SETTINGS)
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
@@ -44,7 +42,7 @@ class User(Base):
 
     def hash_password(self, password):
         """
-        Get a password string and hashing it
+        Get a password string and hash it
 
         :param password: (str)
         :return void:
@@ -75,7 +73,8 @@ class User(Base):
     @staticmethod
     def verify_auth_token(token):
         """
-        Try to load token, success return user id false return None
+        Try to load token, if successful return user id,
+        if false return None
 
         :param token:
         :return mix:
@@ -215,5 +214,5 @@ class Request(Base):
 
 # create an engine
 if POSTGRES:
-    engine = create_engine(CONNECT_SETTINGS)
+    engine = create_engine(DB_SETTINGS)
 Base.metadata.create_all(engine)
