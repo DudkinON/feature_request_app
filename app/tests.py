@@ -73,3 +73,7 @@ class Storage(object):
         :return string:
         """
         return self.csrf
+
+    def get_token(self):
+
+        return self.token
