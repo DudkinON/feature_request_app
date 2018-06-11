@@ -39,3 +39,7 @@ class Storage(object):
         :return void:
         """
         self.csrf = csrf_token
+
+    def set_token(self, token):
+
+        self.token = token
