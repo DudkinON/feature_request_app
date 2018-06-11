@@ -21,3 +21,7 @@ class Storage(object):
         self.csrf = None
         self.token = None
         self.cookies = None
+
+    def set_uid(self, uid):
+
+        self.uid = uid
