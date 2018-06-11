@@ -15,3 +15,9 @@ class Storage(object):
     """
     Provide storage for data like uid, csrf, token, and cookies
     """
+
+    def __init__(self):
+        self.uid = None
+        self.csrf = None
+        self.token = None
+        self.cookies = None
