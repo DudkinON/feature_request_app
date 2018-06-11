@@ -23,5 +23,10 @@ class Storage(object):
         self.cookies = None
 
     def set_uid(self, uid):
+        """
+        Setter for user id
 
+        :param uid: integer
+        :return void:
+        """
         self.uid = uid
