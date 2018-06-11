@@ -48,3 +48,7 @@ class Storage(object):
         :return void:
         """
         self.token = token
+
+    def set_cookies(self, cookies):
+
+        self.cookies = cookies
