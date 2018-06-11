@@ -65,3 +65,7 @@ class Storage(object):
         :return integer:
         """
         return self.uid
+
+    def get_csrf(self):
+
+        return self.csrf
