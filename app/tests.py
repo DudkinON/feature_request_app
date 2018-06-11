@@ -59,5 +59,9 @@ class Storage(object):
         self.cookies = cookies
 
     def get_uid(self):
+        """
+        Getter for user id
 
+        :return integer:
+        """
         return self.uid
