@@ -102,3 +102,15 @@ class TestApp(TestCase):
         self.credentials = CREDENTIALS
         self.url = HOST + '%s?csrf=%s'
         self.headers = {'content-type': 'application/json'}
+
+    def test_front_end(self):
+
+        r = req_session.get(HOST)
+        content_type = 'text/html; charset=utf-8'
+        pattern = r'\sdata-csrf-token=\"([A-Z\d]{36})\"'
+        csrf = search(pattern, r.text).group(1)
+        cookies = req_session.cookies.get_dict()
+        storage.set_csrf(csrf)
+        storage.set_cookies(cookies)
+        self.assertEquals(r.status_code, 200)
+        self.assertEquals(r.headers['Content-Type'], content_type)
