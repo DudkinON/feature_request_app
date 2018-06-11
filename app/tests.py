@@ -75,5 +75,9 @@ class Storage(object):
         return self.csrf
 
     def get_token(self):
+        """
+        Getter for auth token
 
+        :return string:
+        """
         return self.token
