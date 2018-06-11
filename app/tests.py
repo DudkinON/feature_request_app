@@ -81,3 +81,7 @@ class Storage(object):
         :return string:
         """
         return self.token
+
+    def get_cookies(self):
+
+        return self.cookies
