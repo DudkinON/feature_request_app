@@ -104,7 +104,14 @@ class TestApp(TestCase):
         self.headers = {'content-type': 'application/json'}
 
     def test_front_end(self):
+        """
+        Test for front_end function. Test status code
+        and content type. Get csrf token and cookies
+        from the request and save them, for following
+        test function.
 
+        :return void:
+        """
         r = req_session.get(HOST)
         content_type = 'text/html; charset=utf-8'
         pattern = r'\sdata-csrf-token=\"([A-Z\d]{36})\"'
