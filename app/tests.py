@@ -128,6 +128,10 @@ class Storage(object):
         """
         return self.client
 
+    def get_product_area(self):
+
+        return self.product_area
+
 
 # create storage
 storage = Storage()
