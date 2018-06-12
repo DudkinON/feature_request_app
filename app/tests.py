@@ -21,6 +21,9 @@ class Storage(object):
         self.csrf = None
         self.token = None
         self.cookies = None
+        self.client = None
+        self.product_area = None
+        self.request = None
 
     def set_uid(self, uid):
         """
@@ -121,3 +124,4 @@ class TestApp(TestCase):
         storage.set_cookies(cookies)
         self.assertEquals(r.status_code, 200)
         self.assertEquals(r.headers['Content-Type'], content_type)
+
