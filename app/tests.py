@@ -136,6 +136,10 @@ class Storage(object):
         """
         return self.product_area
 
+    def get_request(self):
+
+        return self.request
+
 
 # create storage
 storage = Storage()
