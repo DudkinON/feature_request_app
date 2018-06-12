@@ -62,7 +62,12 @@ class Storage(object):
         self.cookies = cookies
 
     def set_client(self, client):
+        """
+        Setter for client
 
+        :param client: dictionary
+        :return void:
+        """
         self.client = client
 
     def get_uid(self):
