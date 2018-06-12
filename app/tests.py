@@ -137,7 +137,11 @@ class Storage(object):
         return self.product_area
 
     def get_request(self):
+        """
+        Getter for request dictionary
 
+        :return dict:
+        """
         return self.request
 
 
