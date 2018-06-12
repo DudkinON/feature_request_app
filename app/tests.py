@@ -103,7 +103,7 @@ class TestApp(TestCase):
         self.url = HOST + '%s?csrf=%s'
         self.headers = {'content-type': 'application/json'}
 
-    def test_front_end(self):
+    def test_1_front_end(self):
         """
         Test for front_end function. Test status code
         and content type. Get csrf token and cookies
