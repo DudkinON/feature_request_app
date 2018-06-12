@@ -71,7 +71,12 @@ class Storage(object):
         self.client = client
 
     def set_product_area(self, product_area):
+        """
+        Setter for product_area
 
+        :param product_area: dictionary
+        :return void:
+        """
         self.product_area = product_area
 
     def get_uid(self):
