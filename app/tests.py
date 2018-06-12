@@ -120,6 +120,10 @@ class Storage(object):
         """
         return self.cookies
 
+    def get_client(self):
+
+        return self.client
+
 
 # create storage
 storage = Storage()
