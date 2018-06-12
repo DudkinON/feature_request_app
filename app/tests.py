@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+from unittest import TestCase, main
 from settings import HOST, CREDENTIALS
 from requests import Session
 from re import search
@@ -13,7 +13,7 @@ req_session = Session()
 
 class Storage(object):
     """
-    Provide storage for data like uid, csrf, token, and cookies
+    Provide storage for data like uid, csrf, token, cookies etc
     """
 
     def __init__(self):
@@ -60,6 +60,10 @@ class Storage(object):
         :return void:
         """
         self.cookies = cookies
+
+    def set_client(self, client):
+
+        self.client = client
 
     def get_uid(self):
         """
@@ -124,4 +128,3 @@ class TestApp(TestCase):
         storage.set_cookies(cookies)
         self.assertEquals(r.status_code, 200)
         self.assertEquals(r.headers['Content-Type'], content_type)
-
