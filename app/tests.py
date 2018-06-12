@@ -177,7 +177,14 @@ class TestApp(TestCase):
         self.assertEquals(r.headers['Content-Type'], content_type)
 
     def test_2_registration(self):
+        """
+        Emulation of user registration. Uses stored csrf
+        token and cookies to imitate user behavior.
+        Sends post request to app with user registration
+        data and checks returned user info.
 
+        :return void:
+        """
         r = req_session.post(
             self.url % ('/registration', storage.get_csrf()),
             cookies=storage.get_cookies(),
