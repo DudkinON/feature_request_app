@@ -121,7 +121,11 @@ class Storage(object):
         return self.cookies
 
     def get_client(self):
+        """
+        Getter for client dictionary
 
+        :return dict:
+        """
         return self.client
 
 
