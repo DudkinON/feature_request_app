@@ -80,7 +80,12 @@ class Storage(object):
         self.product_area = product_area
 
     def set_request(self, request):
+        """
+        Setter for request
 
+        :param request: dictionary
+        :return void:
+        """
         self.request = request
 
     def get_uid(self):
