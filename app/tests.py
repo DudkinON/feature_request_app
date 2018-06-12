@@ -129,7 +129,11 @@ class Storage(object):
         return self.client
 
     def get_product_area(self):
+        """
+        Getter for product area dictionary
 
+        :return dict:
+        """
         return self.product_area
 
 
