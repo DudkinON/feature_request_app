@@ -70,6 +70,10 @@ class Storage(object):
         """
         self.client = client
 
+    def set_product_area(self, product_area):
+
+        self.product_area = product_area
+
     def get_uid(self):
         """
         Getter for user id
