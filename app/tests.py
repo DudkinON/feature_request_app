@@ -191,13 +191,19 @@ class TestApp(TestCase):
 
         :return void:
         """
+        # execute request
         r = req_session.get(HOST)
+
+        # retrieve and save csrf token from the page
         content_type = 'text/html; charset=utf-8'
         pattern = r'\sdata-csrf-token=\"([A-Z\d]{36})\"'
         csrf = search(pattern, r.text).group(1)
-        cookies = req_session.cookies.get_dict()
         storage.set_csrf(csrf)
-        storage.set_cookies(cookies)
+
+        # save cookies
+        self.save_cookies()
+
+        # tests
         self.assertEquals(r.status_code, 200)
         self.assertEquals(r.headers['Content-Type'], content_type)
 
