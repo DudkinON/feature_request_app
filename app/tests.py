@@ -157,6 +157,14 @@ class TestApp(TestCase):
         self.url = HOST + '%s?csrf=%s'
         self.headers = {'content-type': 'application/json'}
 
+    def post(self, url, data):
+
+        return req_session.post(
+            self.url % (url, storage.get_csrf()),
+            cookies=storage.get_cookies(),
+            data=dumps(data),
+            headers=self.headers)
+
     def test_01_front_end(self):
         """
         Test for front_end function. Test status code
