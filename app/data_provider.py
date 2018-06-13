@@ -27,7 +27,15 @@ def get_user_by_email(email):
 
 
 def create_user(email, password, first_name, last_name):
+    """
+    Creates a new user
 
+    :param email: string
+    :param password: string
+    :param first_name: string
+    :param last_name: string
+    :return object:
+    """
     user = User(email=email, first_name=first_name, last_name=last_name)
     user.hash_password(password)
     session.add(user)
