@@ -194,7 +194,13 @@ def front_end():
 @app.route('/registration', methods=['POST'])
 @csrf_protection
 def registration():
+    """
+    Get data from front-end and validate and clean data
+    If data is invalid, send error to front-end, else
+    create a new user
 
+    :return string: JSON format
+    """
     # get JSON data
     data = request.get_json()
 
