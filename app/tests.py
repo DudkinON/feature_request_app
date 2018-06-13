@@ -290,7 +290,14 @@ class TestApp(TestCase):
         self.assertTrue('token' in data)
 
     def test_05_update_user_profile(self):
+        """
+        Test update user information. Sends new first name,
+        last name, email, and password, then checks respond
+        updated data each field. Then sends old data for
+        recovered user info, and checks status code.
 
+        :return void:
+        """
         req_session.auth = (storage.get_token(), '')
         usr = dict()
         usr['first_name'] = 'John'
