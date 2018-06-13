@@ -334,6 +334,25 @@ def login(provider):
     else:
         return jsonify({'error': 'Unknown provider'}), 200
 
+
+@app.route('/logout', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def user_logout():
+
+
+    if 'uid' in login_session:
+        del login_session['uid']
+
+    if 'provider' in login_session:
+        del login_session['provider']
+
+    if not g.user:
+        return jsonify({'error': "You are already logged out"}), 200
+
+    g.user = None
+    return jsonify({'info': "You are now logged out"}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
