@@ -258,6 +258,67 @@ def get_auth_token():
     token = g.user.generate_auth_token().decode('ascii')
     return jsonify({'token': token, 'user': g.user.serialize}), 200
 
+
+# TODO: Sign in with provider
+@app.route('/oauth/<provider>', methods=['POST'])
+@csrf_protection
+def login(provider):
+
+    # Parse the auth code
+    data = request.get_json()
+
+    if provider == 'google':
+        # Exchange for a token
+        try:
+            client_secrets = ''.join([SECRETS_DIR, '/client_secrets.json'])
+            # Upgrade the authorization code into a credentials object
+            oauth_flow = flow_from_clientsecrets(client_secrets, scope='')
+            oauth_flow.redirect_uri = 'postmessage'
+            credentials = oauth_flow.step2_exchange(data.get("code"))
+        except FlowExchangeError:
+            return jsonify({'error': 'Authorization failed'}), 200
+
+        # Check that the access token is valid.
+        access_token = credentials.access_token
+        gurl = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
+        url = (gurl % access_token)
+        h = Http()
+        result = loads(h.request(url, 'GET')[1])
+
+        # If there was an error in the access token info, abort.
+        if result.get('error') is not None:
+            response = make_response(dumps(result.get('error')), 500)
+            response.headers['Content-Type'] = 'application/json'
+
+        # Get user info
+        user_info_url = "https://www.googleapis.com/oauth2/v1/userinfo"
+        params = {'access_token': credentials.access_token, 'alt': 'json'}
+        answer = r_get(user_info_url, params=params)
+
+        data = answer.json()
+
+        # see if user exists, if it doesn't make a new one
+        user = get_user_by_email(email=data['email'])
+        if not user:
+            user = create_user(email=data.get('email'),
+                               first_name=data.get('given_name'),
+                               last_name=data.get('family_name'),
+                               password=get_unique_str(8))
+
+        g.user = user
+        login_session['uid'] = user.id
+        login_session['provider'] = provider
+
+        # Make token
+        token = g.user.generate_auth_token()
+
+        # Send back token to the client
+        return jsonify({'token': token.decode('ascii'),
+                        'user': g.user.serialize}), 200
+
+    else:
+        return jsonify({'error': 'Unknown provider'}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
