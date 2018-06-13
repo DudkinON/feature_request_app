@@ -244,6 +244,13 @@ class TestApp(TestCase):
         self.assertEquals(user['status'], 3)
 
     def test_03_user_logout(self):
+        """
+        Test user_logout function. Checks status code and
+        message type. Then sends the request again to check
+        that user is logged out.
+
+        :return void:
+        """
 
         # define credentials
         req_session.auth = (storage.get_token(), '')
