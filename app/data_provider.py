@@ -17,5 +17,10 @@ def get_user_by_id(uid):
 
 
 def get_user_by_email(email):
+    """
+    Returns user object
 
+    :param email: string
+    :return: object
+    """
     return query(User).filter_by(email=email).first() or None
