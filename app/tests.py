@@ -173,7 +173,12 @@ class TestApp(TestCase):
             headers=self.headers)
 
     def get(self, url):
+        """
+        Execute GET request with given URL, then return data
 
+        :param url: string
+        :return object:
+        """
         return req_session.get(self.url % (url, storage.get_csrf()))
 
     @staticmethod
