@@ -13,7 +13,7 @@ from bleach import clean
 
 from data_provider import *
 from settings import SECRETS_DIR, app_host, app_port, app_debug
-from resource import get_unique_str, is_index, convert_date
+from resource import get_unique_str, is_index, convert_date, validator
 from secrets import keys
 
 # define global variables
@@ -131,7 +131,7 @@ def check_request(f):
         # validate fields
         field_validation("title")
         field_validation("description")
-        field_validation("date")
+        field_validation("target_date")
 
         # define fields
         user_request["title"] = clean(data.get("title"))
