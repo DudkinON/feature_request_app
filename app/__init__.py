@@ -339,7 +339,12 @@ def login(provider):
 @csrf_protection
 @auth.login_required
 def user_logout():
+    """
+    Logged out user, remove session, and send logout message
+    back to front-end
 
+    :return:
+    """
 
     if 'uid' in login_session:
         del login_session['uid']
