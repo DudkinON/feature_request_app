@@ -270,7 +270,12 @@ class TestApp(TestCase):
         self.assertTrue('info' in r.json())
 
     def test_04_get_auth_token(self):
+        """
+        Test user authorization. Check status code, and
+        user data, token in returned data.
 
+        :return void:
+        """
         req_session.auth = (CREDENTIALS['email'], CREDENTIALS['password'])
         r = self.post('/token', data={})
 
