@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from os import path
-from settings import SAME_THREAD, DB_FILE_NAME, CONNECT_SETTINGS, POSTGRES
-from secrets.keys import secret_key
+from settings import SAME_THREAD, CONNECT_SETTINGS
+from sqlalchemy.ext.declarative import declarative_base
+from settings import POSTGRES, DB_FILE_NAME
 
-
+Base = declarative_base()
 cur_dir = path.dirname(path.abspath(__file__))
 SQLite = 'sqlite:///%s%s'
 
@@ -16,28 +17,4 @@ else:
 if POSTGRES:
     DB_SETTINGS = CONNECT_SETTINGS
 else:
-    DB_SETTINGS = SQLite
-
-
-class SQLiteConfig(object):
-    DEBUG = False
-    TESTING = False
-    SECRET_KEY = secret_key
-    SQLALCHEMY_DATABASE_URI = SQLite % (path.join(cur_dir, DB_FILE_NAME), cst)
-    SQLALCHEMY_ECHO = False
-
-
-class SQLiteConfigTest(object):
-    DEBUG = False
-    TESTING = False
-    SECRET_KEY = secret_key
-    SQLALCHEMY_DATABASE_URI = SQLite % (path.join(cur_dir, 'test.db'), cst)
-    SQLALCHEMY_ECHO = False
-
-
-class PostgreSQLConfig(object):
-    DEBUG = False
-    TESTING = False
-    SECRET_KEY = secret_key
-    PostgreSQL_DATABASE = CONNECT_SETTINGS
-    SQLALCHEMY_ECHO = False
+    DB_SETTINGS = SQLite % (path.join(cur_dir, DB_FILE_NAME), cst)
