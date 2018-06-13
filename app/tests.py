@@ -268,3 +268,18 @@ class TestApp(TestCase):
         # tests
         self.assertEquals(r.status_code, 200)
         self.assertTrue('info' in r.json())
+
+    def test_04_get_auth_token(self):
+
+        req_session.auth = (CREDENTIALS['email'], CREDENTIALS['password'])
+        r = self.post('/token', data={})
+
+        # save data
+        data = r.json()
+        self.save_cookies()
+        storage.set_token(data['token'])
+
+        # tests
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('user' in data)
+        self.assertTrue('token' in data)
