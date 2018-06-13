@@ -24,3 +24,12 @@ def get_user_by_email(email):
     :return: object
     """
     return query(User).filter_by(email=email).first() or None
+
+
+def create_user(email, password, first_name, last_name):
+
+    user = User(email=email, first_name=first_name, last_name=last_name)
+    user.hash_password(password)
+    session.add(user)
+    session.commit()
+    return user
