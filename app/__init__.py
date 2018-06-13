@@ -358,6 +358,38 @@ def user_logout():
     g.user = None
     return jsonify({'info': "You are now logged out"}), 200
 
+
+@app.route('/profile/update', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def update_user_profile():
+
+
+    # get JSON data
+    data = request.get_json()
+
+    user = get_user_by_email(data.get('email'))
+    if user and data.get('email') != g.user.email:
+        return jsonify({'error': 'This email is already registered'})
+
+    # get user info
+    user = data.get('user')
+
+    usr = dict()
+    usr['uid'] = g.user.id
+    if user:
+        usr['email'] = user.get('email')
+        usr['first_name'] = user.get('first_name')
+        usr['last_name'] = user.get('last_name')
+
+    usr['password'] = data.get('password')
+    user = update_user(usr)
+
+    # add user to global
+    g.user = user
+    return jsonify(user.serialize), 200
+
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
