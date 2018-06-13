@@ -158,7 +158,14 @@ class TestApp(TestCase):
         self.headers = {'content-type': 'application/json'}
 
     def post(self, url, data):
+        """
+        Execute POST query with given URL and data, then
+        returns result
 
+        :param url: string
+        :param data: dictionary
+        :return object:
+        """
         return req_session.post(
             self.url % (url, storage.get_csrf()),
             cookies=storage.get_cookies(),
