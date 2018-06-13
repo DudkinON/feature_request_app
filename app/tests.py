@@ -288,3 +288,25 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue('user' in data)
         self.assertTrue('token' in data)
+
+    def test_05_update_user_profile(self):
+
+        req_session.auth = (storage.get_token(), '')
+        usr = dict()
+        usr['first_name'] = 'John'
+        usr['last_name'] = 'Doe'
+        usr['email'] = 'john@doe.com'
+        password = 'johndoe'
+        r = self.post('/profile/update', {'user': usr, 'password': password})
+        user = r.json()
+
+        # tests
+        self.assertEquals(r.status_code, 200)
+        self.assertEquals(user['first_name'], 'John')
+        self.assertEquals(user['last_name'], 'Doe')
+        self.assertEquals(user['email'], 'john@doe.com')
+
+        # recovering user data
+        data = {'user': CREDENTIALS, 'password': CREDENTIALS['password']}
+        r = self.post('/profile/update', data=data)
+        self.assertEquals(r.status_code, 200)
