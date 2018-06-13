@@ -172,6 +172,10 @@ class TestApp(TestCase):
             data=dumps(data),
             headers=self.headers)
 
+    def get(self, url):
+
+        return req_session.get(self.url % (url, storage.get_csrf()))
+
     @staticmethod
     def save_cookies():
         """
