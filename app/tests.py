@@ -157,7 +157,7 @@ class TestApp(TestCase):
         self.url = HOST + '%s?csrf=%s'
         self.headers = {'content-type': 'application/json'}
 
-    def test_1_front_end(self):
+    def test_01_front_end(self):
         """
         Test for front_end function. Test status code
         and content type. Get csrf token and cookies
@@ -176,7 +176,7 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertEquals(r.headers['Content-Type'], content_type)
 
-    def test_2_registration(self):
+    def test_02_registration(self):
         """
         Emulation of user registration. Uses stored csrf
         token and cookies to imitate user behavior.
