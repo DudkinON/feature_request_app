@@ -242,3 +242,22 @@ class TestApp(TestCase):
         self.assertEquals(user['last_name'], self.credentials['last_name'])
         self.assertEquals(user['role'], 'user')
         self.assertEquals(user['status'], 3)
+
+    def test_03_user_logout(self):
+
+        # define credentials
+        req_session.auth = (storage.get_token(), '')
+
+        # execute request to logout the user
+        r = self.post('/logout', data={})
+
+        # tests
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('info' in r.json())
+
+        # check that user is logged out
+        r = self.post('/logout', data={})
+
+        # tests
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('info' in r.json())
