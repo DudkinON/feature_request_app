@@ -246,6 +246,14 @@ def registration():
     # send data to front-end
     return jsonify({'token': token, 'user': g.user.serialize}), 200
 
+
+@app.route('/token', methods=['POST'])
+@auth.login_required
+def get_auth_token():
+
+    token = g.user.generate_auth_token().decode('ascii')
+    return jsonify({'token': token, 'user': g.user.serialize}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
