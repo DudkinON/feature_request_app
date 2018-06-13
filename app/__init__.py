@@ -263,7 +263,22 @@ def get_auth_token():
 @app.route('/oauth/<provider>', methods=['POST'])
 @csrf_protection
 def login(provider):
+    """
+        Connect with third-party providers and authorize a user.
+        If third-party provider returned a user data to back-end
+        get the user info from the database, if the user does not
+        exist create a new user.
 
+        If a third-party provider returns an error, sends a
+        message with error description
+
+        If the third-party provider does not exist, sends a
+        message with error description
+
+
+    :param provider: A string title of provider
+    :return: a user info if authorization success else error message
+    """
     # Parse the auth code
     data = request.get_json()
 
