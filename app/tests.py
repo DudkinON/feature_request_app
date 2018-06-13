@@ -200,11 +200,7 @@ class TestApp(TestCase):
 
         :return void:
         """
-        r = req_session.post(
-            self.url % ('/registration', storage.get_csrf()),
-            cookies=storage.get_cookies(),
-            data=dumps(self.credentials),
-            headers=self.headers)
+        r = self.post('/registration', self.credentials)
         cookies = req_session.cookies.get_dict()
         storage.set_cookies(cookies)
         data = r.json()
