@@ -190,6 +190,56 @@ def front_end():
     return render("index.html", csrf=csrf_token)
 
 
+# TODO: User registration
+@app.route('/registration', methods=['POST'])
+@csrf_protection
+def registration():
+
+    # get JSON data
+    data = request.get_json()
+
+    # Check that data values are not integers
+    if isinstance(data.get('email'), (int, long)):
+        return jsonify({'error': 'Email cannot to be an integer'})
+
+    if isinstance(data.get('first_name'), (int, long)):
+        return jsonify({'error': 'First name cannot be an integer'})
+
+    if isinstance(data.get('last_name'), (int, long)):
+        return jsonify({'error': 'Last name cannot be an integer'})
+
+    if isinstance(data.get('password'), (int, long)):
+        return jsonify({'error': 'Password cannot be an integer'})
+
+    # prepare data
+    usr = dict()
+    usr['email'] = clean(data.get('email'))
+    usr['first_name'] = clean(data.get('first_name'))
+    usr['last_name'] = clean(data.get('last_name'))
+    usr['password'] = data.get('password')
+
+    # Check email is not register
+    if get_user_by_email(usr['email']):
+        return jsonify({'error': 'Sorry, this email is taken'})
+
+    # create a new user
+    user = create_user(email=usr['email'],
+                       password=usr['password'],
+                       first_name=usr['first_name'],
+                       last_name=usr['last_name'])
+
+    # Add user to the session
+    login_session['uid'] = user.id
+
+    # Add user to global
+    g.user = user
+
+    # generate a token
+    token = g.user.generate_auth_token().decode('ascii')
+
+    # send data to front-end
+    return jsonify({'token': token, 'user': g.user.serialize}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
