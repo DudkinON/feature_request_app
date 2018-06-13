@@ -174,7 +174,11 @@ class TestApp(TestCase):
 
     @staticmethod
     def save_cookies():
+        """
+        Saves cookie in the storage
 
+        :return void:
+        """
         cookies = req_session.cookies.get_dict()
         storage.set_cookies(cookies)
 
