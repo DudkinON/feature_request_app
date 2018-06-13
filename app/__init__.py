@@ -250,7 +250,11 @@ def registration():
 @app.route('/token', methods=['POST'])
 @auth.login_required
 def get_auth_token():
+    """
+    Return auth token
 
+    :return string: JSON
+    """
     token = g.user.generate_auth_token().decode('ascii')
     return jsonify({'token': token, 'user': g.user.serialize}), 200
 
