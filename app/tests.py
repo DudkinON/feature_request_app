@@ -172,6 +172,12 @@ class TestApp(TestCase):
             data=dumps(data),
             headers=self.headers)
 
+    @staticmethod
+    def save_cookies():
+
+        cookies = req_session.cookies.get_dict()
+        storage.set_cookies(cookies)
+
     def test_01_front_end(self):
         """
         Test for front_end function. Test status code
