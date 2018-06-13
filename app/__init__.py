@@ -363,7 +363,11 @@ def user_logout():
 @csrf_protection
 @auth.login_required
 def update_user_profile():
+    """
+    Update a user profile
 
+    :return: success or error message in JSON format
+    """
 
     # get JSON data
     data = request.get_json()
