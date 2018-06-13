@@ -216,14 +216,18 @@ class TestApp(TestCase):
 
         :return void:
         """
+        # execute request
         r = self.post('/registration', self.credentials)
-        cookies = req_session.cookies.get_dict()
-        storage.set_cookies(cookies)
+
+        # save data
         data = r.json()
         token = data['token']
         user = data['user']
         storage.set_token(token)
         storage.set_uid(user['uid'])
+        self.save_cookies()
+
+        # tests
         self.assertEquals(user['email'], self.credentials['email'])
         self.assertEquals(user['first_name'], self.credentials['first_name'])
         self.assertEquals(user['last_name'], self.credentials['last_name'])
