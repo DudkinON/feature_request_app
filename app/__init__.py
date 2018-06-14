@@ -107,6 +107,9 @@ def check_request(f):
         # get JSON data
         data = request.get_json()
 
+        if not bool(data):
+            return jsonify({'error': "Server does not get any data"}), 200
+
         user_request = dict()
 
         def field_validation(field):
