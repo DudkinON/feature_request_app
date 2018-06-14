@@ -114,27 +114,29 @@ def check_request(f):
 
         def field_validation(field):
             """
-            Checks the field on existing, not too short and not an integer.
+            Checks the field on existing, not too short and is a string.
 
             :param field: string
             :return object:
             """
             if not data.get(field):
-                return jsonify(
-                    {'error': '%s is empty' % field.capitalize()}), 200
+                return False
 
             if len(data.get(field)) < 3:
-                return jsonify(
-                    {'error': '%s is too short' % field.capitalize()})
+                return False
 
-            if isinstance(data.get(field), (int, long)):
-                msg = "$s can not be an integer" % field.capitalize()
-                return jsonify({'error': msg})
+            if not isinstance(data.get(field), basestring):
+                return False
+
+            return True
 
         # validate fields
-        field_validation("title")
-        field_validation("description")
-        field_validation("target_date")
+        if not field_validation("title"):
+            return jsonify({'error': "Invalid title"}), 200
+        if not field_validation("description"):
+            return jsonify({'error': "Invalid description"}), 200
+        if not field_validation("target_date"):
+            return jsonify({'error': "Invalid target date"}), 200
 
         # define fields
         user_request["title"] = clean(data.get("title"))
