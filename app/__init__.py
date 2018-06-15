@@ -551,6 +551,31 @@ def new_product_area():
     # return list of areas
     return jsonify(get_product_areas()), 200
 
+
+@app.route('/areas/edit', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def update_product_area_info():
+
+    # get JSON data
+    data = request.get_json()
+
+    # clean input data
+    if not validator(data.get("name"), basestring, 3):
+        return jsonify({'error': 'Product area name is invalid'}), 200
+    if not is_index(data.get('id')):
+        msg = 'The id of product area is not an integer'
+        return jsonify({'error': msg}), 200
+    data['id'] = int(data.get('id'))
+    data['name'] = clean(data.get('name'))
+
+    # check product area exist
+    if not product_area_exist(data['id']):
+        return jsonify({'error': "Can't find this product area"}), 200
+
+    # return list of clients
+    return jsonify(update_product_area(data)), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
