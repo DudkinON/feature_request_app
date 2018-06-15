@@ -53,3 +53,17 @@ def convert_date(date_string):
         month, day, year = map(int, date_string.split("/"))
         return date(year, month, day)
     return None
+
+
+def validator(data, inst, length=None):
+
+    if not data:
+        return False
+
+    if not isinstance(data, inst):
+        return False
+
+    if length:
+        return False if len(data) < length else True
+
+    return True
