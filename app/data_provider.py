@@ -158,5 +158,10 @@ def get_product_areas():
 
 
 def product_area_exist(area_id):
+    """
+    Check product area by id
 
+    :param area_id: integer
+    :return: bool
+    """
     return True if query(ProductArea).filter_by(id=area_id).first() else False
