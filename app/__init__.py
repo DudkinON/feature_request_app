@@ -482,6 +482,27 @@ def update_client_info():
     else:
         return jsonify({'error': "Can't find this client"}), 200
 
+
+@app.route('/clients/delete', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def delete_client():
+
+    # get JSON data
+    data = request.get_json()
+
+    # clean input data
+    if is_index(data.get('id')):
+        data['id'] = int(data.get('id'))
+    else:
+        return jsonify({'error': "Cannot define client id"}), 200
+
+    # check client exist
+    if client_exist(data['id']):
+        return jsonify(remove_client(data['id'])), 200
+    else:
+        return jsonify({'error': "The client does not exist"}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
