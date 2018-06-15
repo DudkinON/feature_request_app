@@ -537,7 +537,11 @@ class TestApp(TestCase):
         self.assertTrue(bool(product_area_name))
 
     def test_11_get_all_product_areas(self):
+        """
+        Test for getting list of product areas.
 
+        :return void:
+        """
         r = self.get('/areas')
         self.assertEqual(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
