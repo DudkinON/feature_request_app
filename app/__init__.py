@@ -399,6 +399,23 @@ def update_user_profile():
     return jsonify(user.serialize), 200
 
 
+@app.route('/profile/remove', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def remove_user_profile():
+
+    remove_user(g.user.id)
+    g.user = None
+
+    # clean login session
+    if 'uid' in login_session:
+        del login_session['uid']
+
+    if 'provider' in login_session:
+        del login_session['provider']
+
+    return jsonify({'info': 'Profile was removed'})
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
