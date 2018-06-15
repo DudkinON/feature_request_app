@@ -78,7 +78,12 @@ def remove_user(uid):
 
 
 def create_client(name):
+    """
+    Creates a new client in database
 
+    :param name: string
+    :return object:
+    """
     client = Client(name=name)
     session.add(client)
     session.commit()
