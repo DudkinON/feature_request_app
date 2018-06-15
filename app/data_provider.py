@@ -123,3 +123,8 @@ def remove_client(client_id):
     session.delete(client)
     session.commit()
     return get_clients()
+
+
+def client_exist(client_id):
+
+    return True if query(Client).filter_by(id=client_id).first() else False
