@@ -88,3 +88,8 @@ def create_client(name):
     session.add(client)
     session.commit()
     return client
+
+
+def get_clients():
+
+    return [request.serialize for request in query(Client).all()]
