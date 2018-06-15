@@ -7,6 +7,10 @@ from requests import Session
 from re import search
 from json import dumps
 from datetime import datetime
+from resource import get_unique_str, is_index, convert_date, validator
+from data_provider import create_user, get_user_by_id, get_user_by_email, \
+    update_user, remove_user, create_client, get_clients, update_client, \
+    remove_client
 
 req_session = Session()
 
@@ -17,7 +21,7 @@ class Storage(object):
     """
 
     def __init__(self):
-        self.uid = None
+        self.user = None
         self.csrf = None
         self.token = None
         self.cookies = None
@@ -25,7 +29,7 @@ class Storage(object):
         self.product_area = None
         self.request = None
 
-    def set_uid(self, uid):
+    def set_user(self, uid):
         """
         Setter for user id
 
@@ -88,7 +92,7 @@ class Storage(object):
         """
         self.request = request
 
-    def get_uid(self):
+    def get_user(self):
         """
         Getter for user id
 
@@ -251,7 +255,7 @@ class TestApp(TestCase):
         token = data['token']
         user = data['user']
         storage.set_token(token)
-        storage.set_uid(user['uid'])
+        storage.set_user(user)
         self.save_cookies()
 
         # tests
@@ -422,3 +426,10 @@ class TestApp(TestCase):
                 name = client['name']
         self.assertEquals(r.status_code, 200)
         self.assertEquals(name, "Valid client")
+
+    def test_08_get_all_clients(self):
+
+        r = self.get('/clients')
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        self.assertTrue(len(r.json()) > 0)
