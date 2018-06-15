@@ -403,6 +403,11 @@ def update_user_profile():
 @csrf_protection
 @auth.login_required
 def remove_user_profile():
+    """
+    Remove user from database
+
+    :return String: (JSON)
+    """
 
     remove_user(g.user.id)
     g.user = None
