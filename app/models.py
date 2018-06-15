@@ -208,7 +208,8 @@ class Request(Base):
             'client': self.get_client,
             'client_priority': self.client_priority,
             'target_date': self.target_date,
-            'product_area': self.get_product_area
+            'product_area': self.get_product_area,
+            'is_active': self.is_active
         }
 
 
