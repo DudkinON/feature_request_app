@@ -37,7 +37,12 @@ def is_index(index):
 
 
 def convert_date(date_string):
+    """
+    Convert string format 'mm/dd/yyyy' to date
 
+    :param date_string: string
+    :return mix:
+    """
     date_string = date_string.strip()
     match = re.match('\d{2}/\d{2}/\d{4}', date_string)
 
