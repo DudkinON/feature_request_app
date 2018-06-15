@@ -56,7 +56,17 @@ def convert_date(date_string):
 
 
 def validator(data, inst, length=None):
+    """
+    Check that data is not empty, data is an instance
+    of the inst parameter, and if indexing parameter
+    length, checks that data length longer than
+    parameter length.
 
+    :param data: any
+    :param inst: type of data
+    :param length: integer
+    :return boolean:
+    """
     if not data:
         return False
 
