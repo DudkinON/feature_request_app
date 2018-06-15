@@ -439,3 +439,35 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
         self.assertTrue(len(r.json()) > 0)
+
+    def test_09_new_product_area(self):
+
+        # test case for empty data
+        product_area = {}
+        r = self.post('/areas/new', product_area)
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for empty product area name
+        product_area = {'name': ''}
+        r = self.post('/areas/new', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for product area having wrong format
+        product_area = {'name': []}
+        r = self.post('/areas/new', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for product area with valid name
+        product_area = {'name': "Valid product area"}
+        r = self.post('/areas/new', product_area)
+        product_area_name = None
+        for area in r.json():
+            if area['name'] == "Valid product area":
+                storage.set_product_area(area)
+                product_area_name = area['name']
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        self.assertTrue(bool(product_area_name))
