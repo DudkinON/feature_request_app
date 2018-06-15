@@ -426,7 +426,12 @@ def remove_user_profile():
 @csrf_protection
 @auth.login_required
 def new_client():
+    """
+    Validate input data, if it invalid sends message
+    to front-end. Create a new client in database
 
+    :return String: (JSON)
+    """
     # get JSON data
     data = request.get_json()
 
