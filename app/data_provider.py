@@ -146,3 +146,8 @@ def create_product_area(name):
     session.add(product_area)
     session.commit()
     return product_area
+
+
+def get_product_areas():
+
+    return [area.serialize for area in query(ProductArea).all()]
