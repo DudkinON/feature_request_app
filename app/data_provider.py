@@ -133,3 +133,11 @@ def client_exist(client_id):
     :return: bool
     """
     return True if query(Client).filter_by(id=client_id).first() else False
+
+
+def create_product_area(name):
+
+    product_area = ProductArea(name=name)
+    session.add(product_area)
+    session.commit()
+    return product_area
