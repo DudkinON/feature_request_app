@@ -168,7 +168,12 @@ def product_area_exist(area_id):
 
 
 def update_product_area(area):
+    """
+    Update product area and return list of product areas
 
+    :param area: dict
+    :return object:
+    """
     product_area = session.query(ProductArea).filter_by(id=area['id']).first()
     product_area.name = area['name']
     session.commit()
