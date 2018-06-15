@@ -110,3 +110,11 @@ def update_client(client_info):
     client.name = client_info['name']
     session.commit()
     return get_clients()
+
+
+def remove_client(client_id):
+
+    client = query(Client).filter_by(id=client_id).first()
+    session.delete(client)
+    session.commit()
+    return get_clients()
