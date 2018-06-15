@@ -535,3 +535,10 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
         self.assertTrue(bool(product_area_name))
+
+    def test_11_get_all_product_areas(self):
+
+        r = self.get('/areas')
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        self.assertTrue(len(r.json()) > 0)
