@@ -41,3 +41,19 @@ def create_user(email, password, first_name, last_name):
     session.add(user)
     session.commit()
     return user
+
+
+def update_user(usr):
+
+    user = session.query(User).filter_by(id=usr['uid']).first()
+    if usr['password']:
+        user.hash_password(usr['password'])
+    if usr['email']:
+        user.email = usr['email']
+    if usr['first_name']:
+        user.first_name = usr['first_name']
+    if usr['last_name']:
+        user.last_name = usr['last_name']
+
+    session.commit()
+    return user
