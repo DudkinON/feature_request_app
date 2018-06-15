@@ -556,6 +556,13 @@ def new_product_area():
 @csrf_protection
 @auth.login_required
 def update_product_area_info():
+    """
+    Get json from front-end, clean data, update a product
+    area record in database and return list of product
+    areas in JSON format
+
+    :return: string (JSON)
+    """
 
     # get JSON data
     data = request.get_json()
