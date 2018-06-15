@@ -374,3 +374,42 @@ class TestApp(TestCase):
                 name = client['name']
         self.assertEquals(r.status_code, 200)
         self.assertEquals(name, 'Test client')
+
+    def test_07_update_client_info(self):
+
+        # test case for empty data for the request
+        client = {}
+
+        r = self.post('/clients/edit', client)
+
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for too short client name
+        client = {'name': ''}
+        r = self.post('/clients/edit', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for client name an integer
+        client = {'name': 2}
+        r = self.post('/clients/edit', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for client not existing
+        client = {'name': "Valid client", 'id': 9999999}
+        r = self.post('/clients/edit', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for valid data
+        client = {'name': "Valid client", 'id': storage.get_client()['id']}
+        r = self.post('/clients/edit', client)
+        name = None
+        for client in r.json():
+            if client['name'] == "Valid client":
+                storage.set_client(client)
+                name = client['name']
+        self.assertEquals(r.status_code, 200)
+        self.assertEquals(name, "Valid client")
