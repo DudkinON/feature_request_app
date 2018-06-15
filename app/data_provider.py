@@ -91,5 +91,9 @@ def create_client(name):
 
 
 def get_clients():
+    """
+    Get all clients and serialize it
 
+    :return object:
+    """
     return [request.serialize for request in query(Client).all()]
