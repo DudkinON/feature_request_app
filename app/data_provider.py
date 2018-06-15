@@ -155,3 +155,8 @@ def get_product_areas():
     :return object:
     """
     return [area.serialize for area in query(ProductArea).all()]
+
+
+def product_area_exist(area_id):
+
+    return True if query(ProductArea).filter_by(id=area_id).first() else False
