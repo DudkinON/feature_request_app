@@ -18,7 +18,12 @@ def get_unique_str(amount):
 
 
 def is_index(index):
+    """
+    Check that value is an integer and more than 0
 
+    :param index: integer
+    :return: boolean
+    """
     if isinstance(index, (int, long)):
         return index > 0
 
