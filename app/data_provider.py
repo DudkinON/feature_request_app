@@ -97,3 +97,11 @@ def get_clients():
     :return object:
     """
     return [request.serialize for request in query(Client).all()]
+
+
+def update_client(client_info):
+
+    client = session.query(Client).filter_by(id=client_info['id']).first()
+    client.name = client_info['name']
+    session.commit()
+    return get_clients()
