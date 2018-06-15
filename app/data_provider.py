@@ -149,5 +149,9 @@ def create_product_area(name):
 
 
 def get_product_areas():
+    """
+    Get all product areas and serialize it
 
+    :return object:
+    """
     return [area.serialize for area in query(ProductArea).all()]
