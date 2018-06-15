@@ -519,6 +519,31 @@ def get_all_clients():
     """
     return jsonify(get_clients()), 200
 
+
+@app.route('/areas/new', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def new_product_area():
+
+    # get JSON data
+    data = request.get_json()
+
+    # check input data
+    if not data.get("name"):
+        return jsonify({'error': 'Name of product area is empty'}), 200
+
+    if len(data.get("name")) < 3:
+        return jsonify({'error': 'Product area name is too short'})
+
+    if isinstance(data.get('name'), (int, long)):
+        return jsonify({'error': 'Product area can not be an integer'})
+
+    # create product area
+    create_product_area(name=clean(data.get("name")))
+
+    # return list of areas
+    return jsonify(get_product_areas()), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
