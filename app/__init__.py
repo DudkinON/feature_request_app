@@ -421,6 +421,28 @@ def remove_user_profile():
 
     return jsonify({'info': 'Profile was removed'})
 
+
+@app.route('/clients/new', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def new_client():
+
+    # get JSON data
+    data = request.get_json()
+
+    if not data.get("name"):
+        return jsonify({'error': 'Name of client is empty'}), 200
+
+    if isinstance(data.get('name'), (int, long)):
+        return jsonify({'error': 'Client cannot to be an integer'})
+
+    if len(data.get("name")) < 3:
+        return jsonify({'error': 'Client name is too short'})
+
+    create_client(name=clean(data.get("name")))
+
+    return jsonify(get_clients()), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
