@@ -66,7 +66,12 @@ def update_user(usr):
 
 
 def remove_user(uid):
+    """
+    Remove user by user id
 
+    :param uid:
+    :return void:
+    """
     user = session.query(User).filter_by(id=uid).first()
     session.delete(user)
     session.commit()
