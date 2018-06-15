@@ -524,7 +524,14 @@ def get_all_clients():
 @csrf_protection
 @auth.login_required
 def new_product_area():
+    """
+    Get data from the back-end and validate and clean
+    the name of the product area. If data is invalid,
+    return error to front-end, else create a new
+    product area
 
+    :return string: (JSON)
+    """
     # get JSON data
     data = request.get_json()
 
