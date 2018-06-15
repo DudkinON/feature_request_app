@@ -136,7 +136,12 @@ def client_exist(client_id):
 
 
 def create_product_area(name):
+    """
+    Creates a new product area
 
+    :param name: string
+    :return object:
+    """
     product_area = ProductArea(name=name)
     session.add(product_area)
     session.commit()
