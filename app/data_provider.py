@@ -165,3 +165,11 @@ def product_area_exist(area_id):
     :return: bool
     """
     return True if query(ProductArea).filter_by(id=area_id).first() else False
+
+
+def update_product_area(area):
+
+    product_area = session.query(ProductArea).filter_by(id=area['id']).first()
+    product_area.name = area['name']
+    session.commit()
+    return get_product_areas()
