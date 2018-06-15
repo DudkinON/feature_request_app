@@ -453,6 +453,12 @@ def new_client():
 @csrf_protection
 @auth.login_required
 def update_client_info():
+    """
+    Get json from front-end, clean data, update a client record in
+    database and return list of clients in JSON format
+
+    :return: string (JSON)
+    """
 
     # get JSON data
     data = request.get_json()
