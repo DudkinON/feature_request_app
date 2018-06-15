@@ -507,6 +507,14 @@ def delete_client():
     else:
         return jsonify({'error': "The client does not exist"}), 200
 
+
+@app.route('/clients')
+@csrf_protection
+@auth.login_required
+def get_all_clients():
+
+    return jsonify(get_clients()), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
