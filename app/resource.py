@@ -34,3 +34,17 @@ def is_index(index):
         return True if int(index) > 0 else False
     except ValueError:
         return False
+
+
+def convert_date(date_string):
+
+    date_string = date_string.strip()
+    match = re.match('\d{2}/\d{2}/\d{4}', date_string)
+
+    if not match:
+        return None
+
+    if len(str(match.group())) == 10:
+        month, day, year = map(int, date_string.split("/"))
+        return date(year, month, day)
+    return None
