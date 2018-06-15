@@ -337,7 +337,14 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
 
     def test_06_new_client(self):
+        """
+        Testing create a new request. Sends request with
+        invalid client name in checks behavior of back-end,
+        then sends request with valid client name, and
+        try to find the client name in returned data.
 
+        :return void:
+        """
         # test case for empty data for the request
         client = {}
         r = self.post('/clients/new', client)
