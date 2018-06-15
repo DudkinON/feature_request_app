@@ -376,7 +376,16 @@ class TestApp(TestCase):
         self.assertEquals(name, 'Test client')
 
     def test_07_update_client_info(self):
+        """
+        Test update client info. Sends requests with invalid
+        data like empty data, empty client name, client name
+        is not string, client not exist and check response
+        for status code and existing error message. Then sends
+        valid data and checks response that client name was
+        updated.
 
+        :return void:
+        """
         # test case for empty data for the request
         client = {}
 
