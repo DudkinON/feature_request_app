@@ -100,7 +100,12 @@ def get_clients():
 
 
 def update_client(client_info):
+    """
+    Update client and return list of clients
 
+    :param client_info: dict
+    :return object:
+    """
     client = session.query(Client).filter_by(id=client_info['id']).first()
     client.name = client_info['name']
     session.commit()
