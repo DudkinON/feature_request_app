@@ -448,6 +448,34 @@ def new_client():
 
     return jsonify(get_clients()), 200
 
+
+@app.route('/clients/edit', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def update_client_info():
+
+    # get JSON data
+    data = request.get_json()
+
+    # validate client name
+    if not validator(data.get("name"), basestring, 3):
+        return jsonify({'error': "Client name is invalid"})
+
+    # clean input data
+    if is_index(data.get('id')):
+        data['id'] = int(data.get('id'))
+    else:
+        return jsonify({'error': 'The id of client is not integer'}), 200
+
+    data['name'] = clean(data.get('name'))
+
+    # check client exist
+    if client_exist(data['id']):
+        # return list of clients
+        return jsonify(update_client(data)), 200
+    else:
+        return jsonify({'error': "Can't find this client"}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
