@@ -126,5 +126,10 @@ def remove_client(client_id):
 
 
 def client_exist(client_id):
+    """
+    Check client by id
 
+    :param client_id: integer
+    :return: bool
+    """
     return True if query(Client).filter_by(id=client_id).first() else False
