@@ -113,7 +113,12 @@ def update_client(client_info):
 
 
 def remove_client(client_id):
+    """
+    Remove client by client id and return list of clients
 
+    :param client_id: integer
+    :return void:
+    """
     client = query(Client).filter_by(id=client_id).first()
     session.delete(client)
     session.commit()
