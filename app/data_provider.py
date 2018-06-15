@@ -63,3 +63,10 @@ def update_user(usr):
 
     session.commit()
     return user
+
+
+def remove_user(uid):
+
+    user = session.query(User).filter_by(id=uid).first()
+    session.delete(user)
+    session.commit()
