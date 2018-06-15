@@ -75,3 +75,11 @@ def remove_user(uid):
     user = session.query(User).filter_by(id=uid).first()
     session.delete(user)
     session.commit()
+
+
+def create_client(name):
+
+    client = Client(name=name)
+    session.add(client)
+    session.commit()
+    return client
