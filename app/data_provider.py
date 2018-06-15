@@ -44,6 +44,12 @@ def create_user(email, password, first_name, last_name):
 
 
 def update_user(usr):
+    """
+    Update user and return new data
+
+    :param usr: dictionary
+    :return object:
+    """
 
     user = session.query(User).filter_by(id=usr['uid']).first()
     if usr['password']:
