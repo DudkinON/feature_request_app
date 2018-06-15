@@ -3,6 +3,8 @@
 
 from random import choice
 from string import ascii_uppercase as uppercase, digits
+from datetime import date, datetime
+import re
 
 
 def get_unique_str(amount):
@@ -13,3 +15,17 @@ def get_unique_str(amount):
     :return string:
     """
     return ''.join(choice(uppercase + digits) for x in xrange(amount))
+
+
+def is_index(index):
+
+    if isinstance(index, (int, long)):
+        return index > 0
+
+    if not isinstance(index, basestring):
+        return False
+
+    try:
+        return True if int(index) > 0 else False
+    except ValueError:
+        return False
