@@ -487,7 +487,11 @@ def update_client_info():
 @csrf_protection
 @auth.login_required
 def delete_client():
+    """
+    Remove a client from database
 
+    :return: string (JSON)
+    """
     # get JSON data
     data = request.get_json()
 
