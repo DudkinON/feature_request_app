@@ -512,7 +512,11 @@ def delete_client():
 @csrf_protection
 @auth.login_required
 def get_all_clients():
+    """
+    Return all request in JSON
 
+    :return String: (JSON)
+    """
     return jsonify(get_clients()), 200
 
 if __name__ == '__main__':
