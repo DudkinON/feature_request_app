@@ -6,7 +6,7 @@ from settings import HOST, CREDENTIALS
 from requests import Session
 from re import search
 from json import dumps
-
+from datetime import datetime
 
 req_session = Session()
 
@@ -181,6 +181,24 @@ class TestApp(TestCase):
         """
         return req_session.get(self.url % (url, storage.get_csrf()))
 
+    def post_request(self, url, request, key, value):
+        """
+        Sends request with invalid date, and check response
+        for status code, end existing error message in
+        response data
+
+        :param url: string
+        :param request: dict
+        :param key: string
+        :param value: any
+        :return void:
+        """
+        prepare_request = dict(request)
+        prepare_request[key] = value
+        r = self.post(url, prepare_request)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
     @staticmethod
     def save_cookies():
         """
@@ -317,3 +335,35 @@ class TestApp(TestCase):
         data = {'user': CREDENTIALS, 'password': CREDENTIALS['password']}
         r = self.post('/profile/update', data=data)
         self.assertEquals(r.status_code, 200)
+
+    def test_06_new_client(self):
+
+        # test case for empty data for the request
+        client = {}
+        r = self.post('/clients/new', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for too short client name
+        client = {'name': ''}
+        r = self.post('/clients/new', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for client name as an integer
+        client = {'name': 2}
+        r = self.post('/clients/new', client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for valid client name
+        client = {'name': 'Test client'}
+        r = self.post('/clients/new', client)
+        clients = r.json()
+        name = None
+        for client in clients:
+            if client['name'] == 'Test client':
+                storage.set_client(client)
+                name = client['name']
+        self.assertEquals(r.status_code, 200)
+        self.assertEquals(name, 'Test client')
