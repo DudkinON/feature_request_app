@@ -428,7 +428,13 @@ class TestApp(TestCase):
         self.assertEquals(name, "Valid client")
 
     def test_08_get_all_clients(self):
+        """
+        Test for getting all clients. Sends request to back-end
+        and check status code that response data is a list, and
+        the list have at least one record.
 
+        :return void:
+        """
         r = self.get('/clients')
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
