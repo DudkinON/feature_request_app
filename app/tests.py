@@ -483,7 +483,20 @@ class TestApp(TestCase):
         self.assertTrue(bool(product_area_name))
 
     def test_10_update_product_area_info(self):
+        """
+        Test for updating the product area. Sends a requests
+        to the back-end with empty data, empty product
+        area name, invalid product area name, id of
+        product area witch not exist, and checks response
+        for the status code, and existing error message
+        in response data.
+        Then sends request with valid name, id of
+        product area, and checks response data for status
+        code, the data is a list, a new name of product area
+        in the list.
 
+        :return void:
+        """
         # test case for empty data
         product_area = {}
         r = self.post('/areas/edit', product_area)
