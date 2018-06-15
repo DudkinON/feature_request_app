@@ -441,7 +441,17 @@ class TestApp(TestCase):
         self.assertTrue(len(r.json()) > 0)
 
     def test_09_new_product_area(self):
+        """
+        Test for creating a new product area. Sends requests
+        to the back-end with empty data, empty or invalid
+        product area name, and checks response for status
+        code, and existing error message. Then sends
+        response with valid data and checks response for
+        status code, that response data is a list, and
+        in the list exist the product area.
 
+        :return void:
+        """
         # test case for empty data
         product_area = {}
         r = self.post('/areas/new', product_area)
