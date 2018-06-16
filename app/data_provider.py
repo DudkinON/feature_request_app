@@ -202,3 +202,10 @@ def get_requests():
     requests = query(Request).filter_by(
         is_active=True).order_by(Request.client_priority.asc()).all()
     return [request.serialize for request in requests]
+
+
+def get_completed_requests():
+
+    requests = query(Request).filter_by(
+        is_active=False).order_by(Request.client_priority.asc()).all()
+    return [request.serialize for request in requests]
