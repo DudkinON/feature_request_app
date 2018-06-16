@@ -544,3 +544,181 @@ class TestApp(TestCase):
         self.assertEqual(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
         self.assertTrue(len(r.json()) > 0)
+
+    def test_12_new_request(self):
+
+        # define client prototype
+        client = {
+            'id': storage.get_client()['id'],
+            'name': storage.get_client()['name'],
+            'client_priority': 1
+        }
+
+        # define request prototype
+        request = {
+            'title': "new request",
+            'description': "description",
+            'target_date': "06/14/2018",
+            'client': client,
+            'product_area': storage.get_product_area()
+        }
+
+        # test case for empty data
+        r = self.post('/requests/new', {})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for empty title
+        self.post_request('/requests/new', request, 'title', "")
+
+        # test case for empty description
+        self.post_request('/requests/new', request, 'description', "")
+
+        # test case for empty target date
+        self.post_request('/requests/new', request, 'target_date', "")
+
+        # test case for empty client
+        self.post_request('/requests/new', request, 'client', "")
+
+        # test case for empty product area
+        self.post_request('/requests/new', request, 'product_area', "")
+
+        # test case for invalid title
+        self.post_request('/requests/new', request, 'title', [])
+
+        # test case for invalid description
+        self.post_request('/requests/new', request, 'description', [])
+
+        # test case for invalid target date
+        self.post_request('/requests/new', request, 'target_date', [])
+
+        # test case for invalid client
+        self.post_request('/requests/new', request, 'client', [])
+
+        # test case for invalid product area
+        self.post_request('/requests/new', request, 'product_area', [])
+
+        # test case valid data
+        r = self.post('/requests/new', request)
+
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+
+        resp_request = None
+        for req in r.json():
+            if req['title'] == request['title']:
+                storage.set_request([req])
+                resp_request = req
+        self.assertEquals(resp_request['title'], request['title'])
+        self.assertEquals(resp_request['description'], request['description'])
+        self.assertEquals(int(resp_request['client']['id']),
+                          int(request['client']['id']))
+        self.assertEquals(int(resp_request['client_priority']),
+                          int(request['client']['client_priority']))
+        self.assertEquals(int(resp_request['product_area']['id']),
+                          int(request['product_area']['id']))
+
+        # create the second request with client priority 1
+        request = {
+            'title': "second request",
+            'description': "description of second request",
+            'target_date': "06/14/2018",
+            'client': client,
+            'product_area': storage.get_product_area()
+        }
+        r = self.post('/requests/new', request)
+        self.assertEquals(r.status_code, 200)
+
+        # save first request
+        for req in r.json():
+            if req['title'] == "new request":
+                storage.set_request([req])
+
+        # append second request
+        for req in r.json():
+            if req['title'] == "second request":
+                saved_requests = storage.get_request()
+                saved_requests.append(req)
+                storage.set_request(saved_requests)
+
+        # test case conflict client priority
+        self.assertEquals(storage.get_request()[0]['client_priority'], 2)
+        self.assertEquals(storage.get_request()[1]['client_priority'], 1)
+
+        # test case with new client
+        new_client = {'name': 'new client'}  # create a new client
+        r = self.post('/clients/new', new_client)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        self.assertFalse('error' in r.json())
+
+        # retrieve the new client from response
+        for item in r.json():
+            if item['name'] == 'new client':
+                clients = list()
+                clients.append(storage.get_client())
+                clients.append(item)
+                storage.set_client(clients)
+
+        # check that the client was save successfully
+        self.assertTrue(isinstance(storage.get_client(), list))
+        self.assertTrue(len(storage.get_client()) > 1)
+        self.assertTrue(storage.get_client()[1]['name'] == 'new client')
+
+        # create another request
+        new_client = {
+            'id': storage.get_client()[1]['id'],
+            'name': storage.get_client()[1]['name'],
+            'client_priority': storage.get_client()[1]['client_priority']
+        }
+        request = {
+            'title': "first request of new client",
+            'description': "description of second request",
+            'target_date': "06/14/2018",
+            'client': new_client,
+            'product_area': storage.get_product_area()
+        }
+        r = self.post('/requests/new', request)
+
+        self.assertEquals(r.status_code, 200)
+        self.assertFalse('error' in r.json())
+        self.assertTrue(isinstance(r.json(), list))
+
+        # retrieve the requests from the response
+        first_request = storage.get_request()[0]
+        second_request = storage.get_request()[1]
+        for item in r.json():
+            if item['title'] == first_request['title']:
+                requests = [item]
+                storage.set_request(requests)
+
+        for item in r.json():
+            if item['title'] == second_request['title']:
+                requests = storage.get_request()
+                requests.append(item)
+                storage.set_request(requests)
+
+        for item in r.json():
+            if item['title'] == request['title']:
+                requests = storage.get_request()
+                requests.append(item)
+                storage.set_request(requests)
+
+        # check that request was retrieved successfully
+        self.assertTrue(len(storage.get_request()) > 2)
+        self.assertTrue(storage.get_request()[2]['title'] == request['title'])
+
+        # check that saved requests have correct client priorities
+        first_request = storage.get_request()[0]
+        second_request = storage.get_request()[1]
+        third_request = storage.get_request()[2]
+        self.assertTrue(first_request['client_priority'] == 2)
+        self.assertTrue(second_request['client_priority'] == 1)
+        self.assertTrue(third_request['client_priority'] == 1)
+
+        # check that third request have correct client
+        self.assertTrue(third_request['client']['name'] == 'new client')
+
+        # save requests
+        requests = [first_request, second_request, third_request]
+        storage.set_request(requests)
