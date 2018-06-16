@@ -191,3 +191,10 @@ def remove_product_area(area_id):
     session.delete(product_area)
     session.commit()
     return get_product_areas()
+
+
+def get_requests():
+
+    requests = query(Request).filter_by(
+        is_active=True).order_by(Request.client_priority.asc()).all()
+    return [request.serialize for request in requests]
