@@ -546,7 +546,27 @@ class TestApp(TestCase):
         self.assertTrue(len(r.json()) > 0)
 
     def test_12_new_request(self):
+        """
+        Test for creating new requests. Sends to the
+        back-end requests with invalid data, and checks
+        that status code is 200, end app returns an error
+        message.
 
+        Then sends request with valid data and check each
+        element was save correctly.
+
+        Then sends another request with the client priority 1,
+        and make sure that in the response data second request
+        has client priority 1, and the first request was updated
+        and client priority of the first request equals 2.
+
+        Then create a new client and a new request with the new
+        client, and checks that the requests have correct
+        client priorities, checks that new request was saved
+        with the new client as well.
+
+        :return void:
+        """
         # define client prototype
         client = {
             'id': storage.get_client()['id'],
