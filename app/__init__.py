@@ -614,7 +614,11 @@ def delete_product_area():
 @csrf_protection
 @auth.login_required
 def get_all_product_areas():
+    """
+    Return all requests in JSON format
 
+    :return String: (JSON)
+    """
     return jsonify(get_product_areas()), 200
 
 if __name__ == '__main__':
