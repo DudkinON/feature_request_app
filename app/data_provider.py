@@ -229,7 +229,12 @@ def completed_request(request_id):
 
 
 def create_request(data):
+    """
+    Creates a new request and return list of requests
 
+    :param data: dictionary
+    :return object:
+    """
     new_request = Request(
         title=data['title'],
         description=data['description'],
