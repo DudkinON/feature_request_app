@@ -583,6 +583,28 @@ def update_product_area_info():
     # return list of clients
     return jsonify(update_product_area(data)), 200
 
+
+@app.route('/areas/delete', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def delete_product_area():
+
+    # get JSON data
+    data = request.get_json()
+
+    # clean input data
+    if is_index(data.get('id')):
+        data['id'] = int(data.get('id'))
+    else:
+        msg = 'The id of product area is not an integer'
+        return jsonify({'error': msg}), 200
+
+    # check product area exist
+    if product_area_exist(data['id']):
+        return jsonify(remove_product_area(data['id'])), 200
+    else:
+        return jsonify({'error': "The product area does not exist"}), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
