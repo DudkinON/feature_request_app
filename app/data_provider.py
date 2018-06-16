@@ -226,3 +226,18 @@ def completed_request(request_id):
     current_request.is_active = False
     session.commit()
     return get_requests()
+
+
+def create_request(data):
+
+    new_request = Request(
+        title=data['title'],
+        description=data['description'],
+        client=data['client'],
+        client_priority=data['client_priority'],
+        target_date=data['target_date'],
+        product_area=data['product_area']
+    )
+    session.add(new_request)
+    session.commit()
+    return get_requests()
