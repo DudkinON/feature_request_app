@@ -6,11 +6,9 @@ from settings import HOST, CREDENTIALS
 from requests import Session
 from re import search
 from json import dumps
-from datetime import datetime
+from datetime import datetime, date
 from resource import get_unique_str, is_index, convert_date, validator
-from data_provider import create_user, get_user_by_id, get_user_by_email, \
-    update_user, remove_user, create_client, get_clients, update_client, \
-    remove_client
+from data_provider import *
 
 req_session = Session()
 
@@ -98,7 +96,7 @@ class Storage(object):
 
         :return integer:
         """
-        return self.uid
+        return self.user
 
     def get_csrf(self):
         """
