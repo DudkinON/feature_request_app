@@ -609,6 +609,14 @@ def delete_product_area():
     else:
         return jsonify({'error': "The product area does not exist"}), 200
 
+
+@app.route('/areas')
+@csrf_protection
+@auth.login_required
+def get_all_product_areas():
+
+    return jsonify(get_product_areas()), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
