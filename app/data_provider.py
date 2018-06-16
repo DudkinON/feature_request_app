@@ -216,7 +216,12 @@ def get_completed_requests():
 
 
 def completed_request(request_id):
+    """
+    Mark the request as completed
 
+    :param request_id:
+    :return:
+    """
     current_request = query(Request).filter_by(id=request_id).first()
     current_request.is_active = False
     session.commit()
