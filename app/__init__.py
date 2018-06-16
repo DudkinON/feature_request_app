@@ -627,7 +627,19 @@ def get_all_product_areas():
 @auth.login_required
 @check_request
 def new_request():
+    """
+    Get the request data from the front-end end and process the
+    data.
 
+    If data does exist, clean each value from danger characters
+    then if client priority is taken update each request in the
+    database and save a new request with the current value of
+    client priority.
+
+    Returns or list of requests or error message in JSON format
+
+    :return object or string:
+    """
     # get user request
     user_request = g.user_request
 
