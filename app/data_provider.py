@@ -181,7 +181,12 @@ def update_product_area(area):
 
 
 def remove_product_area(area_id):
+    """
+    Remove product area by id
 
+    :param area_id: integer
+    :return void:
+    """
     product_area = session.query(ProductArea).filter_by(id=area_id).first()
     session.delete(product_area)
     session.commit()
