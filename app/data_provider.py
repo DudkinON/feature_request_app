@@ -205,7 +205,11 @@ def get_requests():
 
 
 def get_completed_requests():
+    """
+    Get all completed requests and serialize them
 
+    :return object:
+    """
     requests = query(Request).filter_by(
         is_active=False).order_by(Request.client_priority.asc()).all()
     return [request.serialize for request in requests]
