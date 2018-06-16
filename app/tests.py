@@ -29,14 +29,14 @@ class Storage(object):
         self.product_area = None
         self.request = None
 
-    def set_user(self, uid):
+    def set_user(self, user):
         """
         Setter for user id
 
-        :param uid: integer
+        :param user: integer
         :return void:
         """
-        self.uid = uid
+        self.user = user
 
     def set_csrf(self, csrf_token):
         """
