@@ -621,6 +621,27 @@ def get_all_product_areas():
     """
     return jsonify(get_product_areas()), 200
 
+
+@app.route('/requests/new', methods=['POST'])
+@csrf_protection
+@auth.login_required
+@check_request
+def new_request():
+
+    # get user request
+    user_request = g.user_request
+
+    # check that client priority is not taken
+    if client_priority_is_taken(user_request):
+        # else shift all requests where client priority >= current priority
+        update_client_priorities(user_request)
+
+    # clean RAM
+    del g.user_request
+
+    # send list of requests to front-end
+    return jsonify(create_request(user_request)), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
