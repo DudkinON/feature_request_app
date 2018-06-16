@@ -588,7 +588,11 @@ def update_product_area_info():
 @csrf_protection
 @auth.login_required
 def delete_product_area():
+    """
+    Remove product area from database
 
+    :return: string (JSON)
+    """
     # get JSON data
     data = request.get_json()
 
