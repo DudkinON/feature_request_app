@@ -178,3 +178,11 @@ def update_product_area(area):
     product_area.name = area['name']
     session.commit()
     return get_product_areas()
+
+
+def remove_product_area(area_id):
+
+    product_area = session.query(ProductArea).filter_by(id=area_id).first()
+    session.delete(product_area)
+    session.commit()
+    return get_product_areas()
