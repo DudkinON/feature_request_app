@@ -3,7 +3,7 @@
 
 from random import choice
 from string import ascii_uppercase as uppercase, digits
-from datetime import date, datetime
+from datetime import date
 import re
 
 
