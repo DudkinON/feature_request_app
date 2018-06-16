@@ -194,7 +194,11 @@ def remove_product_area(area_id):
 
 
 def get_requests():
+    """
+    Get all requests and serialize them
 
+    :return object:
+    """
     requests = query(Request).filter_by(
         is_active=True).order_by(Request.client_priority.asc()).all()
     return [request.serialize for request in requests]
