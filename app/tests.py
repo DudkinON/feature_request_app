@@ -1031,7 +1031,14 @@ class TestApp(TestCase):
         self.assertFalse(bool(product_area_id))
 
     def test_19_remove_client(self):
+        """
+        Test for removing client. Sends request to the back-end
+        with empty data, invalid client id, and checks the
+        response for the status code and existing error
+        message. Then sends request with valid client id
 
+        :return void:
+        """
         # test case for empty data
         client = {}
         r = self.post('/clients/delete', data=client)
