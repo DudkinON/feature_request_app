@@ -867,7 +867,15 @@ class TestApp(TestCase):
         storage.set_request(requests)
 
     def test_14_complete_request(self):
+        """
+        Tests for complete_request function. Checks the
+        response of the function with empty data, empty
+        request id, invalid request id and with not
+        existing request id. Then, checks that server
+        marked the request as completed
 
+        :return viod:
+        """
         # test case for empty data
         r = self.post('/requests/complete', {})
         self.assertEquals(r.status_code, 200)
