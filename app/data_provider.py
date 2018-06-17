@@ -249,7 +249,19 @@ def create_request(data):
 
 
 def update_request(request):
+    """
+    Update request information in database, and re
 
+    :param request: dictionary
+        :arg id: integer
+        :arg title: string
+        :arg description: string
+        :arg client: integer (client id)
+        :arg client_priority: integer
+        :arg date: date object
+        :arg product_area: integer (product area id)
+    :return list:
+    """
     current_request = query(Request).filter_by(id=request['id']).first()
     current_request.title = request['title']
     current_request.description = request['description']
