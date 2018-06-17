@@ -989,7 +989,18 @@ class TestApp(TestCase):
             self.assertFalse(int(request['id']) in req_ids)
 
     def test_18_remove_product_area(self):
+        """
+        Test for removing the product area. Sends requests to
+        back-end with empty data, invalid product area id,
+        and product area id which does not exit. In response
+        checks status code, and existing error message.
 
+        Then sends request with valid product area id, and in
+        response checks the status code, response data is list,
+        the id of removed product area not exist in the list.
+
+        :return void:
+        """
         # test case for empty data
         product_area = {}
         r = self.post('/areas/delete', product_area)
