@@ -943,3 +943,37 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
         self.assertTrue(len(r.json()) > 1)
+
+    def test_17_remove_requests(self):
+
+        # retrieve requests from the storage
+        requests = storage.get_request()
+
+        req_ids = [int(req['id']) for req in requests]
+
+        # test case empty data
+        r = self.post('/requests/delete', {})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case request id not exist
+        r = self.post('/requests/delete', {'id': ''})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case request id not exist
+        r = self.post('/requests/delete', {'id': 0})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # remove requests
+        for request in requests:
+            r = self.post('/requests/delete', request)
+            self.assertEquals(r.status_code, 200)
+            self.assertFalse('error' in r.json())
+            self.assertTrue(isinstance(r.json(), list))
+
+        # make sure that request was removed
+        all_requests = self.get('/requests')
+        for request in all_requests.json():
+            self.assertFalse(int(request['id']) in req_ids)
