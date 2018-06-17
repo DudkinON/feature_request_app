@@ -1029,3 +1029,35 @@ class TestApp(TestCase):
             if int(area['id']) == int(storage.get_product_area()['id']):
                 product_area_id = area['id']
         self.assertFalse(bool(product_area_id))
+
+    def test_19_remove_client(self):
+
+        # test case for empty data
+        client = {}
+        r = self.post('/clients/delete', data=client)
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for invalid client id
+        client = {'id': []}
+        r = self.post('/clients/delete', data=client)
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for client id not existing
+        client = {'id': 0}
+        r = self.post('/clients/delete', data=client)
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for valid client id
+        client_ids = [int(cl['id']) for cl in storage.get_client()]
+        for client_id in client_ids:
+            client = {'id': client_id}
+            r = self.post('/clients/delete', data=client)
+            self.assertEqual(r.status_code, 200)
+            self.assertFalse('error' in r.json())
+
+        # make sure that all clients were removed
+        for client in r.json():
+            self.assertFalse(int(client['id']) in client_ids)
