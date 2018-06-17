@@ -908,7 +908,16 @@ class TestApp(TestCase):
             self.assertFalse(int(item['id']) == request_id)
 
     def test_15_get_complete_requests(self):
+        """
+        Tests for get completed request. Send GET request
+        to the server, and checks that status code equals
+        200, and response data is a list.
 
+        Then try to retrieve the request form the list,
+        and makes sure that request in the list.
+
+        :return void:
+        """
         r = self.get('/requests/get/completed')
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
