@@ -654,6 +654,32 @@ def new_request():
     # send list of requests to front-end
     return jsonify(create_request(user_request)), 200
 
+
+@app.route('/requests/edit', methods=['POST'])
+@csrf_protection
+@auth.login_required
+@check_request
+def update_request_info():
+
+    request_id = request.get_json().get('id')
+    user_request = g.user_request
+
+    if not is_index(request_id):
+        return jsonify({'error': "Cannot read request id"}), 200
+
+    user_request['id'] = int(request_id)
+
+    if not request_exist(request_id):
+        return jsonify({'error': "Cannot find the request"}), 200
+
+    if client_priority_is_taken(user_request):
+        update_client_priorities(user_request)
+
+    # clean RAM
+    del g.user_request
+
+    return jsonify(update_request(user_request)), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
