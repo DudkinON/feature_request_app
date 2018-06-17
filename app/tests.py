@@ -744,7 +744,19 @@ class TestApp(TestCase):
         storage.set_request(requests)
 
     def test_13_update_request(self):
+        """
+        Tests for update_user function. Sends to the
+        function  requests with invalid data, and check
+        results for status code, existing error message.
 
+        Then sends the request with valid and checks that
+        in result status code equal 200, error message not
+        in result, result is a list. After, retrieve the
+        response from the list, and make sure that data
+        were updated correctly.
+
+        :return void:
+        """
         # retrieve requests from the storage
         first_request = storage.get_request()[0]
         second_request = storage.get_request()[1]
