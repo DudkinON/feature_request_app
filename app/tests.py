@@ -931,7 +931,14 @@ class TestApp(TestCase):
         self.assertTrue(bool(_completed_request))
 
     def test_16_get_requests(self):
+        """
+        Tests for requests path. Sends GET request for
+        the back-end and, checks that status code is 200,
+        returned data is a list, and in the list at
+        least one record.
 
+        :return void:
+        """
         r = self.get('/requests')
         self.assertEquals(r.status_code, 200)
         self.assertTrue(isinstance(r.json(), list))
