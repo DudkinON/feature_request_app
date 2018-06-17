@@ -987,3 +987,34 @@ class TestApp(TestCase):
         all_requests = self.get('/requests')
         for request in all_requests.json():
             self.assertFalse(int(request['id']) in req_ids)
+
+    def test_18_remove_product_area(self):
+
+        # test case for empty data
+        product_area = {}
+        r = self.post('/areas/delete', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for empty product area id
+        product_area = {'id': []}
+        r = self.post('/areas/delete', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for product area id not existing
+        product_area = {'id': 9999999}
+        r = self.post('/areas/delete', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for valid data
+        product_area = {'id': storage.get_product_area()['id']}
+        r = self.post('/areas/delete', product_area)
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        product_area_id = None
+        for area in r.json():
+            if int(area['id']) == int(storage.get_product_area()['id']):
+                product_area_id = area['id']
+        self.assertFalse(bool(product_area_id))
