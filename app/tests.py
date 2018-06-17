@@ -906,3 +906,17 @@ class TestApp(TestCase):
         # check that server mark the request as completed
         for item in r.json():
             self.assertFalse(int(item['id']) == request_id)
+
+    def test_15_get_complete_requests(self):
+
+        r = self.get('/requests/get/completed')
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+
+        # try find the completed request
+        _completed_request = None
+        for item in r.json():
+            if int(item['id']) == int(storage.get_request()[0]['id']):
+                _completed_request = item
+
+        self.assertTrue(bool(_completed_request))
