@@ -660,7 +660,11 @@ def new_request():
 @auth.login_required
 @check_request
 def update_request_info():
+    """
+    Update the given request and return list of requests
 
+    :return String: (JSON)
+    """
     request_id = request.get_json().get('id')
     user_request = g.user_request
 
