@@ -310,5 +310,11 @@ def update_client_priorities(req):
 
 
 def request_exist(request_id):
+    """
+    Try to find request in database, if requst exist return
+    True, else return false
 
+    :param request_id: integer
+    :return boolean:
+    """
     return True if query(Request).filter_by(id=request_id).first() else False
