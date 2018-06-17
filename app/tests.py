@@ -1068,3 +1068,25 @@ class TestApp(TestCase):
         # make sure that all clients were removed
         for client in r.json():
             self.assertFalse(int(client['id']) in client_ids)
+
+    def test_20_remove_user_profile(self):
+
+        # remove user
+        r = self.post('/profile/remove', data={})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('info' in r.json())
+        req_session.auth = (CREDENTIALS['email'],
+                            CREDENTIALS['password'])
+
+        # make sure that user was removed
+        r = self.post('/token', data={})
+        self.assertEquals(r.status_code, 401)
+
+        # reset storage
+        storage.set_client(None)
+        storage.set_product_area(None)
+        storage.set_token(None)
+        storage.set_user(None)
+        storage.set_cookies(None)
+        storage.set_csrf(None)
+        storage.set_request(None)
