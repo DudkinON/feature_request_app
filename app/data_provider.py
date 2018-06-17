@@ -272,3 +272,12 @@ def update_request(request):
     session.commit()
 
     return get_requests()
+
+
+def client_priority_is_taken(request):
+
+    request = query(Request).filter_by(
+        client=request['client'],
+        client_priority=request['client_priority']).first()
+
+    return True if request else False
