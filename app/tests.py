@@ -485,7 +485,7 @@ class TestApp(TestCase):
         Test for updating the product area. Sends a requests
         to the back-end with empty data, empty product
         area name, invalid product area name, id of
-        product area witch not exist, and checks response
+        product area which does not exist, and checks response
         for the status code, and existing error message
         in response data.
         Then sends request with valid name, id of
@@ -738,6 +738,117 @@ class TestApp(TestCase):
 
         # check that third request have correct client
         self.assertTrue(third_request['client']['name'] == 'new client')
+
+        # save requests
+        requests = [first_request, second_request, third_request]
+        storage.set_request(requests)
+
+    def test_13_update_request(self):
+
+        # retrieve requests from the storage
+        first_request = storage.get_request()[0]
+        second_request = storage.get_request()[1]
+        third_request = storage.get_request()[2]
+
+        # test case for empty data
+        client = {
+            'id': first_request['client']['id'],
+            'name': first_request['client']['name'],
+            'client_priority': first_request['client_priority']
+        }
+        request = {
+            'id': first_request['id'],
+            'title': first_request['title'],
+            'description': first_request['description'],
+            'client': client,
+            'target_date': first_request['target_date'],
+            'product_area': first_request['product_area']
+        }
+
+        # test case for empty title
+        self.post_request('/requests/edit', request, 'title', "")
+
+        # test case for empty description
+        self.post_request('/requests/edit', request, 'description', "")
+
+        # test case for empty target date
+        self.post_request('/requests/edit', request, 'target_date', "")
+
+        # test case for empty client
+        self.post_request('/requests/edit', request, 'client', "")
+
+        # test case for empty product area
+        self.post_request('/requests/edit', request, 'product_area', "")
+
+        # test case for invalid title
+        self.post_request('/requests/edit', request, 'title', [])
+
+        # test case for invalid description
+        self.post_request('/requests/edit', request, 'description', [])
+
+        # test case for invalid target date
+        self.post_request('/requests/edit', request, 'target_date', [])
+
+        # test case for invalid client
+        self.post_request('/requests/edit', request, 'client', [])
+
+        # test case for invalid product area
+        self.post_request('/requests/edit', request, 'product_area', [])
+
+        # test case valid data
+        client = {
+            'id': storage.get_client()[1]['id'],
+            'name': storage.get_client()[1]['name'],
+            'client_priority': 1
+        }
+        request = {
+            'id': first_request['id'],
+            'title': "first request updated",
+            'description': "description for first request updated",
+            'client': client,
+            'target_date': "06/25/2018",
+            'product_area': first_request['product_area']
+        }
+        r = self.post('/requests/edit', request)
+
+        # check status code, no error in response, and data type
+        self.assertEquals(r.status_code, 200)
+        self.assertFalse('error' in r.json())
+        self.assertTrue(isinstance(r.json(), list))
+
+        # retrieve requests form the response
+        for item in r.json():
+            if int(item['id']) == int(first_request['id']):
+                first_request = item
+
+            if int(item['id']) == int(second_request['id']):
+                second_request = item
+
+            if int(item['id']) == int(third_request['id']):
+                third_request = item
+
+        # convert data
+        dt = datetime.strptime(first_request['target_date'],
+                               '%a, %d %b %Y %X GMT')
+        if dt.month < 10:
+            month = "0%s" % dt.month
+        else:
+            month = dt.month
+        data = "%s/%s/%s" % (month, dt.day, dt.year)
+
+        # make sure that request was updated
+        self.assertEquals(first_request['title'], request['title'])
+        self.assertEquals(first_request['description'], request['description'])
+        self.assertEquals(first_request['client']['id'],
+                          request['client']['id'])
+        self.assertEquals(data, request['target_date'])
+        self.assertEquals(first_request['product_area']['id'],
+                          request['product_area']['id'])
+
+        # make sure that requests have correct client priority
+        self.assertEquals(first_request['client_priority'], 1)
+        self.assertEquals(second_request['client_priority'], 1)
+        self.assertEquals(third_request['client_priority'], 2)
 
         # save requests
         requests = [first_request, second_request, third_request]
