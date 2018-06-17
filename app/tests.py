@@ -865,3 +865,36 @@ class TestApp(TestCase):
         # save requests
         requests = [first_request, second_request, third_request]
         storage.set_request(requests)
+
+    def test_14_complete_request(self):
+
+        # test case for empty data
+        r = self.post('/requests/complete', {})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for empty request id
+        r = self.post('/requests/complete', {'id': ''})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for invalid type of request id
+        r = self.post('/requests/complete', {'id': []})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for request id which does not exist
+        r = self.post('/requests/complete', {'id': 0})
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for valid data
+        request_id = storage.get_request()[0]['id']
+        r = self.post('/requests/complete', {'id': request_id})
+        self.assertEquals(r.status_code, 200)
+        self.assertFalse('error' in r.json())
+        self.assertTrue(isinstance(r.json(), list))
+
+        # check that server mark the request as completed
+        for item in r.json():
+            self.assertFalse(int(item['id']) == request_id)
