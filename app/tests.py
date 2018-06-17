@@ -945,7 +945,17 @@ class TestApp(TestCase):
         self.assertTrue(len(r.json()) > 1)
 
     def test_17_remove_requests(self):
+        """
+        Tests for removal of request path. Sends post
+        request with empty and invalid data and checks
+        that the server returns status code 200 and
+        an error in the response.
 
+        Later, the same thing is done with valid data
+        and makes sure that the request was removed.
+
+        :return void:
+        """
         # retrieve requests from the storage
         requests = storage.get_request()
 
