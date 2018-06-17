@@ -1070,7 +1070,13 @@ class TestApp(TestCase):
             self.assertFalse(int(client['id']) in client_ids)
 
     def test_20_remove_user_profile(self):
+        """
+        Test for removing user from database. Sends query
+        with user credentials to back-end, and checks
+        in response data status code, info message.
 
+        :return void:
+        """
         # remove user
         r = self.post('/profile/remove', data={})
         self.assertEquals(r.status_code, 200)
