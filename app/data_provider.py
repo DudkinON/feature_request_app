@@ -287,3 +287,16 @@ def client_priority_is_taken(request):
         client_priority=request['client_priority']).first()
 
     return True if request else False
+
+
+def update_client_priorities(req):
+
+    requests = query(Request).filter(
+        Request.client_priority >= req["client_priority"],
+        Request.client == req["client"]
+    ).all()
+
+    for request in requests:
+        request.client_priority += 1
+
+    session.commit()
