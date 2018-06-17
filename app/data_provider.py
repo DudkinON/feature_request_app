@@ -246,3 +246,17 @@ def create_request(data):
     session.add(new_request)
     session.commit()
     return get_requests()
+
+
+def update_request(request):
+
+    current_request = query(Request).filter_by(id=request['id']).first()
+    current_request.title = request['title']
+    current_request.description = request['description']
+    current_request.client = request['client']
+    current_request.client_priority = request['client_priority']
+    current_request.target_date = request['target_date']
+    current_request.product_area = request['product_area']
+    session.commit()
+
+    return get_requests()
