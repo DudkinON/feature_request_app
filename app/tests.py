@@ -929,3 +929,10 @@ class TestApp(TestCase):
                 _completed_request = item
 
         self.assertTrue(bool(_completed_request))
+
+    def test_16_get_requests(self):
+
+        r = self.get('/requests')
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(isinstance(r.json(), list))
+        self.assertTrue(len(r.json()) > 1)
