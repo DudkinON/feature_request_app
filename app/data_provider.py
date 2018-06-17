@@ -290,7 +290,14 @@ def client_priority_is_taken(request):
 
 
 def update_client_priorities(req):
+    """
+    Get requests from database where client priority more or
+    equal given client_priority, then increase client
+    priority column on 1
 
+    :param req: dict
+    :return void:
+    """
     requests = query(Request).filter(
         Request.client_priority >= req["client_priority"],
         Request.client == req["client"]
