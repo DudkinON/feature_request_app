@@ -275,7 +275,13 @@ def update_request(request):
 
 
 def client_priority_is_taken(request):
+    """
+    Takes requests and filters by client and client priority,
+    if request exists return True else False
 
+    :param request: integer
+    :return Boolean:
+    """
     request = query(Request).filter_by(
         client=request['client'],
         client_priority=request['client_priority']).first()
