@@ -307,3 +307,8 @@ def update_client_priorities(req):
         request.client_priority += 1
 
     session.commit()
+
+
+def request_exist(request_id):
+
+    return True if query(Request).filter_by(id=request_id).first() else False
