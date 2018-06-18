@@ -748,7 +748,11 @@ def complete_the_request():
 @csrf_protection
 @auth.login_required
 def get_all_requests():
+    """
+    Return all request in JSON format
 
+    :return String: (JSON)
+    """
     return jsonify(get_requests()), 200
 
 if __name__ == '__main__':
