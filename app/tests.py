@@ -1103,6 +1103,14 @@ class TestFunctions(TestCase):
     Tests for resource.py
     """
     def test_01_get_unique_str(self):
+        """
+        Test for get_unique_str function. Checks that
+        function returns a string, and length of the
+        string equals parameter amount that was pass
+        to the function.
+
+        :return void:
+        """
 
         amount = 34
 
