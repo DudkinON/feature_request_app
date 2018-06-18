@@ -330,6 +330,7 @@ def update_client_priorities(req):
     ).all()
 
     for request in requests:
+        check_create_priority(request.client_priority + 1)
         request.client_priority += 1
 
     session.commit()
