@@ -1154,7 +1154,14 @@ class TestFunctions(TestCase):
         self.assertEquals(str(convert_date('04/04/2000')), '2000-04-04')
 
     def test_04_validator(self):
+        """
+        Test for validator function. Checks function with
+        data types like: string, list, dict, tuple. First
+        test with wrong length, second test with invalid
+        data type, third test with valid data.
 
+        :return void:
+        """
 
         # test case for too short string
         self.assertFalse(validator('abcd', basestring, 5))
