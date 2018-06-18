@@ -1144,7 +1144,11 @@ class TestFunctions(TestCase):
         self.assertTrue(is_index("1"))
 
     def test_03_convert_date(self):
+        """
+        Test for convert_date function.
 
+        :return void:
+        """
         import datetime as date_type
         self.assertTrue(isinstance(convert_date('04/04/2000'), date_type.date))
         self.assertEquals(str(convert_date('04/04/2000')), '2000-04-04')
