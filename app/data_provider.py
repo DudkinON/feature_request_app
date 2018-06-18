@@ -321,5 +321,10 @@ def request_exist(request_id):
 
 
 def get_requests_by_id(request_id):
+    """
+    Get request_id and return request by id
 
+    :param request_id: integer
+    :return:
+    """
     return query(Request).filter_by(id=request_id).first()
