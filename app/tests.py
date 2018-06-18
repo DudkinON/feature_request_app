@@ -1142,3 +1142,9 @@ class TestFunctions(TestCase):
         self.assertFalse(is_index(0))
         self.assertTrue(is_index(1))
         self.assertTrue(is_index("1"))
+
+    def test_03_convert_date(self):
+
+        import datetime as date_type
+        self.assertTrue(isinstance(convert_date('04/04/2000'), date_type.date))
+        self.assertEquals(str(convert_date('04/04/2000')), '2000-04-04')
