@@ -755,6 +755,15 @@ def get_all_requests():
     """
     return jsonify(get_requests()), 200
 
+
+@app.route('/requests/get/completed')
+@csrf_protection
+@auth.login_required
+def get_all_completed_requests():
+
+    return jsonify(get_completed_requests()), 200
+
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
