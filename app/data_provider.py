@@ -204,6 +204,12 @@ def create_priority():
     return query(Priority).all()
 
 
+def check_create_priority(priority_id):
+
+    if not query(Priority).filter_by(id=priority_id).first():
+        create_priority()
+
+
 def get_requests():
     """
     Get all requests and serialize them
