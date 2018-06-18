@@ -286,9 +286,7 @@ def update_request(request):
         :arg product_area: integer (product area id)
     :return list:
     """
-    # make sure that property exist, if not create a new one
-    if not query(Priority).filter_by(id=request['client_priority']).first():
-        create_priority()
+    check_create_priority(request['client_priority'])
 
     current_request = query(Request).filter_by(id=request['id']).first()
     current_request.title = request['title']
