@@ -1152,3 +1152,42 @@ class TestFunctions(TestCase):
         import datetime as date_type
         self.assertTrue(isinstance(convert_date('04/04/2000'), date_type.date))
         self.assertEquals(str(convert_date('04/04/2000')), '2000-04-04')
+
+    def test_04_validator(self):
+
+
+        # test case for too short string
+        self.assertFalse(validator('abcd', basestring, 5))
+
+        # test case invalid string
+        self.assertFalse(validator([1, 2, 3, 4], basestring, 3))
+
+        # test case valid string
+        self.assertTrue(validator('abcd', basestring, 3))
+
+        # test case for too short list
+        self.assertFalse(validator([1, 2, 3, 4], list, 5))
+
+        # test case invalid list
+        self.assertFalse(validator((1, 2, 3, 4), list, 3))
+
+        # test case valid list
+        self.assertTrue(validator([1, 2, 3, 4], list, 3))
+
+        # test case for too short dictionary
+        self.assertFalse(validator({'a': 'a', 'b': 'b'}, dict, 5))
+
+        # test case invalid dictionary
+        self.assertFalse(validator("{'a': 'a', 'b': 'b'}", dict, 1))
+
+        # test case valid dictionary
+        self.assertTrue(validator({'a': 'a', 'b': 'b'}, dict, 1))
+
+        # test case for too short tuple
+        self.assertFalse(validator((1, 2, 3, 4), tuple, 5))
+
+        # test case invalid tuple
+        self.assertFalse(validator([1, 2, 3, 4], tuple, 5))
+
+        # test case valid tuple
+        self.assertTrue(validator((1, 2, 3, 4), tuple, 3))
