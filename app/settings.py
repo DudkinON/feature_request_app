@@ -14,10 +14,7 @@ SECRETS_DIR = ''.join([BASE_DIR, '/secrets'])
 # use database PostgreSQL if False will use SQLite
 POSTGRES = False
 
-CONNECT_SETTINGS = 'postgresql://%s:%s@%s/%s' % (database.get('user'),
-                                                 database.get('password'),
-                                                 database.get('host'),
-                                                 database.get('database'))
+CONNECT_SETTINGS = 'postgresql://%s:%s@%s/%s' % database
 
 # SQLite configuration
 DB_FILE_NAME = 'request.db'  # define SQLite database file name
@@ -26,7 +23,7 @@ SAME_THREAD = False  # set SQLite for checking same thread
 
 # Test settings
 
-HOST = 'http://127.0.0.1:5000'
+HOST = 'http://%s:%s' % (app_host, app_port)
 CREDENTIALS = {'email': 'test@test.com',
                'first_name': 'test',
                'last_name': 'test',
