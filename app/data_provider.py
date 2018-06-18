@@ -193,6 +193,13 @@ def remove_product_area(area_id):
     return get_product_areas()
 
 
+def create_priority():
+
+    session.add(Priority())
+    session.commit()
+    return query(Priority).all()
+
+
 def get_requests():
     """
     Get all requests and serialize them
