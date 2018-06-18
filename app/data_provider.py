@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from models import User, ProductArea, Client, Request, session
+from models import User, ProductArea, Client, Request, session, Priority
 
 query = session.query
 
@@ -318,3 +318,8 @@ def request_exist(request_id):
     :return boolean:
     """
     return True if query(Request).filter_by(id=request_id).first() else False
+
+
+def get_requests_by_id(request_id):
+
+    return query(Request).filter_by(id=request_id).first()

@@ -26,7 +26,7 @@ SAME_THREAD = False  # set SQLite for checking same thread
 
 # Test settings
 
-HOST = 'http://localhost:5000'
+HOST = 'http://127.0.0.1:5000'
 CREDENTIALS = {'email': 'test@test.com',
                'first_name': 'test',
                'last_name': 'test',
