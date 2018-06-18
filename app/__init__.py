@@ -714,6 +714,31 @@ def remove_request_info():
 
     return jsonify(remove_request(data.get("id"))), 200
 
+
+@app.route('/requests/complete', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def complete_the_request():
+
+    # get data
+    data = request.get_json()
+
+    if not data:
+        return jsonify({'error': "Server does not get any data"}), 200
+
+    if not data.get('id'):
+        return jsonify({'error': "Server does not get request id"}), 200
+
+    if not is_index(data.get('id')):
+        return jsonify({'error': "Invalid request id"}), 200
+
+    request_id = int(data.get('id'))
+
+    if not request_exist(request_id):
+        return jsonify({'error': "Cannot find the request"}), 200
+
+    return jsonify(completed_request(request_id)), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
