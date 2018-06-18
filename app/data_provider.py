@@ -257,9 +257,7 @@ def create_request(data):
     :param data: dictionary
     :return object:
     """
-    # make sure that property exist, if not create a new one
-    if not query(Priority).filter_by(id=data['client_priority']).first():
-        create_priority()
+    check_create_priority(data['client_priority'])
 
     new_request = Request(
         title=data['title'],
