@@ -1096,3 +1096,9 @@ class TestApp(TestCase):
         storage.set_cookies(None)
         storage.set_csrf(None)
         storage.set_request(None)
+
+
+class TestFunctions(TestCase):
+    """
+    Tests for resource.py
+    """
