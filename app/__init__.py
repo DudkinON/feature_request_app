@@ -760,7 +760,11 @@ def get_all_requests():
 @csrf_protection
 @auth.login_required
 def get_all_completed_requests():
+    """
+    Return all completed requests in JSON format
 
+    :return String: (JSON)
+    """
     return jsonify(get_completed_requests()), 200
 
 
