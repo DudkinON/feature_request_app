@@ -328,3 +328,10 @@ def get_requests_by_id(request_id):
     :return:
     """
     return query(Request).filter_by(id=request_id).first()
+
+
+def remove_request(request_id):
+
+    session.delete(session.query(Request).filter_by(id=request_id).first())
+    session.commit()
+    return get_requests()
