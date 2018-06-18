@@ -691,6 +691,11 @@ def update_request_info():
 @csrf_protection
 @auth.login_required
 def remove_request_info():
+    """
+    Remove request from database
+
+    :return String: (JSON)
+    """
 
     # get data
     data = request.get_json()
