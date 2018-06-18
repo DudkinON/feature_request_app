@@ -205,7 +205,12 @@ def create_priority():
 
 
 def check_create_priority(priority_id):
+    """
+    Make sure that property exist, if not create a new one
 
+    :param priority_id: integer
+    :return void:
+    """
     if not query(Priority).filter_by(id=priority_id).first():
         create_priority()
 
