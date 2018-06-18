@@ -1121,3 +1121,15 @@ class TestFunctions(TestCase):
 
         # make sure that the function return unique string
         self.assertNotEquals(get_unique_str(amount), get_unique_str(amount))
+
+    def test_02_is_index(self):
+
+        self.assertFalse(is_index('a'))
+        self.assertFalse(is_index([1]))
+        self.assertFalse(is_index({1: 1}))
+        self.assertFalse(is_index((0,)))
+        self.assertFalse(is_index(None))
+        self.assertFalse(is_index(False))
+        self.assertFalse(is_index(0))
+        self.assertTrue(is_index(1))
+        self.assertTrue(is_index("1"))
