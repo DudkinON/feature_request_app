@@ -194,7 +194,11 @@ def remove_product_area(area_id):
 
 
 def create_priority():
+    """
+    Create property and return list of property objects
 
+    :return object:
+    """
     session.add(Priority())
     session.commit()
     return query(Priority).all()
