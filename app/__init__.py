@@ -743,6 +743,14 @@ def complete_the_request():
 
     return jsonify(completed_request(request_id)), 200
 
+
+@app.route('/requests')
+@csrf_protection
+@auth.login_required
+def get_all_requests():
+
+    return jsonify(get_requests()), 200
+
 if __name__ == '__main__':
     app.debug = app_debug
     app.run(host=app_host, port=app_port)
