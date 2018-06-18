@@ -719,7 +719,11 @@ def remove_request_info():
 @csrf_protection
 @auth.login_required
 def complete_the_request():
+    """
+    Mark the request as complete
 
+    :return String: (JSON)
+    """
     # get data
     data = request.get_json()
 
