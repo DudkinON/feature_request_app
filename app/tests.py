@@ -1102,3 +1102,14 @@ class TestFunctions(TestCase):
     """
     Tests for resource.py
     """
+    def test_01_get_unique_str(self):
+
+        amount = 34
+
+        # test get_unique_string function
+        result = get_unique_str(amount)
+        self.assertTrue(isinstance(result, basestring))
+        self.assertTrue(len(result) == amount)
+
+        # make sure that the function return unique string
+        self.assertNotEquals(get_unique_str(amount), get_unique_str(amount))
