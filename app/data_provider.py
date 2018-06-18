@@ -331,7 +331,12 @@ def get_requests_by_id(request_id):
 
 
 def remove_request(request_id):
+    """
+    Remove the request by id, and return list of requests
 
+    :param request_id: integer
+    :return list:
+    """
     session.delete(session.query(Request).filter_by(id=request_id).first())
     session.commit()
     return get_requests()
