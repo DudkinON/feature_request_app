@@ -1123,7 +1123,16 @@ class TestFunctions(TestCase):
         self.assertNotEquals(get_unique_str(amount), get_unique_str(amount))
 
     def test_02_is_index(self):
+        """
+        Test for is_index function. Check function with
+        invalid data like string, list, dictionary, tuple,
+        None, False, or 0 (that cannot be an index).
 
+        Then test function with valid data like an
+        integer or an integer in string format.
+
+        :return void:
+        """
         self.assertFalse(is_index('a'))
         self.assertFalse(is_index([1]))
         self.assertFalse(is_index({1: 1}))
