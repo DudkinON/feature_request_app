@@ -648,6 +648,8 @@ def new_request():
         # else shift all requests where client priority >= current priority
         update_client_priorities(user_request)
 
+    print user_request
+
     # clean RAM
     del g.user_request
 
@@ -683,6 +685,29 @@ def update_request_info():
     del g.user_request
 
     return jsonify(update_request(user_request)), 200
+
+
+@app.route('/requests/delete', methods=['POST'])
+@csrf_protection
+@auth.login_required
+def remove_request_info():
+
+    # get data
+    data = request.get_json()
+
+    if not data:
+        return jsonify({'error': "Server does not get any data"}), 200
+
+    if not data.get('id'):
+        return jsonify({'error': "Server does not get request info"}), 200
+
+    if not is_index(data.get('id')):
+        return jsonify({'error': "Id of request invalid"}), 200
+
+    if not request_exist(data.get('id')):
+        return jsonify({'error': 'Cannot find the request'}), 200
+
+    return jsonify(remove_request(data.get("id"))), 200
 
 if __name__ == '__main__':
     app.debug = app_debug
