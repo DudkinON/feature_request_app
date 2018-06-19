@@ -1376,3 +1376,9 @@ class TestDatabaseFunctions(TestCase):
         """
         self.assertFalse(client_exist(0))
         self.assertTrue(int(storage.get_client()[0]['id']))
+
+    def test_10_create_product_area(self):
+
+        product_area = create_product_area("new product area").serialize
+        self.assertEquals(product_area['name'], "new product area")
+        storage.set_product_area(product_area)
