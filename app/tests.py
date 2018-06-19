@@ -1367,3 +1367,8 @@ class TestDatabaseFunctions(TestCase):
         clients.append(first_client)
         clients.append(second_client)
         storage.set_client(clients)
+
+    def test_09_client_exist(self):
+
+        self.assertFalse(client_exist(0))
+        self.assertTrue(int(storage.get_client()[0]['id']))
