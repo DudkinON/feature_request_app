@@ -1409,3 +1409,9 @@ class TestDatabaseFunctions(TestCase):
                 temp_product_area = product_area
 
         self.assertTrue(temp_product_area)
+
+    def test_12_product_area_exist(self):
+
+
+        self.assertTrue(product_area_exist(storage.get_product_area()['id']))
+        self.assertFalse(product_area_exist(0))
