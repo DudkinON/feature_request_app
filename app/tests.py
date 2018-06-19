@@ -1326,7 +1326,12 @@ class TestDatabaseFunctions(TestCase):
         storage.set_client(clients)
 
     def test_07_get_clients(self):
+        """
+        Test for get_client function. Calls function, tests
+        if list has at least one result.
 
+        :return void:
+        """
         client_list = storage.get_client()
 
         self.assertTrue(isinstance(client_list, list))
