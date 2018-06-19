@@ -1245,3 +1245,12 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(bool(user))
         self.assertEquals(user, storage.get_user())
         self.assertFalse(get_user_by_id(0))
+
+    def test_03_get_user_by_email(self):
+
+        user = get_user_by_email(storage.get_user()['email']).serialize
+
+        # test result
+        self.assertTrue(bool(user))
+        self.assertEquals(user, storage.get_user())
+        self.assertFalse(get_user_by_id(0))
