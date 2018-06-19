@@ -1229,7 +1229,15 @@ class TestDatabaseFunctions(TestCase):
         storage.set_user(user)
 
     def test_02_get_user_by_id(self):
+        """
+        Test for get_user_by_id function. Checks returning data
+        that user is not None, user from database equal with
+        user from the storage.
 
+        Additionally test the function with invalid user id.
+
+        :return void:
+        """
         # retrieve user from storage and pass uid to get_user_by_id function
         user = get_user_by_id(storage.get_user()['uid']).serialize
 
