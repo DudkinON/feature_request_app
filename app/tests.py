@@ -1292,6 +1292,11 @@ class TestDatabaseFunctions(TestCase):
         storage.set_user(serialize_user)
 
     def test_05_remove_user(self):
+        """
+        Test to make sure user was removed.
+
+        :return void:
+        """
 
         # remove user
         remove_user(storage.get_user()['uid'])
