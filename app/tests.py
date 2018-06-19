@@ -1303,3 +1303,18 @@ class TestDatabaseFunctions(TestCase):
 
         # make sure that user was removed
         self.assertFalse(get_user_by_id(storage.get_user()['uid']))
+
+    def test_06_create_client(self):
+
+
+        # create a client
+        client = create_client("Client name").serialize
+
+        # test result
+        self.assertEquals(client['name'], "Client name")
+
+        # create another client and save result
+        clients = list()
+        clients.append(client)
+        clients.append(create_client("new Client").serialize)
+        storage.set_client(clients)
