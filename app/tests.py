@@ -1423,7 +1423,15 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(product_area_exist(0))
 
     def test_13_update_product_area(self):
+        """
+        Test for update_product_area function. Changes
+        product area name and passes to the function and
+        makes sure that result is a list with at least one
+        element. Then, checks that product area name was
+        updated and saves product area to the storage.
 
+        :return void:
+        """
 
         product_area = storage.get_product_area()
         product_area['name'] = "updated product area"
