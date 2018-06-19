@@ -1389,3 +1389,16 @@ class TestDatabaseFunctions(TestCase):
         product_area = create_product_area("new product area").serialize
         self.assertEquals(product_area['name'], "new product area")
         storage.set_product_area(product_area)
+
+    def test_11_get_product_areas(self):
+
+        product_areas = get_product_areas()
+        self.assertTrue(isinstance(product_areas, list))
+        self.assertTrue(len(product_areas) > 0)
+
+        temp_product_area = None
+        for product_area in product_areas:
+            if product_area['name'] == storage.get_product_area()['name']:
+                temp_product_area = product_area
+
+        self.assertTrue(temp_product_area)
