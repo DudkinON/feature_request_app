@@ -1369,6 +1369,10 @@ class TestDatabaseFunctions(TestCase):
         storage.set_client(clients)
 
     def test_09_client_exist(self):
+        """
+        Test for client_exist function.
 
+        :return void:
+        """
         self.assertFalse(client_exist(0))
         self.assertTrue(int(storage.get_client()[0]['id']))
