@@ -1411,7 +1411,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(temp_product_area)
 
     def test_12_product_area_exist(self):
+        """
+        Test for product_are_exist function. Check two
+        cases: one with valid data, one with invalid data.
+        Checks that function returns valid boolean response.
 
+        :return void:
+        """
 
         self.assertTrue(product_area_exist(storage.get_product_area()['id']))
         self.assertFalse(product_area_exist(0))
