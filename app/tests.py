@@ -1378,6 +1378,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(int(storage.get_client()[0]['id']))
 
     def test_10_create_product_area(self):
+        """
+        Test for create_product_area function. Pass the
+        function product area name and checks that the
+        product area was saved.
+
+        :return void:
+        """
 
         product_area = create_product_area("new product area").serialize
         self.assertEquals(product_area['name'], "new product area")
