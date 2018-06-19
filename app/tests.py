@@ -1336,3 +1336,27 @@ class TestDatabaseFunctions(TestCase):
 
         self.assertTrue(isinstance(client_list, list))
         self.assertTrue(len(client_list) > 0)
+
+    def test_08_update_client(self):
+
+
+        first_client = dict(storage.get_client()[0])
+        second_client = storage.get_client()[1]
+        first_client['name'] = "updated Client name"
+        client_list = update_client(first_client)
+
+        self.assertTrue(isinstance(client_list, list))
+
+        # retrieve client from result
+        new_client = None
+        for item in client_list:
+            if int(item['id']) == first_client['id']:
+                new_client = item
+
+        self.assertEquals(new_client['name'], first_client['name'])
+
+        # save clients
+        clients = list()
+        clients.append(first_client)
+        clients.append(second_client)
+        storage.set_client(clients)
