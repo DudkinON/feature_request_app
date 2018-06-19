@@ -1421,3 +1421,21 @@ class TestDatabaseFunctions(TestCase):
 
         self.assertTrue(product_area_exist(storage.get_product_area()['id']))
         self.assertFalse(product_area_exist(0))
+
+    def test_13_update_product_area(self):
+
+
+        product_area = storage.get_product_area()
+        product_area['name'] = "updated product area"
+        product_areas_list = update_product_area(product_area)
+        self.assertTrue(isinstance(product_areas_list, list))
+        self.assertTrue(len(product_areas_list) > 0)
+        temp_product_area = None
+        for item in product_areas_list:
+            if item['name'] == product_area['name']:
+                temp_product_area = item
+
+        self.assertTrue(bool(temp_product_area))
+        self.assertEquals(temp_product_area['name'], product_area['name'])
+
+        storage.set_product_area(temp_product_area)
