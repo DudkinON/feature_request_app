@@ -1247,7 +1247,11 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(get_user_by_id(0))
 
     def test_03_get_user_by_email(self):
+        """
+        Test for get_user_by_email function.
 
+        :return void:
+        """
         user = get_user_by_email(storage.get_user()['email']).serialize
 
         # test result
