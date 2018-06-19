@@ -1227,3 +1227,13 @@ class TestDatabaseFunctions(TestCase):
 
         # save user
         storage.set_user(user)
+
+    def test_02_get_user_by_id(self):
+
+        # retrieve user from storage and pass uid to get_user_by_id function
+        user = get_user_by_id(storage.get_user()['uid']).serialize
+
+        # test result
+        self.assertTrue(bool(user))
+        self.assertEquals(user, storage.get_user())
+        self.assertFalse(get_user_by_id(0))
