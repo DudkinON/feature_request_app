@@ -1206,7 +1206,13 @@ class TestDatabaseFunctions(TestCase):
     """
 
     def test_01_create_user(self):
+        """
+        Test for create_user function. Checks in returning
+        data that user was saved, and data is a dictionary.
 
+
+        :return void:
+        """
         user = create_user(email=CREDENTIALS['email'],
                            password=CREDENTIALS['password'],
                            first_name=CREDENTIALS['first_name'],
