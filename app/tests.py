@@ -1258,3 +1258,29 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(bool(user))
         self.assertEquals(user, storage.get_user())
         self.assertFalse(get_user_by_id(0))
+
+    def test_04_update_user(self):
+
+        # update user info
+        user = {
+            'uid': storage.get_user()['uid'],
+            'password': 'new_password',
+            'email': 'new@email.com',
+            'first_name': 'John',
+            'last_name': 'Doe'
+        }
+
+        # get result
+        new_user_info = update_user(user)
+
+        # serialize result
+        serialize_user = new_user_info.serialize
+
+        # data test
+        self.assertEquals(serialize_user['email'], user['email'])
+        self.assertEquals(serialize_user['first_name'], user['first_name'])
+        self.assertEquals(serialize_user['last_name'], user['last_name'])
+        self.assertTrue(new_user_info.verify_password(user['password']))
+
+        # save user
+        storage.set_user(serialize_user)
