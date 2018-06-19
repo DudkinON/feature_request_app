@@ -1198,3 +1198,9 @@ class TestFunctions(TestCase):
 
         # test case valid tuple
         self.assertTrue(validator((1, 2, 3, 4), tuple, 3))
+
+
+class TestDatabaseFunctions(TestCase):
+    """
+    Tests for database functions from data_provider.py
+    """
