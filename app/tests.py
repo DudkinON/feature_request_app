@@ -1204,3 +1204,20 @@ class TestDatabaseFunctions(TestCase):
     """
     Tests for database functions from data_provider.py
     """
+
+    def test_01_create_user(self):
+
+        user = create_user(email=CREDENTIALS['email'],
+                           password=CREDENTIALS['password'],
+                           first_name=CREDENTIALS['first_name'],
+                           last_name=CREDENTIALS['last_name']
+                           ).serialize
+
+        # test result
+        self.assertTrue(isinstance(user, dict))
+        self.assertEquals(user['email'], CREDENTIALS['email'])
+        self.assertEquals(user['first_name'], CREDENTIALS['first_name'])
+        self.assertEquals(user['last_name'], CREDENTIALS['last_name'])
+
+        # save user
+        storage.set_user(user)
