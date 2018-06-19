@@ -1305,7 +1305,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(get_user_by_id(storage.get_user()['uid']))
 
     def test_06_create_client(self):
+        """
+        Tests create_client function, creates a client,
+        and check that client was saved, creates another
+        client and saves result.
 
+        :return void:
+        """
 
         # create a client
         client = create_client("Client name").serialize
