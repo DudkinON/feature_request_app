@@ -1324,3 +1324,10 @@ class TestDatabaseFunctions(TestCase):
         clients.append(client)
         clients.append(create_client("new Client").serialize)
         storage.set_client(clients)
+
+    def test_07_get_clients(self):
+
+        client_list = storage.get_client()
+
+        self.assertTrue(isinstance(client_list, list))
+        self.assertTrue(len(client_list) > 0)
