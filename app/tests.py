@@ -1260,7 +1260,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(get_user_by_id(0))
 
     def test_04_update_user(self):
+        """
+        Tests for updating user. Pass new user info to the
+        function, and makes sure that all info was saved
+        correctly.
 
+        :return void:
+        """
         # update user info
         user = {
             'uid': storage.get_user()['uid'],
