@@ -1338,7 +1338,14 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(len(client_list) > 0)
 
     def test_08_update_client(self):
+        """
+        Test for update_client function, changes client
+        name and passes name to the function. Then, checks
+        that result type is a list, retrieves, client from
+        the result and saves clients.
 
+        :return void:
+        """
 
         first_client = dict(storage.get_client()[0])
         second_client = storage.get_client()[1]
