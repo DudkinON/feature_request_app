@@ -1741,3 +1741,7 @@ class TestDatabaseFunctions(TestCase):
 
         for item in product_areas_list:
             self.assertFalse(int(item['id']) == int(product_area['id']))
+
+
+if __name__ == '__main__':
+    main()
