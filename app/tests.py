@@ -1677,3 +1677,10 @@ class TestDatabaseFunctions(TestCase):
         """
         self.assertTrue(int(request_exist(storage.get_request()[0]['id'])))
         self.assertFalse(request_exist(0))
+
+    def test_21_get_requests_by_id(self):
+
+        request = get_requests_by_id(
+            int(storage.get_request()[1]['id'])).serialize
+
+        self.assertEquals(request['title'], storage.get_request()[1]['title'])
