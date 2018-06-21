@@ -1609,3 +1609,20 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(client_priority_is_taken(data))
         data['client_priority'] = 2
         self.assertFalse(client_priority_is_taken(data))
+
+    def test_18_update_client_priorities(self):
+
+        # prepare data
+        data = {
+            'client': storage.get_client()[0]['id'],
+            'client_priority': 1
+        }
+
+        # make sure that client priority is taken
+        self.assertTrue(client_priority_is_taken(data))
+
+        # update client priority
+        update_client_priorities(data)
+
+        # make sure that client priority is free
+        self.assertFalse(client_priority_is_taken(data))
