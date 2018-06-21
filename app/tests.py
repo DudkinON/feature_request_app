@@ -1447,3 +1447,9 @@ class TestDatabaseFunctions(TestCase):
         self.assertEquals(temp_product_area['name'], product_area['name'])
 
         storage.set_product_area(temp_product_area)
+
+    def test_14_get_requests(self):
+
+        product_areas_list = get_requests()
+        self.assertTrue(isinstance(product_areas_list, list))
+        self.assertTrue(len(product_areas_list) > 0)
