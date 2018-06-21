@@ -1667,6 +1667,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(len(requests) > 0)
 
     def test_20_request_exist(self):
+        """
+        Test for request_exist function. Passes to the
+        function valid and invalid request id and makes
+        sure that function returns a correct boolean
+        response.
 
+        :return void:
+        """
         self.assertTrue(int(request_exist(storage.get_request()[0]['id'])))
         self.assertFalse(request_exist(0))
