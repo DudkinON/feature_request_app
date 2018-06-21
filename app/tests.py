@@ -1648,3 +1648,14 @@ class TestDatabaseFunctions(TestCase):
         # make sure that the request is not in the list of requests
         for item in requests:
             self.assertFalse(item['id'] == storage.get_request()[0]['id'])
+
+    def test_19_get_completed_requests(self):
+
+        # get completed requests
+        requests = get_completed_requests()
+
+        # make sure that returned data is list
+        self.assertTrue(isinstance(requests, list))
+
+        # make sure that in the list at least one request
+        self.assertTrue(len(requests) > 0)
