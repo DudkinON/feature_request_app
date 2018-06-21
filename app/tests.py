@@ -1650,7 +1650,13 @@ class TestDatabaseFunctions(TestCase):
             self.assertFalse(item['id'] == storage.get_request()[0]['id'])
 
     def test_19_get_completed_requests(self):
+        """
+        Test for get_completed_requests function. Gets
+        the completed requests and makes sure that returned
+        data is a list with at least one element.
 
+        :return void:
+        """
         # get completed requests
         requests = get_completed_requests()
 
