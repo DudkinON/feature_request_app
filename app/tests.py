@@ -1634,6 +1634,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(client_priority_is_taken(data))
 
     def test_18_completed_request(self):
+        """
+        Test for completed_request function. Marks request
+        as completed and makes sure that the request is not
+        in the list of requests.
+
+        :return void:
+        """
 
         # mark request as completed
         requests = completed_request(storage.get_request()[0]['id'])
