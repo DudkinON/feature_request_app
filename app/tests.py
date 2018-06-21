@@ -1703,6 +1703,12 @@ class TestDatabaseFunctions(TestCase):
             self.assertFalse(int(request_exist(request['id'])))
 
     def test_23_remove_client(self):
+        """
+        Test for 23_remove_client function. Removes clients
+        and makes sure clients are removed.
+
+        :return void:
+        """
 
         client_list = None
         clients = storage.get_client()
