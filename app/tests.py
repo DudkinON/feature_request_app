@@ -1728,3 +1728,11 @@ class TestDatabaseFunctions(TestCase):
                 second_client = item
         self.assertFalse(first_client)
         self.assertFalse(second_client)
+
+    def test_24_remove_product_area(self):
+
+        product_area = storage.get_product_area()
+        product_areas_list = remove_product_area(int(product_area['id']))
+
+        for item in product_areas_list:
+            self.assertFalse(int(item['id']) == int(product_area['id']))
