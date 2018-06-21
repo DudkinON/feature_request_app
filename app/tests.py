@@ -1692,7 +1692,12 @@ class TestDatabaseFunctions(TestCase):
         self.assertEquals(request['title'], storage.get_request()[1]['title'])
 
     def test_22_remove_request(self):
+        """
+        Test for remove_request function. Removes requests
+        and make sure that they were removed.
 
+        :return void:
+        """
         for request in storage.get_request():
             remove_request(int(request['id']))
             self.assertFalse(int(request_exist(request['id'])))
