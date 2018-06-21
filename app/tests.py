@@ -1449,7 +1449,13 @@ class TestDatabaseFunctions(TestCase):
         storage.set_product_area(temp_product_area)
 
     def test_14_get_requests(self):
+        """
+        Test get_requests function. Get list of product
+        areas, and checks that result is a list that has
+        at least one element.
 
+        :return void:
+        """
         product_areas_list = get_requests()
         self.assertTrue(isinstance(product_areas_list, list))
         self.assertTrue(len(product_areas_list) > 0)
