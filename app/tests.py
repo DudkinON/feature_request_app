@@ -1701,3 +1701,24 @@ class TestDatabaseFunctions(TestCase):
         for request in storage.get_request():
             remove_request(int(request['id']))
             self.assertFalse(int(request_exist(request['id'])))
+
+    def test_23_remove_client(self):
+
+        client_list = None
+        clients = storage.get_client()
+
+        # remove clients
+        for client in clients:
+            client_list = remove_client(int(client['id']))
+
+        first_client = None
+        second_client = None
+
+        # make sure that clients were removed
+        for item in client_list:
+            if int(item['id']) == int(storage.get_client()[0]['id']):
+                first_client = item
+            if int(item['id']) == int(storage.get_client()[1]['id']):
+                second_client = item
+        self.assertFalse(first_client)
+        self.assertFalse(second_client)
