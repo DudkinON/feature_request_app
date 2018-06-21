@@ -1459,3 +1459,78 @@ class TestDatabaseFunctions(TestCase):
         product_areas_list = get_requests()
         self.assertTrue(isinstance(product_areas_list, list))
         self.assertTrue(len(product_areas_list) > 0)
+
+    def test_15_create_request(self):
+
+        # define request data
+        request = {
+            'title': 'new request',
+            'description': 'description of new request',
+            'client': storage.get_client()[0]['id'],
+            'client_priority': 2,
+            'target_date': date(2018, 06, 16),
+            'product_area': storage.get_product_area()['id']
+        }
+
+        # get result
+        requests_list = create_request(request)
+
+        # retrieve the request from the list
+        temp_request = None
+        for item in requests_list:
+            if item['title'] == request['title']:
+                temp_request = item
+
+        # tests for returned request
+        self.assertTrue(bool(temp_request))
+        self.assertEquals(temp_request['title'], request['title'])
+        self.assertEquals(temp_request['description'], request['description'])
+        self.assertEquals(temp_request['client']['name'],
+                          storage.get_client()[0]['name'])
+        self.assertEquals(temp_request['client_priority'],
+                          request['client_priority'])
+        self.assertEquals(temp_request['product_area'],
+                          storage.get_product_area())
+
+        # create two more requests
+        second_request = {
+            'title': 'second request',
+            'description': 'description of second request',
+            'client': storage.get_client()[0]['id'],
+            'client_priority': 1,
+            'target_date': date(2018, 06, 16),
+            'product_area': storage.get_product_area()['id']
+        }
+        create_request(second_request)
+        third_request = {
+            'title': 'third request',
+            'description': 'description of third request',
+            'client': storage.get_client()[1]['id'],
+            'client_priority': 1,
+            'target_date': date(2018, 06, 16),
+            'product_area': storage.get_product_area()['id']
+        }
+        requests_list = create_request(third_request)
+
+        first_request = None
+
+        # retrieve requests from the requests list
+        for item in requests_list:
+            if item['title'] == temp_request['title']:
+                first_request = item
+            if item['title'] == second_request['title']:
+                second_request = item
+            if item['title'] == third_request['title']:
+                third_request = item
+
+        # tests for requests
+        self.assertEquals(first_request['client_priority'], 2)
+        self.assertEquals(second_request['client_priority'], 1)
+        self.assertEquals(third_request['client_priority'], 1)
+
+        # save requests in the storage
+        requests = list()
+        requests.append(first_request)
+        requests.append(second_request)
+        requests.append(third_request)
+        storage.set_request(requests)
