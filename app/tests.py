@@ -1690,3 +1690,9 @@ class TestDatabaseFunctions(TestCase):
             int(storage.get_request()[1]['id'])).serialize
 
         self.assertEquals(request['title'], storage.get_request()[1]['title'])
+
+    def test_22_remove_request(self):
+
+        for request in storage.get_request():
+            remove_request(int(request['id']))
+            self.assertFalse(int(request_exist(request['id'])))
