@@ -1543,3 +1543,47 @@ class TestDatabaseFunctions(TestCase):
         requests.append(second_request)
         requests.append(third_request)
         storage.set_request(requests)
+
+    def test_16_update_request(self):
+
+        # get requests
+        first_request = storage.get_request()[0]
+        second_request = storage.get_request()[1]
+        third_request = storage.get_request()[2]
+
+        # update request data
+        request = {
+            'id': int(first_request['id']),
+            'title': 'updated request title',
+            'description': 'updated description',
+            'client': storage.get_client()[1]['id'],
+            'client_priority': 3,
+            'target_date': date(year=2018, month=6, day=26),
+            'product_area': storage.get_product_area()['id']
+        }
+
+        # get requests
+        requests = update_request(request)
+
+        # retrieve requests from the requests list
+        for item in requests:
+            if item['id'] == request['id']:
+                first_request = item
+            if item['id'] == second_request['id']:
+                second_request = item
+            if item['id'] == third_request['id']:
+                third_request = item
+
+        self.assertTrue(bool(first_request))
+        self.assertEquals(first_request['title'], request['title'])
+        self.assertEquals(first_request['description'], request['description'])
+        self.assertEquals(first_request['client']['id'], request['client'])
+        self.assertEquals(first_request['client_priority'],
+                          request['client_priority'])
+        self.assertEquals(first_request['product_area'],
+                          storage.get_product_area())
+
+        # make sure that update function change client priority
+        self.assertEquals(first_request['client_priority'], 3)
+        self.assertEquals(second_request['client_priority'], 1)
+        self.assertEquals(third_request['client_priority'], 1)
