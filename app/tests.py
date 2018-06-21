@@ -1679,7 +1679,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(request_exist(0))
 
     def test_21_get_requests_by_id(self):
+        """
+        Test for get_requests_by_id function. Request
+        id is passed to the function and checks that
+        function returns correct request.
 
+        :return void:
+        """
         request = get_requests_by_id(
             int(storage.get_request()[1]['id'])).serialize
 
