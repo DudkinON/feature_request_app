@@ -1594,3 +1594,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertEquals(first_request['client_priority'], 3)
         self.assertEquals(second_request['client_priority'], 1)
         self.assertEquals(third_request['client_priority'], 1)
+
+    def test_17_client_priority_is_taken(self):
+
+        data = {
+            'client': storage.get_client()[0]['id'],
+            'client_priority': 1
+        }
+        self.assertTrue(client_priority_is_taken(data))
+        data['client_priority'] = 2
+        self.assertFalse(client_priority_is_taken(data))
