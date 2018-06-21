@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <meta id="csrf-token" data-csrf-token="{% block csrf_token %}{% endblock %}">
+  {% include 'head.html' %}
+</head>
+<body class="hide" id="body">
+{% include 'header.html' %}
+{% block content %}{% endblock %}
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
+</body>
+</html>
