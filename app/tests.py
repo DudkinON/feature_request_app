@@ -1461,6 +1461,15 @@ class TestDatabaseFunctions(TestCase):
         self.assertTrue(len(product_areas_list) > 0)
 
     def test_15_create_request(self):
+        """
+        Test for create_request function. Defines request
+        data, and passes this data to the function. Then
+        retrieve the request from the list and tests for
+        returned request. Creates two more requests for
+        the next functions and saves them.
+
+        :return void:
+        """
 
         # define request data
         request = {
