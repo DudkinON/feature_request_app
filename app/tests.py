@@ -1730,6 +1730,11 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(second_client)
 
     def test_24_remove_product_area(self):
+        """
+        Test for remove_product_area function.
+
+        :return void:
+        """
 
         product_area = storage.get_product_area()
         product_areas_list = remove_product_area(int(product_area['id']))
