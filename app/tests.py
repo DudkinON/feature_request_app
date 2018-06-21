@@ -1545,7 +1545,14 @@ class TestDatabaseFunctions(TestCase):
         storage.set_request(requests)
 
     def test_16_update_request(self):
+        """
+        Test for update_request function. Retrieves request
+        from the storage and updates information for the first
+        request, and passes to the function. Then, gets list
+        for requests and makes sure data was updated.
 
+        :return void:
+        """
         # get requests
         first_request = storage.get_request()[0]
         second_request = storage.get_request()[1]
