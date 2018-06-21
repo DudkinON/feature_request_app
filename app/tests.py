@@ -1596,7 +1596,12 @@ class TestDatabaseFunctions(TestCase):
         self.assertEquals(third_request['client_priority'], 1)
 
     def test_17_client_priority_is_taken(self):
+        """
+        Test for client_priority_is_taken function. Passes valid
+        and invalid to check if data exists or not.
 
+        :return void:
+        """
         data = {
             'client': storage.get_client()[0]['id'],
             'client_priority': 1
