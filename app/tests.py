@@ -1611,7 +1611,13 @@ class TestDatabaseFunctions(TestCase):
         self.assertFalse(client_priority_is_taken(data))
 
     def test_18_update_client_priorities(self):
+        """
+        Test for update_client_priorities function. Checks
+        that client priority is taken, updates client priority,
+        makes sure that client priority is free.
 
+        :return void:
+        """
         # prepare data
         data = {
             'client': storage.get_client()[0]['id'],
