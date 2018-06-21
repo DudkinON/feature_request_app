@@ -1665,3 +1665,8 @@ class TestDatabaseFunctions(TestCase):
 
         # make sure that in the list at least one request
         self.assertTrue(len(requests) > 0)
+
+    def test_20_request_exist(self):
+
+        self.assertTrue(int(request_exist(storage.get_request()[0]['id'])))
+        self.assertFalse(request_exist(0))
