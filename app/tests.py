@@ -1632,3 +1632,12 @@ class TestDatabaseFunctions(TestCase):
 
         # make sure that client priority is free
         self.assertFalse(client_priority_is_taken(data))
+
+    def test_18_completed_request(self):
+
+        # mark request as completed
+        requests = completed_request(storage.get_request()[0]['id'])
+
+        # make sure that the request is not in the list of requests
+        for item in requests:
+            self.assertFalse(item['id'] == storage.get_request()[0]['id'])
