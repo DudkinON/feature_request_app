@@ -1,0 +1,46 @@
+<div class="mb-5 text-uppercase">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Request app</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#about">about</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#license">license</a>
+        </li>
+      </ul>
+
+      <div class="usr-btn">
+        <div class="navbar-nav">
+          <a class="nav-link tltip" target="_blank" data-toggle="tooltip"
+             data-placement="bottom" title="LinkedIn profile"
+             href="https://www.linkedin.com/in/oleg-dudkin/"
+          >
+            <i class="fab fa-linkedin"></i>
+            <span class="icon-description">LinkedIn profile</span>
+          </a>
+          <a class="nav-link tltip" target="_blank" data-toggle="tooltip"
+             data-placement="bottom" title="GitHub repository"
+             href="https://github.com/DudkinON/feature_request_app"
+          >
+            <i class="fab fa-github"></i>
+            <span class="icon-description">GitHub repository</span>
+          </a>
+          <a class="nav-link" href="#" data-bind="
+            visible: !$root.worker.login()
+            css: { active: $data == $root.routeName() },
+            click: $root.modalLogin">login</a>
+          <a class="nav-link" href="#profile" data-bind="
+            visible: $root.worker.login()">profile</a>
+          <a class="nav-link" href="#" data-bind="
+            visible: $root.worker.login(),
+            click: $root.worker.onLogout()">logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
