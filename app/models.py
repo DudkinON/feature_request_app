@@ -149,7 +149,8 @@ class Client(Base):
 
         :return integer:
         """
-        amount = len(query(Request.id).filter_by(client=self.id).all())
+        amount = len(query(Request.id).filter_by(
+            client=self.id, is_active=True).all())
         return amount + 1
 
     @property
