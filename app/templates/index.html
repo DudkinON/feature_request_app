@@ -1,0 +1,1089 @@
+{% extends 'base.html' %}
+
+{% block title %}Feature Request App{% endblock %}
+{% block csrf_token %}{{ csrf }}{% endblock %}
+
+{% block content %}
+  <div class="container page-size">
+    <div class="row">
+      <div class="col-lg-3">
+
+        <!-- sidebar section -->
+        <div class="sitebar"
+             data-bind="visible: $root.worker.login(), with: $root.worker.user()">
+          <h3 class="h3 text-center mb-4 text-capitalize">Menu</h3>
+
+          <div class="client-menu"
+               data-bind="visible: $root.worker.user()">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a href="#profile/user"
+                   class="nav-link btn-shadow text-capitalize">user</a>
+              </li>
+              <li>
+                <span class="float-right amount-label">
+                  <span class="badge badge-dark"
+                        data-bind="text: $root.worker.requests().length"></span>
+                </span>
+                <a href="#" data-bind="click: $root.worker.initRequest"
+                   class="nav-link btn-shadow text-capitalize">requests</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9">
+
+        <!-- Main header -->
+        <div id="main-header" data-bind="with: $root.data()" class="row">
+          <div data-bind="css: { colLg8 : $root.data().name == 'about' ||
+          $root.data().name == 'license'}" class="col-12 text-center">
+            <h1 class="h3 mb-4 text-capitalize"
+                data-bind="visible: $root.data().name || $root.routeName()">
+            <span data-bind="with: $root.routeName()">
+              <span data-bind="text: $root.routeName()"></span>
+            </span>
+              <span
+                  data-bind="visible: $root.data().name && !$root.routeName()">
+              <span data-bind="text: $root.data().name"></span>
+            </span>
+            </h1>
+          </div>
+        </div>
+
+        <!-- alert messages -->
+        <div class="alert-container" data-bind="with: $root.worker.message()">
+          <div class="alert alert-danger alert-dismissible fade show"
+               role="alert" data-bind="visible: $root.worker.message().error">
+            <strong>Error: </strong>
+            <span data-bind="text: $root.worker.message().error"></span>
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-label="Close"
+                    data-bind="click: $root.worker.closeAlert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="alert alert-info alert-dismissible fade show"
+               role="alert" data-bind="visible: $root.worker.message().info">
+            <strong>Info: </strong>
+            <span data-bind="text: $root.worker.message().info"></span>
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-label="Close"
+                    data-bind="click: $root.worker.closeAlert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- about page -->
+        <div id="about-page" data-bind="visible: $root.data().name == 'about'"
+             class="row">
+          <div class="col-lg-8">
+            <p class="mb-5">This is an implementation of the assignment for
+              <strong>
+                <a href="https://github.com/IntuitiveWebSolutions/EngineeringMidLevel"
+                   target="_blank">a request feature app</a>
+              </strong>.
+              The app is a single page application using KnockoutJS on
+              front-end
+              side, and Flask, SQLAlchemy for the RESTFul back-end. In addition
+              to
+              all project requirements, Google auth, CSRF protection, HTTP
+              authentication were also enabled as well.</p>
+            <h4 class="h4">Tech Stack Requirements</h4>
+            <p>Implemented Tech Requirements:</p>
+            <ul>
+              <li>OS: Ubuntu 16.04</li>
+              <li>Server Side Scripting: Python 2.7.12</li>
+              <li>Server Framework: Flask 1.0.2</li>
+              <li>ORM: Sql-Alchemy 1.2.7</li>
+              <li>JavaScript: KnockoutJS 3.4.2</li>
+              <li>Database: PostgreSQL 9.5.13</li>
+            </ul>
+            <h4 class="h4">Technology</h4>
+            <ol>
+              <li>
+                This application uses open source frameworks and libraries.
+              </li>
+              <li>Decoupled backend and frontend, Single Page Application
+                frontend communicates with RESTFul backend by AJAX queries.
+              </li>
+              <li>Tests imitate user behavior for each link. Additionally, each
+                function is tested.
+              </li>
+              <li>Frontend side is implemented with Responsive Interface. The app
+                  looks good on desktop and mobile devices.
+
+              </li>
+              <li>Frontend side uses Knockout JS MVVM framework for
+                  implementing Single Page Application.
+              </li>
+            </ol>
+            <h4 class="h4">Web server</h4>
+
+            <ol>
+              <li>Configured the SSH access and changed the SSH port</li>
+              <li>Configured AWS firewall and Ubuntu firewall</li>
+              <li>
+                <strong>Configured HTTP server Apache:</strong>
+                <ul>
+                  <li>Disabled .htaccess support</li>
+                  <li>Configured HTTP 2.0</li>
+                </ul>
+              </li>
+              <li>Configured HTTPS protocol</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- license -->
+        <div id="license-page" class="row pb-8"
+             data-bind="visible: $root.data().name == 'license'">
+          <div class="col-lg-8">
+            <p class="mb-5">All code is distributed under <strong>MIT</strong>
+              license</p>
+            <h4 class="h4 text-center mb-4">The MIT License</h4>
+            <p>Copyright (c) Oleg Dudkin</p>
+            <p>Permission is hereby granted, free of charge, to any person
+              obtaining a copy
+              of this software and associated documentation files (the
+              "Software"), to deal
+              in the Software without restriction, including without limitation
+              the rights
+              to use, copy, modify, merge, publish, distribute, sublicense,
+              and/or sell
+              copies of the Software, and to permit persons to whom the
+              Software
+              is
+              furnished to do so, subject to the following conditions:</p>
+            <p>The above copyright notice and this permission notice shall be
+              included in
+              all copies or substantial portions of the Software.</p>
+            <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+              EXPRESS OR
+              IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+              MERCHANTABILITY,
+              FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+              SHALL THE
+              AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+              OTHER
+              LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+              ARISING FROM,
+              OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+              DEALINGS IN
+              THE SOFTWARE.</p>
+          </div>
+        </div>
+
+        <!-- login section -->
+        <div class="login">
+          <div class="modal" tabindex="-1" role="dialog" id="modalLogin">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content-gray">
+                <div class="modal-header bb-1 mb-3 inverse">
+                  <h5 class="modal-title">Sign In</h5>
+                  <button type="button" class="close-inverse pointer"
+                          data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group row">
+                      <label for="email"
+                             class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email"
+                               placeholder="Email"
+                               autocomplete="email"
+                               data-bind="value: $root.worker.credentials().email">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="user-password"
+                             class="col-sm-2 col-form-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control"
+                               id="user-password" placeholder="Password"
+                               autocomplete=current-password"
+                               data-bind="value: $root.worker.credentials().password">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-12 text-center">
+                        <button type="button"
+                                class="btn btn-outline-dark pl-5 pr-5"
+                                data-bind="click: $root.worker.onLogin">Sign in
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="text-center p-3 bt-1 inverse">
+                  <a class="pointer pl-5 pr-5 inverse-link"
+                     data-dismiss="modal" href="#"
+                     data-bind="click: $root.modalRegister">Sign up</a>
+                  <a class="pointer pl-5 pr-5 inverse-link"
+                     data-bind="click: $root.worker.GoogleLogin" href="#">
+                    <i class="fab fa-google-plus"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- register section -->
+        <div class="register">
+          <div class="modal" tabindex="-1" role="dialog" id="modalRegister">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content-gray">
+                <div class="modal-header bb-1 mb-3 inverse">
+                  <h5 class="modal-title">Sign Up</h5>
+                  <button type="button" class="close-inverse pointer"
+                          data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form data-bind="with: $root.worker.user()">
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="input_email"
+                             aria-describedby="emailHelp"
+                             autocomplete="email" placeholder="Enter email"
+                             data-bind="value: $root.worker.user().email">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control"
+                             id="input_password1" placeholder="Password"
+                             autocomplete="new-password"
+                             data-bind="value: $root.worker.passwords().p1">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control"
+                             id="input_password2"
+                             placeholder="Confirm password"
+                             autocomplete="new-password"
+                             data-bind="value: $root.worker.passwords().p2">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="first_name"
+                             placeholder="First name" autocomplete="given-name"
+                             data-bind="value: $root.worker.user().first_name">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="last_name"
+                             placeholder="Last name" autocomplete="family-name"
+                             data-bind="value: $root.worker.user().last_name">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-12 text-center">
+                        <button type="button"
+                                class="btn btn-outline-dark pl-5 pr-5"
+                                data-bind="click: $root.worker.onRegister">Sign
+                          up
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="text-center p-3 bt-1 inverse">
+                  <a class="pointer pl-5 pr-5 inverse-link"
+                     data-dismiss="modal" href="#"
+                     data-bind="click: $root.modalLogin">Sign in</a>
+                  <a class="pointer pl-5 pr-5 inverse-link"
+                     data-bind="click: $root.worker.withGoogle" href="#">
+                    <i class="fab fa-google-plus"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- remove profile -->
+        <div id="remove-profile">
+          <div class="modal" tabindex="-1" role="dialog" id="removeModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content-gray">
+                <div class="modal-header bb-1 mb-3 inverse">
+                  <h5 class="modal-title">Remove profile</h5>
+                  <button type="button" class="close-inverse pointer"
+                          data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="text-center">Do you want to remove profile?</div>
+                </div>
+                <div class="text-center p-3 bt-1 inverse">
+                  <a class="pointer pl-5 pr-5 inverse-link"
+                     data-dismiss="modal" href="#"
+                     data-bind="click: $root.worker.removeProfile">Remove</a>
+                  <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                     data-dismiss="modal" aria-label="Close">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-bind="with: $root.worker.user()">
+          <div id="profile-content" data-bind="visible: $root.worker.login()">
+
+            <!-- breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb" data-bind="visible: $root.routeName()">
+                <li class="breadcrumb-item">
+                  <a href="#profile">Profile</a>
+                </li>
+                <li class="breadcrumb-item text-capitalize" data-bind="">
+                  <a href="#"
+                     data-bind="click: $root.goToAction($root.routeName())">
+                    <span data-bind="text: $root.routeName()"></span>
+                  </a>
+                </li>
+                <li class="breadcrumb-item active text-capitalize"
+                    aria-current="page"
+                    data-bind="visible: $root.actionName()">
+                  <span data-bind="text: $root.actionName()"></span>
+                </li>
+              </ol>
+            </nav>
+
+            <!-- profile data -->
+            <div class="row"
+                 data-bind="visible: $root.routeName() == 'user' && !$root.actionName()
+                 || !$root.routeName() && $root.data().name == 'profile'"
+                 id="profile-data">
+              <div class="col-6 font-weight-bold">First name:</div>
+              <div class="col-6"
+                   data-bind="text: $root.worker.user().first_name"></div>
+              <div class="col-6 font-weight-bold">Last name:</div>
+              <div class="col-6"
+                   data-bind="text: $root.worker.user().last_name"></div>
+              <div class="col-6 font-weight-bold">Email:</div>
+              <div class="col-6"
+                   data-bind="text: $root.worker.user().email"></div>
+              <div class="col-6 text-uppercase text-center mt-5">
+                <a class="pointer btn-shadow nav-link"
+                   href="#profile/user/edit">edit profile</a>
+              </div>
+              <div class="col-6 text-uppercase text-center mt-5">
+                    <span class="pointer btn-shadow nav-link"
+                          data-toggle="modal"
+                          data-target="#removeModal">remove profile</span>
+              </div>
+            </div>
+
+            <!-- profile -->
+            <div class="profile"
+                 data-bind="visible: $root.routeName() == 'user' ">
+              <div class="profile-form" data-bind="with: $root.worker.user()">
+
+                <!-- profile form -->
+                <form data-bind="visible: $root.actionName() == 'edit'"
+                      id="edit-profile">
+                  <div class="form-group">
+                    <label for="profile-email">Email address</label>
+                    <input type="email" class="form-control"
+                           id="profile-email" aria-describedby="emailHelp"
+                           placeholder="Enter email" autocomplete="email"
+                           data-bind="value: $root.worker.user().email">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-password">Password</label>
+                    <input type="password" class="form-control"
+                           id="profile-password" placeholder="Password"
+                           data-bind="textInput: $root.worker.passwords().p1"
+                           autocomplete="new-password">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-password-confirm">Repeat
+                      password</label>
+                    <input type="password" class="form-control"
+                           id="profile-password-confirm"
+                           placeholder="New password"
+                           data-bind="textInput: $root.worker.passwords().p2"
+                           autocomplete="new-password">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-first-name">First name</label>
+                    <input type="text" class="form-control"
+                           id="profile-first-name" placeholder="First name"
+                           autocomplete="given-name"
+                           data-bind="textInput: $root.worker.user().first_name,
+                            css: { borderDanger: !$root.worker.user().first_name }">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-last-name">Last name</label>
+                    <input type="text" class="form-control"
+                           id="profile-last-name" placeholder="Last name"
+                           autocomplete="family-name"
+                           data-bind="textInput: $root.worker.user().last_name,
+                            css: { borderDanger: !$root.worker.user().last_name }">
+                  </div>
+                  <div class="row text-center">
+                    <div class="col-6">
+                      <button type="button"
+                              class="btn pointer btn-shadow nav-link text-uppercase"
+                              data-bind="click: $root.worker.onUpdateProfile">
+                        Update
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      <a href="#profile"
+                         class="pointer btn-shadow nav-link text-uppercase">cancel</a>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+
+            <!-- mark request as complete -->
+            <div id="new-product-area">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="modalMarkAsComplete">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">Mark request as complete</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-center">Mark request as completed?</p>
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.markRequest">Completed</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- remove request modal -->
+            <div id="new-product-area">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="modalRemoveRequest">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">Remove the request</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-center">Are you sure that you want to remove the request?</p>
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.removeRequest">Remove</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- new client -->
+            <div id="new-client">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="newClientModal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">New client</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" class="form-control"
+                             id="new-client" aria-describedby="help"
+                             placeholder="New client" autocomplete="email"
+                             data-bind="value: $root.worker.newClient">
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.addClient">Add</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- edit client -->
+            <div id="edit-client">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="editClientModal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">Edit client</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" class="form-control"
+                             id="edit-client" aria-describedby="help"
+                             placeholder="Edit client"
+                             data-bind="value: $root.worker.editClient().name">
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.updateClient">Save</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- new product area -->
+            <div id="new-product-area">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="modalNewProductArea">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">New product area</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" class="form-control"
+                             id="add-product-aria" aria-describedby="help"
+                             placeholder="New product area"
+                             data-bind="value: $root.worker.newProductArea">
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.addProductArea">Add</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- edit product area -->
+            <div id="edit-product-area">
+              <div class="modal" tabindex="-1" role="dialog"
+                   id="modalEditProductArea">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content-gray">
+                    <div class="modal-header bb-1 mb-3 inverse">
+                      <h5 class="modal-title">Edit product area</h5>
+                      <button type="button" class="close-inverse pointer"
+                              data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" class="form-control"
+                             id="new-product-aria" aria-describedby="help"
+                             placeholder="Edit product area"
+                             autocomplete="email"
+                             data-bind="value: $root.worker.editProductArea().name">
+                    </div>
+                    <div class="text-center p-3 bt-1 inverse">
+                      <a class="pointer pl-5 pr-5 inverse-link"
+                         data-dismiss="modal" href="#"
+                         data-bind="click: $root.updateProductArea">Save</a>
+                      <a class="pointer pl-5 pr-5 inverse-link" href="#"
+                         data-dismiss="modal" aria-label="Close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- requests -->
+            <div class="request-content"
+                 data-bind="visible: $root.routeName() != 'user' &&
+                            $root.routeName()">
+              <div id="tabs-container" class="container">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#profile/requests"
+                       data-toggle="tab"
+                       data-bind="click: $root.openLink('/requests')">Requests</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#profile/clients"
+                       data-toggle="tab"
+                       data-bind="click: $root.openLink('/clients')">Clients</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#profile/areas" data-toggle="tab"
+                       data-bind="click: $root.openLink('/areas')">
+                      <span class="desktop-text">Product areas</span>
+                      <span class="mobile-text">PA</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+
+                  <!-- request new form -->
+                  <div class="request"
+                       data-bind="visible: $root.actionName() == 'new'">
+                    <form data-bind="with: $root.worker.newRequest()">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="title"
+                               data-bind="value: $root.worker.newRequest().title"
+                               placeholder="Title">
+                      </div>
+                      <div class="form-group">
+                    <textarea class="form-control" id="description" rows="3"
+                              data-bind="value: $root.worker.newRequest().description"
+                              placeholder="Description"></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="client">Client</label>
+                        <div class="row">
+                          <div class="col-2 text-center">
+                        <span class="add-icon pointer tltip"
+                              data-toggle="tooltip"
+                              data-placement="top" title="Add a new client"
+                              data-bind="click: $root.modalNewClient">
+                          <i class="fas fa-plus-circle"></i>
+                        </span>
+                          </div>
+                          <div class="col-10">
+                            <select class="form-control select-pad" id="client"
+                                    data-bind="options: $root.worker.clients(),
+                                               optionsText: 'name',
+                                               value: $root.worker.chosenClient">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"
+                           data-bind="with: $root.worker.chosenClient()">
+                        <label for="client_priority">Client priority</label>
+                        <input type="number" class="form-control"
+                               placeholder="Client priority"
+                               id="client_priority"
+                               data-bind="value: $root.worker.chosenClient().client_priority">
+                      </div>
+                      <div class="form-group">
+                        <label for="date">Target date</label>
+                        <input type="date" class="form-control"
+                               placeholder="Target date" id="target_date"
+                               data-bind="value: $root.worker.newRequest().target_date">
+                      </div>
+                      <label for="product_area">Product Area</label>
+                      <div class="row">
+                        <div class="col-2 text-center">
+                      <span class="add-icon pointer tltip"
+                            data-toggle="tooltip"
+                            data-placement="top" title="Add a new product area"
+                            data-bind="click: $root.modalNewProductArea">
+                        <i class="fas fa-plus-circle"></i>
+                      </span>
+                        </div>
+                        <div class="col-10">
+                          <div class="form-group">
+                            <select class="form-control select-pad"
+                                    id="product_area"
+                                    data-bind="options: $root.worker.areas(),
+                                               optionsText: 'name',
+                                               value: $root.worker.newRequest().product_area">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <button data-bind="click: $root.addRequest"
+                                class="btn-shadow nav-link text-capitalize pointer">
+                          send
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- request page -->
+                  <div id="request-page"
+                       data-bind="visible: $root.actionName() == 'info'">
+                    <div data-bind="with: $root.worker.requestInfo()"
+                         class="row p-2">
+                      <div class="h4 text-center mb-3 mt-3 col-12">Request
+                        info
+                      </div>
+                      <hr>
+                      <div class="col-12 mb-2">
+                        <strong>Title: </strong>
+                        <span
+                            data-bind="text: $root.worker.requestInfo().title"></span>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <strong>Description: </strong>
+                        <span
+                            data-bind="text: $root.worker.requestInfo().description"></span>
+                      </div>
+                      <div class="col-12 mb-2"
+                           data-bind="with: $root.worker.requestInfo()">
+                        <strong>Client: </strong>
+                        <span id="client-string"
+                              data-bind="text: $root.worker.requestInfo().client.name"></span>
+                      </div>
+                      <div class="col-12 mb-2"
+                           data-bind="with: $root.worker.requestInfo()">
+                        <strong>Client priority: </strong>
+                        <span id="priority-string"
+                              data-bind="text: $root.worker.requestInfo().client_priority"></span>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <strong>Product area: </strong>
+                        <span
+                            data-bind="text: $root.worker.requestInfo().product_area.name"></span>
+                      </div>
+                      <hr>
+                      <div class="col-6 text-center">
+                        <span data-bind="click: $root.editRequest"
+                              class="pointer btn-shadow nav-link text-uppercase">edit</span>
+                      </div>
+                      <div class="col-6 text-center">
+                        <a href="#profile/requests/edit"
+                           class="pointer btn-shadow nav-link text-uppercase">remove</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- request edit form -->
+                  <div class="request"
+                       data-bind="visible: $root.actionName() == 'edit'">
+                    <h2 class="h4 text-center mb-5 mt-3">Edit request</h2>
+                    <form data-bind="with: $root.worker.editRequest()">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="edit_title"
+                               data-bind="value: $root.worker.editRequest().title"
+                               placeholder="Title">
+                      </div>
+                      <div class="form-group">
+                    <textarea class="form-control" id="edit_description"
+                              rows="3"
+                              data-bind="value: $root.worker.editRequest().description"
+                              placeholder="Description"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="client">Client</label>
+                        <div class="row">
+                          <div class="col-2 text-center">
+                        <span class="add-icon pointer tltip"
+                              data-toggle="tooltip"
+                              data-placement="top" title="Add a new client"
+                              data-bind="click: $root.modalNewClient">
+                          <i class="fas fa-plus-circle"></i>
+                        </span>
+                          </div>
+                          <div class="col-10">
+                            <select class="form-control select-pad"
+                                    id="edit_client"
+                                    data-bind="options: $root.worker.clients(),
+                                               optionsText: 'name',
+                                               optionsCaption: $root.worker.editRequest().client.name,
+                                               value: $root.worker.editRequest().client">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"
+                           data-bind="with: $root.worker.editClient()">
+                        <label for="edit_client_priority">Client
+                          priority</label>
+                        <input type="number" class="form-control"
+                               placeholder="Client priority"
+                               id="edit_client_priority"
+                               data-bind="value: $root.worker.editRequest().client_priority">
+                      </div>
+                      <div class="form-group">
+                        <label for="date">Target date</label>
+                        <input type="date" class="form-control"
+                               placeholder="Target date" id="edit_date"
+                               data-bind="value: $root.worker.editRequest().target_date">
+                      </div>
+                      <label for="product_area">Product Area</label>
+                      <div class="row">
+                        <div class="col-2 text-center">
+                      <span class="add-icon pointer tltip"
+                            data-toggle="tooltip"
+                            data-placement="top" title="Add a new product area"
+                            data-bind="click: $root.modalNewProductArea">
+                        <i class="fas fa-plus-circle"></i>
+                      </span>
+                        </div>
+                        <div class="col-10">
+                          <div class="form-group">
+                            <select class="form-control select-pad"
+                                    id="edit_product_area"
+                                    data-bind="options: $root.worker.areas(),
+                                               optionsText: 'name',
+                                               optionsCaption: $root.worker.editRequest().product_area.name,
+                                               value: $root.worker.editRequest().product_area">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <button data-bind="click: $root.updateRequest"
+                                class="btn-shadow nav-link text-capitalize pointer">
+                          send
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="request-nav"
+                       data-bind="visible: $root.routeName() == 'requests'">
+                    <a class="add-icon tltip" href="#profile/requests/new"
+                       data-toggle="tooltip" data-placement="top"
+                       title="Add a new request"
+                       data-bind="visible: !$root.actionName()"
+                    ><i class="fas fa-plus-circle"></i></a>
+                    <a class="add-icon tltip"
+                       href="#profile/requests/completed"
+                       data-toggle="tooltip" data-placement="top"
+                       title="Show completed requests"
+                       data-bind="visible: !$root.actionName()"
+                    ><i class="fas fa-check-circle"></i></a>
+                  </div>
+
+                  <!-- requests completed -->
+                  <div id="completed-requests">
+                    <div data-bind="with: $root.worker.completedRequests()">
+                      <div data-bind="visible: $root.actionName() == 'completed'"
+                      class="request-nav">
+                        <a class="add-icon tltip" href="#profile/requests/new"
+                           data-toggle="tooltip" data-placement="top"
+                           title="Add a new request"
+                        ><i class="fas fa-plus-circle"></i></a>
+                        <a class="add-icon tltip active-request-link"
+                           href="#profile/requests/completed"
+                           data-toggle="tooltip" data-placement="top"
+                           title="Show completed requests"
+                        ><i class="fas fa-check-circle"></i></a>
+                      </div>
+                      <h4 class="h4 text-center pt-3"
+                          data-bind="visible: $root.actionName() == 'completed'"
+                      >Completed requests</h4>
+                      <h5 data-bind="visible: $root.worker.completedRequests().length === 0 &&
+                                     $root.actionName() == 'completed'"
+                          class="mt-4">You don't have any completed requests.</h5>
+                    </div>
+
+                    <div data-bind="visible: $root.actionName() == 'completed' &&
+                      $root.worker.completedRequests().length > 0">
+                      <table class="table mt-4">
+                        <thead class="thead-dark">
+                        <tr class="text-center">
+                          <th scope="col" width="7%">
+                            <span class="desktop-text">Priority</span>
+                            <span class="mobile-test">P</span>
+                          </th>
+                          <th scope="col" width="18%">Client</th>
+                          <th scope="col" width="45%">Title</th>
+                          <th scope="col" width="30%">
+                            <span class="desktop-text">Actions</span>
+                            <span class="mobile-test">Act</span>
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody data-bind="foreach: $root.worker.completedRequests()">
+                        <tr class="text-center">
+                          <th scope="row"
+                              data-bind="text: $data.client_priority"></th>
+                          <td data-bind="text: $data.client.name"></td>
+                          <td data-bind="text: $data.title"></td>
+                          <td>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="See the request"
+                                  data-bind="click: $root.openRequest">
+                              <i class="fas fa-eye"></i>
+                            </span>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Edit the request"
+                                  data-bind="click: $root.editRequest">
+                              <i class="far fa-edit"></i>
+                            </span>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Remove the request"
+                                  data-bind="click: $root.removeRequestModal">
+                              <i class="far fa-trash-alt"></i>
+                            </span>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- requests content -->
+                  <div id="profile/requests"
+                       data-bind="visible: $root.routeName() == 'requests' &&
+                                  !$root.actionName()">
+                    <h4 class="h4 text-center mt-3">Active requests</h4>
+                    <div data-bind="with: $root.worker.requests()">
+                      <h5 data-bind="visible: $root.worker.requests().length === 0 &&
+                                   !$root.actionName()"
+                          class="mt-4">You don't have any requests.</h5>
+                    </div>
+                    <div
+                        data-bind="visible: $root.worker.requests().length > 0">
+                      <table class="table mt-4">
+                        <thead class="thead-dark">
+                        <tr class="text-center">
+                          <th scope="col" width="7%">
+                            <span class="desktop-text">Priority</span>
+                            <span class="mobile-test">P</span>
+                          </th>
+                          <th scope="col" width="18%">Client</th>
+                          <th scope="col" width="45%">Title</th>
+                          <th scope="col" width="30%">
+                            <span class="desktop-text">Actions</span>
+                            <span class="mobile-test">Act</span>
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody data-bind="foreach: $root.worker.requests()">
+                        <tr class="text-center">
+                          <th scope="row"
+                              data-bind="text: $data.client_priority"></th>
+                          <td data-bind="text: $data.client.name"></td>
+                          <td data-bind="text: $data.title"></td>
+                          <td>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Mark as completed"
+                                  data-bind="click: $root.markAsCompletedModal">
+                              <i class="fas fa-check"></i>
+                            </span>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="See the request"
+                                  data-bind="click: $root.openRequest">
+                              <i class="fas fa-eye"></i>
+                            </span>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Edit the request"
+                                  data-bind="click: $root.editRequest">
+                              <i class="far fa-edit"></i>
+                            </span>
+                            <span class="request-link tltip pointer"
+                                  data-toggle="tooltip" data-placement="top"
+                                  title="Remove the request"
+                                  data-bind="click: $root.removeRequestModal">
+                              <i class="far fa-trash-alt"></i>
+                            </span>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- clients content -->
+                  <div id="profile/clients"
+                       data-bind="visible: $root.routeName() == 'clients'">
+                    <div data-bind="with: $root.worker.clients()">
+                      <h5 data-bind="visible: $root.worker.clients().length === 0"
+                      >You don't have any clients.</h5>
+                    </div>
+                    <span class="add-icon pointer tltip" data-toggle="tooltip"
+                          data-placement="top" title="Add a new client"
+                          data-bind="click: $root.modalNewClient">
+                      <i class="fas fa-plus-circle"></i>
+                    </span>
+                    <div data-bind="with: $root.worker.clients()" class="mt-4">
+                      <div data-bind="foreach: $root.worker.clients()"
+                           class="mb-5">
+                        <span class="text-danger pointer float-right tltip"
+                              data-toggle="tooltip" data-placement="top"
+                              title="Remove client"
+                              data-bind="click: $root.removeClient">
+                          <i class="fas fa-trash-alt"></i></span>
+                        <span
+                            class="text-success pointer float-right pr-3 tltip"
+                            data-toggle="tooltip" data-placement="top"
+                            title="Edit client name"
+                            data-bind="click: $root.editClient">
+                          <i class="fas fa-edit"></i></span>
+                        <div data-bind="text: $data.name"
+                             class="separator-b"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- areas content -->
+                  <div id="profile/areas"
+                       data-bind="visible: $root.routeName() == 'areas'">
+                    <div data-bind="with: $root.worker.areas()">
+                      <h5 data-bind="visible: $root.worker.areas().length === 0"
+                      >You don't have any product areas.</h5>
+                    </div>
+                    <span class="add-icon pointer tltip" data-toggle="tooltip"
+                          data-placement="top" title="Add a new product area"
+                          data-bind="click: $root.modalNewProductArea">
+                      <i class="fas fa-plus-circle"></i>
+                    </span>
+                    <div data-bind="with: $root.worker.areas()">
+                      <div data-bind="foreach: $root.worker.areas()"
+                           class="mt-3 mb-5">
+                        <span class="text-danger pointer float-right tltip"
+                              data-toggle="tooltip" data-placement="top"
+                              title="Remove product area"
+                              data-bind="click: $root.removeProductArea">
+                          <i class="fas fa-trash-alt"></i></span>
+                        <span
+                            class="text-success pointer float-right pr-3 tltip"
+                            data-toggle="tooltip" data-placement="top"
+                            title="Edit product area"
+                            data-bind="click: $root.editProductArea">
+                          <i class="fas fa-edit"></i></span>
+                        <div data-bind="text: $data.name"
+                             class="separator-b"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
