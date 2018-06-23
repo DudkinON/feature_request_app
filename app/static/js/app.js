@@ -17,9 +17,12 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'google-sign-in-script'));
 
-  
+  // TODO: function onLoadFunction
   function onLoadedGoogle() {
-
+    /**
+     * Function which run after Google OAuth API
+     * library will loaded.
+     */
     gapi.client.setApiKey(
       document.getElementById('google-app-id').getAttribute('data-key-api'));
     gapi.client.load('plus', 'v1', function () {
