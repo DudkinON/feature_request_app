@@ -414,9 +414,9 @@ def remove_user_profile():
 
     :return String: (JSON)
     """
-
-    remove_user(g.user.id)
+    user = dict(g.user.serialize)
     g.user = None
+    remove_user(user['uid'])
 
     # clean login session
     if 'uid' in login_session:
