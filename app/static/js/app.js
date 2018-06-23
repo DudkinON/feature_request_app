@@ -1,8 +1,11 @@
 (function () {
 
-
+  // TODO: upload Google client
   (function (d, s, id) {
-
+    /**
+     * Upload Google OAuth API library, and run callback when
+     * the library is loaded.
+     */
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {
       return;
