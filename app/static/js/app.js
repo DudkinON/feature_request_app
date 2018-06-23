@@ -105,6 +105,17 @@
       location.hash = '#profile/requests';
     };
 
+    self.err = function (msg) {
+     
+      if (msg.status && msg.responseText.length < 100) {
+        self.message({error: msg.responseText});
+      }
+      else {
+        $('#body').html(msg.responseText);
+      }
+        // self.message({error: 'Server is not available'});
+    };
+
   };
 
 }());
