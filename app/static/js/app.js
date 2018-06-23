@@ -29,4 +29,8 @@
     });
   }
 
+  var Worker = function () {
+
+  };
+
 }());
