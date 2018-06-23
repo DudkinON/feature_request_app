@@ -84,6 +84,12 @@
       return _date;
     };
 
+    self.isDate = function (date) {
+
+      var dateArr = date.match(/\d{4}-\d{2}-\d{2}/);
+      return Boolean(dateArr) && dateArr.length > 0;
+    };
+
   };
 
 }());
