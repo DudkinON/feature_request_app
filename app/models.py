@@ -23,7 +23,7 @@ ph = PasswordHasher()
 if POSTGRES:
     engine = create_engine(DB_SETTINGS)
 else:
-    engine = create_engine(DB_SETTINGS, connect_args={'timeout': 10})
+    engine = create_engine(DB_SETTINGS, connect_args={'timeout': 15})
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
