@@ -122,9 +122,15 @@
       $('#modalRegister').modal('hide');
     };
 
-
+    // TODO: return the user credentials
     self.getCredentials = function () {
-
+      /**
+       * Return a string credentials encoded in Base64
+       *  - credentials is or a token from a back-end server or
+       *    user and password
+       *
+       * @return: string
+       */
       if (self.token()) return "Basic " + btoa(self.token() + ":");
       else if (self.credentials().email && self.credentials().password) {
         var credentials = self.credentials();
