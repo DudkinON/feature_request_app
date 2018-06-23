@@ -24,6 +24,11 @@ auth = HTTPBasicAuth()
 
 @app.before_request
 def before_request():
+    """
+    Update global user
+
+    :return void:
+    """
     if 'uid' in login_session:
         g.user = get_user_by_id(login_session['uid'])
     else:
