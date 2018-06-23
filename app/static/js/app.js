@@ -31,6 +31,35 @@
 
   var Worker = function () {
     /** Object which managements data and contained logical of SPA */
+    var self = this;
+
+    // Define scope
+    self.host = ""; // change for use cross site request
+    self.menu = ['about', 'license'];
+    self.requestMenu = ['user', 'requests'];
+    self.login = ko.observable(false);
+    self.user = ko.observable();
+    self.message = ko.observable();
+    self.data = ko.observable();
+    self.token = ko.observable(null);
+    self.passwords = ko.observable({p1: null, p2: null});
+    self.credentials = ko.observable({email: null, password: null});
+    self.clients = ko.observableArray();
+    self.newClient = ko.observable('');
+    self.editClient = ko.observable('');
+    self.chosenClient = ko.observable();
+    self.areas = ko.observableArray();
+    self.newProductArea = ko.observable('');
+    self.editProductArea = ko.observable('');
+    self.requests = ko.observableArray();
+    self.completedRequests = ko.observableArray();
+    self.requestInfo = ko.observable();
+    self.newRequest = ko.observable();
+    self.editRequest = ko.observable();
+    self.markRequest = ko.observable();
+    self.removeRequest = ko.observable();
+    self.selectedClient = ko.observable();
+    self.selectedProductArea = ko.observable();
 
   };
 
