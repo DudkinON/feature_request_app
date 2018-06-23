@@ -305,7 +305,7 @@ def login(provider):
         # Exchange for a token
         try:
             client_secrets = ''.join([SECRETS_DIR,
-                                      '/client_secrets_original.json'])
+                                      '/client_secrets.json'])
             # Upgrade the authorization code into a credentials object
             oauth_flow = flow_from_clientsecrets(client_secrets, scope='')
             oauth_flow.redirect_uri = 'postmessage'
@@ -381,7 +381,7 @@ def user_logout():
 
 @app.route('/profile/update', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def update_user_profile():
     """
     Update a user profile
@@ -420,7 +420,7 @@ def update_user_profile():
 
 @app.route('/profile/remove', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def remove_user_profile():
     """
     Remove user from database
@@ -443,7 +443,7 @@ def remove_user_profile():
 
 @app.route('/clients/new', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def new_client():
     """
     Validate input data, if it invalid sends message
@@ -470,7 +470,7 @@ def new_client():
 
 @app.route('/clients/edit', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def update_client_info():
     """
     Get json from front-end, clean data, update a client record in
@@ -504,7 +504,7 @@ def update_client_info():
 
 @app.route('/clients/delete', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def delete_client():
     """
     Remove a client from database
@@ -529,7 +529,7 @@ def delete_client():
 
 @app.route('/clients')
 @csrf_protection
-@login_required
+@auth.login_required
 def get_all_clients():
     """
     Return all request in JSON
@@ -541,7 +541,7 @@ def get_all_clients():
 
 @app.route('/areas/new', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def new_product_area():
     """
     Get data from the back-end and validate and clean
@@ -573,7 +573,7 @@ def new_product_area():
 
 @app.route('/areas/edit', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def update_product_area_info():
     """
     Get json from front-end, clean data, update a product
@@ -605,7 +605,7 @@ def update_product_area_info():
 
 @app.route('/areas/delete', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def delete_product_area():
     """
     Remove product area from database
@@ -631,7 +631,7 @@ def delete_product_area():
 
 @app.route('/areas')
 @csrf_protection
-@login_required
+@auth.login_required
 def get_all_product_areas():
     """
     Return all requests in JSON format
@@ -643,7 +643,7 @@ def get_all_product_areas():
 
 @app.route('/requests/new', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 @check_request
 def new_request():
     """
@@ -667,8 +667,6 @@ def new_request():
         # else shift all requests where client priority >= current priority
         update_client_priorities(user_request)
 
-    print user_request
-
     # clean RAM
     del g.user_request
 
@@ -678,7 +676,7 @@ def new_request():
 
 @app.route('/requests/edit', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 @check_request
 def update_request_info():
     """
@@ -708,7 +706,7 @@ def update_request_info():
 
 @app.route('/requests/delete', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def remove_request_info():
     """
     Remove request from database
@@ -736,7 +734,7 @@ def remove_request_info():
 
 @app.route('/requests/complete', methods=['POST'])
 @csrf_protection
-@login_required
+@auth.login_required
 def complete_the_request():
     """
     Mark the request as complete
@@ -765,7 +763,7 @@ def complete_the_request():
 
 @app.route('/requests')
 @csrf_protection
-@login_required
+@auth.login_required
 def get_all_requests():
     """
     Return all request in JSON format
@@ -777,7 +775,7 @@ def get_all_requests():
 
 @app.route('/requests/get/completed')
 @csrf_protection
-@login_required
+@auth.login_required
 def get_all_completed_requests():
     """
     Return all completed requests in JSON format
