@@ -139,7 +139,7 @@
     };
 
     self.updateToken = function () {
-      
+      /** Get a token from back-end and save it */
       self.location.post('/token', null, function (res) {
         if (res.user !== undefined && res.token !== undefined) {
           self.user(res.user);
