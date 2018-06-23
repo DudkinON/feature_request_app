@@ -94,7 +94,7 @@
     };
 
     self.initRequest = function () {
-      
+      /** define client priority value */
       self.newRequest({
         title: null,
         description: null,
