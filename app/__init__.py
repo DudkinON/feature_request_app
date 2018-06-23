@@ -22,6 +22,14 @@ app.secret_key = keys.secret_key
 auth = HTTPBasicAuth()
 
 
+@app.before_request
+def before_request():
+    if 'uid' in login_session:
+        g.user = get_user_by_id(login_session['uid'])
+    else:
+        g.user = None
+
+
 def login_required(f):
     """
     Checking to see if the user is logged in
