@@ -17,4 +17,13 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'google-sign-in-script'));
 
+  
+  function onLoadedGoogle() {
+
+    gapi.client.setApiKey(
+      document.getElementById('google-app-id').getAttribute('data-key-api'));
+    gapi.client.load('plus', 'v1', function () {
+    });
+  }
+
 }());
