@@ -117,7 +117,7 @@
     };
 
     self.closeModals = function () {
-      
+      /** close a modal window */
       $('#modalLogin').modal('hide');
       $('#modalRegister').modal('hide');
     };
