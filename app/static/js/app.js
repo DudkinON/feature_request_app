@@ -30,6 +30,7 @@
   }
 
   var Worker = function () {
+    /** Object which managements data and contained logical of SPA */
 
   };
 
