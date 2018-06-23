@@ -116,6 +116,12 @@
         // self.message({error: 'Server is not available'});
     };
 
+    self.closeModals = function () {
+      
+      $('#modalLogin').modal('hide');
+      $('#modalRegister').modal('hide');
+    };
+
   };
 
 }());
