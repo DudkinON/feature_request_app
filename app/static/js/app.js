@@ -122,6 +122,16 @@
       $('#modalRegister').modal('hide');
     };
 
+
+    self.getCredentials = function () {
+
+      if (self.token()) return "Basic " + btoa(self.token() + ":");
+      else if (self.credentials().email && self.credentials().password) {
+        var credentials = self.credentials();
+        return "Basic " + btoa(credentials.email + ":" + credentials.password);
+      } else return "";
+    };
+
   };
 
 }());
