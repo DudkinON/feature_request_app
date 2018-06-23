@@ -93,6 +93,18 @@
       return Boolean(dateArr) && dateArr.length > 0;
     };
 
+    self.initRequest = function () {
+      
+      self.newRequest({
+        title: null,
+        description: null,
+        client: self.chosenClient(),
+        target_date: self.getDate(),
+        product_area: null
+      });
+      location.hash = '#profile/requests';
+    };
+
   };
 
 }());
