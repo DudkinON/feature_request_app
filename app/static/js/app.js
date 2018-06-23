@@ -106,7 +106,7 @@
     };
 
     self.err = function (msg) {
-     
+      /** default error message */
       if (msg.status && msg.responseText.length < 100) {
         self.message({error: msg.responseText});
       }
