@@ -138,6 +138,18 @@
       } else return "";
     };
 
+    self.updateToken = function () {
+      
+      self.location.post('/token', null, function (res) {
+        if (res.user !== undefined && res.token !== undefined) {
+          self.user(res.user);
+          self.token(res.token);
+        } else {
+          self.message({error: 'Server is not available.'})
+        }
+      }, self.err);
+    };
+
   };
 
 }());
