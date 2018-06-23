@@ -1448,19 +1448,7 @@ class TestDatabaseFunctions(TestCase):
 
         storage.set_product_area(temp_product_area)
 
-    def test_14_get_requests(self):
-        """
-        Test get_requests function. Get list of product
-        areas, and checks that result is a list that has
-        at least one element.
-
-        :return void:
-        """
-        product_areas_list = get_requests()
-        self.assertTrue(isinstance(product_areas_list, list))
-        self.assertTrue(len(product_areas_list) > 0)
-
-    def test_15_create_request(self):
+    def test_14_create_request(self):
         """
         Test for create_request function. Defines request
         data, and passes this data to the function. Then
@@ -1543,6 +1531,18 @@ class TestDatabaseFunctions(TestCase):
         requests.append(second_request)
         requests.append(third_request)
         storage.set_request(requests)
+
+    def test_15_get_requests(self):
+        """
+        Test get_requests function. Get list of product
+        areas, and checks that result is a list that has
+        at least one element.
+
+        :return void:
+        """
+        requests = get_requests()
+        self.assertTrue(isinstance(requests, list))
+        self.assertTrue(len(requests) > 0)
 
     def test_16_update_request(self):
         """
