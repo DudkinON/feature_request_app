@@ -62,7 +62,11 @@
     self.selectedProductArea = ko.observable();
 
     self.getDate = function (date) {
-
+      /**
+       * Convert data to format dd-mm-yyyy, if date paremeter does not
+       * given, return current date
+       * @return string:
+       */
       var _date;
 
       if (date === undefined) _date = new Date();
