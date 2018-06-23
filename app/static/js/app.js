@@ -61,6 +61,25 @@
     self.selectedClient = ko.observable();
     self.selectedProductArea = ko.observable();
 
+    self.getDate = function (date) {
+
+      var _date;
+
+      if (date === undefined) _date = new Date();
+      else _date = new Date(date);
+
+      var day = _date.getDate();
+      var month = _date.getMonth() + 1;
+      var year = _date.getFullYear();
+
+      if (day < 10) day = '0' + day;
+      if (month < 10) month = '0' + month;
+
+      _date = year + '-' + month + '-' + day;
+      $('#target_date').data(_date);
+      return _date;
+    };
+
   };
 
 }());
