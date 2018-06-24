@@ -113,7 +113,7 @@
       else {
         $('#body').html(msg.responseText);
       }
-        // self.message({error: 'Server is not available'});
+      // self.message({error: 'Server is not available'});
     };
 
     self.closeModals = function () {
@@ -340,7 +340,7 @@
 
       self.location.post('/profile/remove', null, successRemove, self.err);
     };
-    
+
     self.onLogout = function () {
       /** Logout a user */
       self.user(null);
@@ -350,5 +350,9 @@
 
   };
 
+  var ViewModel = function () {
+
+    
+  };
   ko.applyBindings(new ViewModel());
 }());
