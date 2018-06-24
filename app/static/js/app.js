@@ -235,6 +235,11 @@
       gapi.auth.signIn(self.googleParams);
     };
 
+    self.userValid = function () {
+
+      return self.user().email && self.user().first_name && self.user().last_name
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
