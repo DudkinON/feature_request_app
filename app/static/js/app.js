@@ -369,6 +369,17 @@
       } else if (self.worker.user()) self.worker.login(true);
     };
 
+    // TODO: get requests
+    self.getRequests = function () {
+
+      if (!self.worker.requests() || self.worker.requests().length === 0) {
+        self.worker.location.get('/requests',
+          function (res) {
+            self.worker.requests(res);
+          }, self.err);
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
