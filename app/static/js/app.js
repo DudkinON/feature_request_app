@@ -240,6 +240,11 @@
       return self.user().email && self.user().first_name && self.user().last_name
     };
 
+    self.passwordsValid = function () {
+
+      return self.passwords().p1 && self.passwords().p2 && self.passwords().p1 === self.passwords().p2;
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
