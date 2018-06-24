@@ -410,6 +410,21 @@
       }
     };
 
+    // TODO: create a new client
+    self.addClient = function () {
+
+      // check length of client name
+      if (self.worker.newClient().length > 3) {
+        // send query to back-end
+        self.worker.location.post('/clients/new', {name: self.worker.newClient()},
+          function (res) {
+            self.worker.clients(res);
+            self.worker.newClient('');
+          }, self.err)
+      }
+      else self.worker.message({error: 'Client name too short'});
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
