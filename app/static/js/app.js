@@ -426,7 +426,7 @@
     };
 
     self.updateClient = function () {
-
+      /** Update client name */
       if (self.worker.editClient().name < 3) {
         self.worker.message({error: 'Client name too short'});
       } else {
