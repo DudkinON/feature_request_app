@@ -438,7 +438,7 @@
     };
 
     self.removeClient = function (client) {
-
+      /** Remove a client */
       self.worker.location.post('/clients/delete', client,
         function (res) {
           self.worker.clients(res);
