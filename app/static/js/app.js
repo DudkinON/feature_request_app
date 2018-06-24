@@ -362,7 +362,7 @@
     self.data = self.worker.data;
 
     self.checkAuth = function () {
-
+      /** Checks that user was authorized */
       if (self.data().name === 'profile' && !self.worker.user()) {
         self.worker.onLogout();
         location.hash = '';
