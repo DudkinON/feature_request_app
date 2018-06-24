@@ -340,6 +340,13 @@
 
       self.location.post('/profile/remove', null, successRemove, self.err);
     };
+    
+    self.onLogout = function () {
+
+      self.user(null);
+      self.token(null);
+      self.login(false);
+    };
 
   };
 
