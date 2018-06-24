@@ -380,6 +380,17 @@
       }
     };
 
+    self.getCompletedRequests = function () {
+
+      if (!self.worker.completedRequests() ||
+        self.worker.completedRequests().length === 0) {
+        self.worker.location.get('/requests/get/completed',
+          function (res) {
+            self.worker.completedRequests(res);
+          }, self.err);
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
