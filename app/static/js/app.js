@@ -279,6 +279,17 @@
         self.message({error: 'Passwords does not match'});
       } else {
 
+        function successRegister(res) {
+
+          if (res.error !== undefined) self.message({error: res.error});
+          if (res.user) {
+            self.user(res.user);
+            self.token(res.token);
+            location.hash = '#profile';
+          } else {
+            self.message({error: 'server is not available'});
+          }
+        }
 
         var postData = {
           email: self.user().email,
