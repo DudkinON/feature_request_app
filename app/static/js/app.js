@@ -152,7 +152,10 @@
 
     // TODO: location and requests
     self.location = {
+      uri: function (url) {
 
+        return self.host + url + '?csrf=' + self.getCSRFToken();
+      }
     };
 
   };
