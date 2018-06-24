@@ -392,7 +392,7 @@
     };
 
     self.updateCompletedRequests = function () {
-
+      /** Update completed requests list */
       self.worker.location.get('/requests/get/completed',
         function (res) {
           self.worker.completedRequests(res);
