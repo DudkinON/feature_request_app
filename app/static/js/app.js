@@ -157,7 +157,7 @@
         return self.host + url + '?csrf=' + self.getCSRFToken();
       },
       get: function (url, callback, err) {
-        
+        /** prepare and execute a GET request */
         var data = {
           type: 'GET',
           url: self.location.uri(url),
