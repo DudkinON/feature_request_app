@@ -445,6 +445,17 @@
         }, self.err);
     };
 
+    // TODO: get product areas
+    self.getAreas = function () {
+
+      if (!self.worker.areas() || self.worker.areas().length === 0) {
+        self.worker.location.get('/areas',
+          function (res) {
+            self.worker.areas(res);
+          }, self.err);
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
