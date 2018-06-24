@@ -268,7 +268,10 @@
 
     // TODO: on register
     self.onRegister = function () {
-
+      /**
+       * Close modal window and checks data if user data is
+       * valid sends it to back-end
+       */
       self.closeModals();
       if (!self.userValid()) {
         self.message({error: 'Fields can not to be empty', info: null});
