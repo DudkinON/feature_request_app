@@ -236,7 +236,7 @@
     };
 
     self.userValid = function () {
-
+      /** check user is not empty */
       return self.user().email && self.user().first_name && self.user().last_name
     };
 
