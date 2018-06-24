@@ -354,7 +354,12 @@
     /**
      * View model. Management display data on a page
      */
- 
+    var self = this;
+
+    self.worker = new Worker();
+    self.routeName = ko.observable(null);
+    self.actionName = ko.observable(null);
+    self.data = self.worker.data;
   };
   ko.applyBindings(new ViewModel());
 }());
