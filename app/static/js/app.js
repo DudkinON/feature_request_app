@@ -266,6 +266,28 @@
       }
     };
 
+    // TODO: on register
+    self.onRegister = function () {
+
+      self.closeModals();
+      if (!self.userValid()) {
+        self.message({error: 'Fields can not to be empty', info: null});
+      } else if (!self.passwordsValid()) {
+        self.message({error: 'Passwords does not match'});
+      } else {
+
+
+        var postData = {
+          email: self.user().email,
+          first_name: self.user().first_name,
+          last_name: self.user().last_name,
+          password: self.passwords().p1
+        };
+
+        self.location.post('/registration', postData, successRegister, self.err);
+      }
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
