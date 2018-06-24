@@ -306,6 +306,26 @@
       }
     };
 
+    // TODO: update profile
+    self.onUpdateProfile = function () {
+
+      if (self.passwords().p1 && self.passwords().p1 === self.passwords().p2) {
+        function successUpdateProfile(res) {
+          if (res.error !== undefined) self.message({error: res.error});
+          if (res) self.user(res);
+          location.hash = '#profile'
+        }
+
+        self.location.post('/profile/update', {
+          user: self.user(),
+          password: self.passwords().p1
+        }, successUpdateProfile, self.err);
+      } else {
+        self.message({error: 'Passwords do not match'})
+      }
+
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
