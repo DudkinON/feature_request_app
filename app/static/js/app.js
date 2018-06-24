@@ -328,7 +328,10 @@
 
     // TODO: remove profile
     self.removeProfile = function () {
-
+      /**
+       * Remove user profile
+       * @param res: response from back-end
+       */
       function successRemove(res) {
         self.message({info: res.info});
         self.onLogout();
