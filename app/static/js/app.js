@@ -391,6 +391,14 @@
       }
     };
 
+    self.updateCompletedRequests = function () {
+
+      self.worker.location.get('/requests/get/completed',
+        function (res) {
+          self.worker.completedRequests(res);
+        }, self.err);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
