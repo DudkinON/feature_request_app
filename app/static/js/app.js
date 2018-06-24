@@ -172,7 +172,7 @@
         $.ajax(data);
       },
       post: function (url, data, callback, err) {
-        
+        /** prepare and execute a POST request */
         $.ajax({
           type: 'POST',
           url: self.location.uri(url),
