@@ -326,6 +326,18 @@
 
     };
 
+    // TODO: remove profile
+    self.removeProfile = function () {
+
+      function successRemove(res) {
+        self.message({info: res.info});
+        self.onLogout();
+        location.hash = '';
+      }
+
+      self.location.post('/profile/remove', null, successRemove, self.err);
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
