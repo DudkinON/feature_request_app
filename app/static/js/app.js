@@ -399,6 +399,17 @@
         }, self.err);
     };
 
+    // TODO: get clients
+    self.getClients = function () {
+
+      if (!self.worker.clients() || self.worker.clients().length === 0) {
+        self.worker.location.get('/clients',
+          function (res) {
+            self.worker.clients(res);
+          }, self.err);
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
