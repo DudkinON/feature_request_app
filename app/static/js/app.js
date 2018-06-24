@@ -456,6 +456,18 @@
       }
     };
 
+    // TODO: create a new product area
+    self.addProductArea = function () {
+
+      if (self.worker.newProductArea().length > 3) {
+        self.worker.location.post('/areas/new', {name: self.worker.newProductArea()},
+          function (res) {
+            self.worker.areas(res);
+            self.worker.newProductArea('');
+          }, self.err)
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
