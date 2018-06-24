@@ -196,6 +196,43 @@
       return $('#csrf-token').data('csrf-token');
     };
 
+    self.GoogleLogin = function () {
+
+      var googleMeta = document.getElementById('google-app-id');
+      var googleCallBack = function (result) {
+        /** Callback function for Google OAuth */
+        if (result['code']) {
+          function successLogin(res) {
+            /** Callback for success response from back-end  */
+            if (res) {
+              self.user(res.user);
+              self.token(res.token);
+              self.closeModals();
+              location.hash = '#profile';
+            } else if (res.error) {
+              self.message({error: res.error});
+              console.log(res.error);
+            }
+          }
+
+          self.location.post('/oauth/google', {code: result['code']},
+            successLogin, self.err)
+        }
+      };
+      // get Google OAuth configuration
+      self.googleParams = {
+        'clientid': googleMeta.getAttribute('data-clientid'),
+        'cookiepolicy': googleMeta.getAttribute('data-cookiepolicy'),
+        'redirecturi': googleMeta.getAttribute('data-redirecturi'),
+        'accesstype': googleMeta.getAttribute('data-accesstype'),
+        'approvalprompt': googleMeta.getAttribute('data-approvalprompt'),
+        'scope': googleMeta.getAttribute('data-scope'),
+        'callback': googleCallBack
+      };
+      gapi.auth.signIn(self.googleParams);
+    };
+
   };
 
+  ko.applyBindings(new ViewModel());
 }());
