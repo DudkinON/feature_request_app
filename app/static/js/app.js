@@ -170,6 +170,21 @@
           error: err
         };
         $.ajax(data);
+      },
+      post: function (url, data, callback, err) {
+        
+        $.ajax({
+          type: 'POST',
+          url: self.location.uri(url),
+          processData: false,
+          dataType: 'JSON',
+          data: ko.toJSON(data),
+          headers: {"Authorization": self.getCredentials()},
+          contentType: 'application/json; charset=utf-8',
+          statusCode: {401: self.updateToken},
+          success: callback,
+          error: err
+        });
       }
     };
 
