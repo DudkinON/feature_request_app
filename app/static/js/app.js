@@ -351,8 +351,10 @@
   };
 
   var ViewModel = function () {
-
-    
+    /**
+     * View model. Management display data on a page
+     */
+ 
   };
   ko.applyBindings(new ViewModel());
 }());
