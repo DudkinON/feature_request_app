@@ -458,7 +458,7 @@
 
     // TODO: create a new product area
     self.addProductArea = function () {
-
+      /** Create a new product area */
       if (self.worker.newProductArea().length > 3) {
         self.worker.location.post('/areas/new', {name: self.worker.newProductArea()},
           function (res) {
