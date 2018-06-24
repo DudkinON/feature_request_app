@@ -412,7 +412,7 @@
 
     // TODO: create a new client
     self.addClient = function () {
-
+      /** Create a new client */
       // check length of client name
       if (self.worker.newClient().length > 3) {
         // send query to back-end
