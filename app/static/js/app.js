@@ -189,7 +189,10 @@
     };
 
     self.getCSRFToken = function () {
-
+      /**
+       * Get csrf token string from the page
+       * @return: string
+       */
       return $('#csrf-token').data('csrf-token');
     };
 
