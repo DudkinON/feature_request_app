@@ -342,7 +342,7 @@
     };
     
     self.onLogout = function () {
-
+      /** Logout a user */
       self.user(null);
       self.token(null);
       self.login(false);
