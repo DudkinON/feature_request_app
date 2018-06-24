@@ -308,7 +308,7 @@
 
     // TODO: update profile
     self.onUpdateProfile = function () {
-
+      /** if equals users passwords sends updated user info to back-end */
       if (self.passwords().p1 && self.passwords().p1 === self.passwords().p2) {
         function successUpdateProfile(res) {
           if (res.error !== undefined) self.message({error: res.error});
