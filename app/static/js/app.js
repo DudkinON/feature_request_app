@@ -188,6 +188,11 @@
       }
     };
 
+    self.getCSRFToken = function () {
+
+      return $('#csrf-token').data('csrf-token');
+    };
+
   };
 
 }());
