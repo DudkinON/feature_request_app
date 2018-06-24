@@ -280,7 +280,11 @@
       } else {
 
         function successRegister(res) {
-
+          /**
+           * Function which will run after back-end return
+           * success response. Save user data, and a token
+           * from response. Redirect user to profile page.
+           */
           if (res.error !== undefined) self.message({error: res.error});
           if (res.user) {
             self.user(res.user);
