@@ -381,7 +381,7 @@
     };
 
     self.getCompletedRequests = function () {
-
+      /** Uploader for completed requests */
       if (!self.worker.completedRequests() ||
         self.worker.completedRequests().length === 0) {
         self.worker.location.get('/requests/get/completed',
