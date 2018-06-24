@@ -437,6 +437,14 @@
       }
     };
 
+    self.removeClient = function (client) {
+
+      self.worker.location.post('/clients/delete', client,
+        function (res) {
+          self.worker.clients(res);
+        }, self.err);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
