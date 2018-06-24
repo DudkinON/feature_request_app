@@ -150,6 +150,11 @@
       }, self.err);
     };
 
+    // TODO: location and requests
+    self.location = {
+
+    };
+
   };
 
 }());
