@@ -155,6 +155,21 @@
       uri: function (url) {
         /** add csrf token as a GET parameter to url */
         return self.host + url + '?csrf=' + self.getCSRFToken();
+      },
+      get: function (url, callback, err) {
+        
+        var data = {
+          type: 'GET',
+          url: self.location.uri(url),
+          processData: false,
+          dataType: 'JSON',
+          headers: {"Authorization": self.getCredentials()},
+          contentType: 'application/json; charset=utf-8',
+          statusCode: {401: self.updateToken},
+          success: callback,
+          error: err
+        };
+        $.ajax(data);
       }
     };
 
