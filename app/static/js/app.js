@@ -447,7 +447,7 @@
 
     // TODO: get product areas
     self.getAreas = function () {
-
+      /** Uploader for product areas list */
       if (!self.worker.areas() || self.worker.areas().length === 0) {
         self.worker.location.get('/areas',
           function (res) {
