@@ -246,7 +246,7 @@
     };
 
     self.onLogin = function () {
-
+      /** user authorization with login and password */
       self.closeModals();
       if (self.credentials().email && self.credentials().password) {
 
