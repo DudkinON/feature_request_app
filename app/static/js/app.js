@@ -401,7 +401,7 @@
 
     // TODO: get clients
     self.getClients = function () {
-
+      /** Uploader for clients list */
       if (!self.worker.clients() || self.worker.clients().length === 0) {
         self.worker.location.get('/clients',
           function (res) {
