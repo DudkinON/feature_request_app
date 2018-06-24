@@ -245,6 +245,27 @@
       return self.passwords().p1 && self.passwords().p2 && self.passwords().p1 === self.passwords().p2;
     };
 
+    self.onLogin = function () {
+
+      self.closeModals();
+      if (self.credentials().email && self.credentials().password) {
+
+        function successLogin(res) {
+          if (res.user !== undefined && res.token !== undefined) {
+            self.user(res.user);
+            self.token(res.token);
+            location.hash = '#profile';
+          } else {
+            self.message({error: 'Server is not available.'})
+          }
+        }
+
+        self.location.post('/token', null, successLogin, self.err);
+      } else {
+        self.message({error: 'Email or password can\'t to be empty'});
+      }
+    };
+
   };
 
   ko.applyBindings(new ViewModel());
