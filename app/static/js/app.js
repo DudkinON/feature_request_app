@@ -153,7 +153,7 @@
     // TODO: location and requests
     self.location = {
       uri: function (url) {
-
+        /** add csrf token as a GET parameter to url */
         return self.host + url + '?csrf=' + self.getCSRFToken();
       }
     };
