@@ -241,7 +241,7 @@
     };
 
     self.passwordsValid = function () {
-
+      /** check the passwords are equal */
       return self.passwords().p1 && self.passwords().p2 && self.passwords().p1 === self.passwords().p2;
     };
 
