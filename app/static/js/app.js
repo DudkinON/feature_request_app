@@ -360,6 +360,15 @@
     self.routeName = ko.observable(null);
     self.actionName = ko.observable(null);
     self.data = self.worker.data;
+
+    self.checkAuth = function () {
+
+      if (self.data().name === 'profile' && !self.worker.user()) {
+        self.worker.onLogout();
+        location.hash = '';
+      } else if (self.worker.user()) self.worker.login(true);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
