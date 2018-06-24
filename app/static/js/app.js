@@ -425,6 +425,18 @@
       else self.worker.message({error: 'Client name too short'});
     };
 
+    self.updateClient = function () {
+
+      if (self.worker.editClient().name < 3) {
+        self.worker.message({error: 'Client name too short'});
+      } else {
+        self.worker.location.post('/clients/edit', self.worker.editClient(),
+          function (res) {
+            self.worker.clients(res);
+          }, self.err)
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
