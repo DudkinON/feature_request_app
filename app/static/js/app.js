@@ -371,7 +371,7 @@
 
     // TODO: get requests
     self.getRequests = function () {
-
+      /** Uploader for list of requests */
       if (!self.worker.requests() || self.worker.requests().length === 0) {
         self.worker.location.get('/requests',
           function (res) {
