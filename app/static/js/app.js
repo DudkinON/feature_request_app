@@ -197,7 +197,10 @@
     };
 
     self.GoogleLogin = function () {
-
+      /**
+       * Provide a google authorization and send google token to back-end
+       * @type {HTMLElement | null}
+       */
       var googleMeta = document.getElementById('google-app-id');
       var googleCallBack = function (result) {
         /** Callback function for Google OAuth */
