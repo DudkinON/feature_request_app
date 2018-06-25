@@ -532,8 +532,6 @@ def delete_client():
     return jsonify(remove_client(data['id'])), 200
 
 
-
-
 @app.route('/clients')
 @csrf_protection
 @auth.login_required
@@ -639,8 +637,6 @@ def delete_product_area():
         return jsonify({'error': msg}), 200
 
     return jsonify(remove_product_area(data['id'])), 200
-
-
 
 
 @app.route('/areas')
