@@ -591,6 +591,12 @@
       $('#modalEditProductArea').modal();
     };
 
+    self.markAsCompletedModal = function (request) {
+
+      self.worker.markRequest(request);
+      $('#modalMarkAsComplete').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
