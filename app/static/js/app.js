@@ -504,6 +504,13 @@
       self.tooltip();
     };
 
+    self.onAboutPath = function () {
+
+      self.routeName(null);
+      self.data({name: 'about'});
+      self.actionName(null);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
