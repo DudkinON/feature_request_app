@@ -580,7 +580,7 @@
     };
 
     self.editClient = function (elem) {
-
+      /** Open edit client modal window */
       self.worker.editClient(elem);
       $('#editClientModal').modal();
     };
