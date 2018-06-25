@@ -469,7 +469,7 @@
     };
 
     self.updateProductArea = function () {
-
+      /** Update product area list */
       if (self.worker.editProductArea().name < 3) {
         self.worker.message({error: 'Product area too short'})
       } else {
