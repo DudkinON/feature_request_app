@@ -468,6 +468,20 @@
       }
     };
 
+    self.updateProductArea = function () {
+
+      if (self.worker.editProductArea().name < 3) {
+        self.worker.message({error: 'Product area too short'})
+      } else {
+        self.worker.location.post('/areas/edit', self.worker.editProductArea(),
+          function (res) {
+            if (res.error === undefined) {
+              self.worker.areas(res);
+            } else self.worker.message({error: res.error});
+          }, self.err);
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
