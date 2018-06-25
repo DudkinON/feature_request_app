@@ -511,6 +511,13 @@
       self.actionName(null);
     };
 
+    self.onLicensePath = function () {
+
+      self.routeName(null);
+      self.data({name: 'license'});
+      self.actionName(null);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
