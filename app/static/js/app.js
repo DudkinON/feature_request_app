@@ -585,6 +585,12 @@
       $('#editClientModal').modal();
     };
 
+    self.editProductArea = function (area) {
+
+      self.worker.editProductArea(area);
+      $('#modalEditProductArea').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
