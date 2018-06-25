@@ -625,6 +625,26 @@
       }, self.err)
     };
 
+    self.goTo = function (route) {
+
+      location.hash = '#profile/' + route;
+    };
+
+    self.openLink = function (path) {
+
+      return function () {
+        self.tooltip();
+        location.hash = '#profile' + path;
+      };
+    };
+
+    self.goToAction = function (path) {
+
+      return function () {
+        location.hash = '#profile/' + path;
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
