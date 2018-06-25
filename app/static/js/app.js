@@ -597,6 +597,12 @@
       $('#modalMarkAsComplete').modal();
     };
 
+    self.removeRequestModal = function (request) {
+
+      self.worker.removeRequest(request);
+      $('#modalRemoveRequest').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
