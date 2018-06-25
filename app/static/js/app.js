@@ -706,6 +706,7 @@
     };
 
     self.openRequest = function (request) {
+      /** Passes given request data to the storage and opens request page */
 
       // define request info
       self.worker.requestInfo(request);
