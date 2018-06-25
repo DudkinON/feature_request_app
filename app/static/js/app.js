@@ -539,7 +539,7 @@
     };
 
     self.router = new Sammy(function () {
-
+      /** Define routes and run router */
       this.get('#profile', self.onProfilePath);
       this.get('#about', self.onAboutPath);
       this.get('#license', self.onLicensePath);
