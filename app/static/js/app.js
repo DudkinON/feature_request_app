@@ -505,7 +505,7 @@
     };
 
     self.onAboutPath = function () {
-
+      /** On display about page */
       self.routeName(null);
       self.data({name: 'about'});
       self.actionName(null);
