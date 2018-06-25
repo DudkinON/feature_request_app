@@ -521,10 +521,17 @@ def delete_client():
         return jsonify({'error': "Cannot define client id"}), 200
 
     # check client exist
-    if client_exist(data['id']):
-        return jsonify(remove_client(data['id'])), 200
-    else:
+    if not client_exist(data['id']):
         return jsonify({'error': "The client does not exist"}), 200
+
+    # check that every request does not use current client
+    if check_client_relation(data['id']):
+        msg = "This client is currently being used in this requests"
+        return jsonify({'error': msg}), 200
+
+    return jsonify(remove_client(data['id'])), 200
+
+
 
 
 @app.route('/clients')
@@ -623,10 +630,17 @@ def delete_product_area():
         return jsonify({'error': msg}), 200
 
     # check product area exist
-    if product_area_exist(data['id']):
-        return jsonify(remove_product_area(data['id'])), 200
-    else:
+    if not product_area_exist(data['id']):
         return jsonify({'error': "The product area does not exist"}), 200
+
+    # check that current product area id isn't being used already in request
+    if check_product_area_relation(data['id']):
+        msg = "This product area is currently being used in a request(s)"
+        return jsonify({'error': msg}), 200
+
+    return jsonify(remove_product_area(data['id'])), 200
+
+
 
 
 @app.route('/areas')

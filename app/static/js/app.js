@@ -441,7 +441,8 @@
       /** Remove a client */
       self.worker.location.post('/clients/delete', client,
         function (res) {
-          self.worker.clients(res);
+        if (res.error !== undefined) self.worker.message({error: res.error});
+        else self.worker.clients(res);
         }, self.err);
     };
 
@@ -486,7 +487,8 @@
       /** Remove product area */
       self.worker.location.post('/areas/delete', area,
         function (res) {
-          self.worker.areas(res);
+        if (res.error !== undefined) self.worker.message({error: res.error});
+        else self.worker.areas(res);
         }, self.err);
     };
 
