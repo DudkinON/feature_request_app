@@ -563,6 +563,12 @@
       $('#modalLogin').modal();
     };
 
+    // TODO: open register form
+    self.modalRegister = function () {
+      self.worker.user({email: null, first_name: null, last_name: null});
+      $('#modalRegister').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
