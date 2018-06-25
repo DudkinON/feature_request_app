@@ -592,7 +592,7 @@
     };
 
     self.markAsCompletedModal = function (request) {
-
+      /** Open dialog for mark request as completed */
       self.worker.markRequest(request);
       $('#modalMarkAsComplete').modal();
     };
