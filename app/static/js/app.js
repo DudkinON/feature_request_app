@@ -483,7 +483,7 @@
     };
 
     self.removeProductArea = function (area) {
-
+      /** Remove product area */
       self.worker.location.post('/areas/delete', area,
         function (res) {
           self.worker.areas(res);
