@@ -538,6 +538,18 @@
       self.tooltip();
     };
 
+    self.router = new Sammy(function () {
+
+      this.get('#profile', self.onProfilePath);
+      this.get('#about', self.onAboutPath);
+      this.get('#license', self.onLicensePath);
+      this.get('#profile/:route', self.onRoute);
+      this.get('#profile/:route/:action', self.onAction);
+      this.get('', function () {
+        this.app.runRoute('get', '#about');
+      });
+    }).run();
+
   };
   ko.applyBindings(new ViewModel());
 }());
