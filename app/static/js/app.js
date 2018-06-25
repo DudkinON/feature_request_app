@@ -569,6 +569,11 @@
       $('#modalRegister').modal();
     };
 
+    // TODO: open a new client form
+    self.modalNewClient = function () {
+      $('#newClientModal').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
