@@ -441,8 +441,8 @@
       /** Remove a client */
       self.worker.location.post('/clients/delete', client,
         function (res) {
-        if (res.error !== undefined) self.worker.message({error: res.error});
-        else self.worker.clients(res);
+          if (res.error !== undefined) self.worker.message({error: res.error});
+          else self.worker.clients(res);
         }, self.err);
     };
 
@@ -487,8 +487,8 @@
       /** Remove product area */
       self.worker.location.post('/areas/delete', area,
         function (res) {
-        if (res.error !== undefined) self.worker.message({error: res.error});
-        else self.worker.areas(res);
+          if (res.error !== undefined) self.worker.message({error: res.error});
+          else self.worker.areas(res);
         }, self.err);
     };
 
@@ -572,6 +572,11 @@
     // TODO: open a new client form
     self.modalNewClient = function () {
       $('#newClientModal').modal();
+    };
+
+    // TODO: open a new product area form
+    self.modalNewProductArea = function () {
+      $('#modalNewProductArea').modal();
     };
 
   };
