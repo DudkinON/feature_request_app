@@ -555,6 +555,9 @@
       self.worker.message({error: null, info: null});
     };
 
+    // TODO: create a link for error message object
+    self.err = self.worker.err;
+
   };
   ko.applyBindings(new ViewModel());
 }());
