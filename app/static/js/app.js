@@ -598,7 +598,7 @@
     };
 
     self.removeRequestModal = function (request) {
-
+      /** Open dialog for remove request window */
       self.worker.removeRequest(request);
       $('#modalRemoveRequest').modal();
     };
