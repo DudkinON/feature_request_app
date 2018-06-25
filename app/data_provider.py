@@ -191,7 +191,12 @@ def update_product_area(area):
 
 
 def check_product_area_relation(area_id):
+    """
+    Checks that no one request does not use current product area
 
+    :param area_id: integer
+    :return bool:
+    """
     return len(query(Request).filter_by(product_area=area_id).all()) > 0
 
 
