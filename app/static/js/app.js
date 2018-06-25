@@ -646,7 +646,9 @@
     };
 
     self.addRequest = function () {
-
+      /**
+       * Validate user input for a request and sends POST request to back-end
+       */
       var request = self.worker.newRequest();
 
       if (request.title.length < 3) {
