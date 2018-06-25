@@ -518,6 +518,15 @@
       self.actionName(null);
     };
 
+    self.onRoute = function () {
+
+      self.routeName(this.params.route);
+      self.data({name: 'profile'});
+      self.actionName(null);
+      self.checkAuth();
+      self.tooltip();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
