@@ -615,7 +615,7 @@
     };
 
     self.markRequest = function () {
-
+      /** Sends POST request to back-end to mark a request as completed */
       var data = {id: self.worker.markRequest()['id']};
       self.worker.location.post('/requests/complete', data, function (res) {
         if (res.error === undefined) {
