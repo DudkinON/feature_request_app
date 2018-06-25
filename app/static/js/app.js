@@ -814,7 +814,7 @@
     };
 
     self.tooltip = function () {
-
+      /** Checks that device is not touch type, if not run tooltip. */
       if ('ontouchstart' in document.documentElement) {
         // Block tooltip event on touch devices
         return null;
