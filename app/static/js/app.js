@@ -716,7 +716,11 @@
     };
 
     self.editRequest = function (request) {
-
+      /**
+       * Prepare fields for a client and product area
+       * save the data and redirect user to the request
+       * edit page
+       */
       var date = self.worker.getDate(request.target_date);
       self.worker.editClient(request.client);
       self.worker.selectedProductArea(request.product_area);
