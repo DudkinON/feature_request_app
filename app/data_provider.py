@@ -190,6 +190,11 @@ def update_product_area(area):
     return get_product_areas()
 
 
+def check_product_area_relation(area_id):
+
+    return len(query(Request).filter_by(product_area=area_id).all()) > 0
+
+
 def remove_product_area(area_id):
     """
     Remove product area by id
