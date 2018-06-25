@@ -586,7 +586,7 @@
     };
 
     self.editProductArea = function (area) {
-
+      /** Open edit product area modal window */
       self.worker.editProductArea(area);
       $('#modalEditProductArea').modal();
     };
