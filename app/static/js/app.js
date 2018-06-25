@@ -530,7 +530,7 @@
     };
 
     self.onAction = function () {
-
+      /** On display any action */
       self.routeName(this.params.route);
       self.data({name: 'profile'});
       self.actionName(this.params.action);
