@@ -603,6 +603,17 @@
       $('#modalRemoveRequest').modal();
     };
 
+    self.removeRequest = function () {
+
+      var data = {id: self.worker.removeRequest()['id']};
+      self.worker.location.post('/requests/delete', data, function (res) {
+        if (res.error === undefined) {
+          self.worker.requests(res);
+          self.updateCompletedRequests();
+        } else self.worker.message({error: res.error});
+      });
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
