@@ -112,6 +112,11 @@ def update_client(client_info):
     return get_clients()
 
 
+def check_client_relation(client_id):
+
+    return len(query(Request).filter_by(client=client_id).all()) > 0
+
+
 def remove_client(client_id):
     """
     Remove client by client id and return list of clients
