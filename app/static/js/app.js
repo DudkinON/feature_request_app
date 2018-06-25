@@ -715,6 +715,42 @@
       location.hash = '#profile/requests/info';
     };
 
+    self.editRequest = function (request) {
+
+      var date = self.worker.getDate(request.target_date);
+      self.worker.editClient(request.client);
+      self.worker.selectedProductArea(request.product_area);
+      self.worker.editRequest({
+        id: request.id,
+        title: request.title,
+        description: request.description,
+        client: self.worker.editClient(),
+        target_date: date,
+        client_priority: request.client_priority,
+        product_area: request.product_area
+      });
+      $('#edit_client').change(function () {
+        var client = self.worker.editRequest().client;
+        if (client !== undefined) {
+          self.worker.editClient(client);
+          $('#edit_client_priority').val(client.client_priority);
+        }
+      });
+      $('#edit_product_area').change(function () {
+        var request = self.worker.editRequest();
+        if (request !== undefined) {
+          self.worker.selectedProductArea(request.product_area);
+        }
+      });
+      $('#edit_client_priority').change(function () {
+        var client = self.worker.editClient();
+        client.client_priority = self.worker.editRequest().client_priority;
+        self.worker.editClient(client);
+      });
+
+      location.hash = '#profile/requests/edit';
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
