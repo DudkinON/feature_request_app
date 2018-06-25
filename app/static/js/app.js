@@ -490,6 +490,20 @@
         }, self.err);
     };
 
+    // TODO: route functions
+    self.onProfilePath = function () {
+
+      self.routeName(null);
+      self.data({name: 'profile'});
+      self.actionName(null);
+      self.checkAuth();
+      self.getRequests();
+      self.getCompletedRequests();
+      self.getClients();
+      self.getAreas();
+      self.tooltip();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
