@@ -512,7 +512,7 @@
     };
 
     self.onLicensePath = function () {
-
+      /** On display license page */
       self.routeName(null);
       self.data({name: 'license'});
       self.actionName(null);
