@@ -755,6 +755,61 @@
       location.hash = '#profile/requests/edit';
     };
 
+    self.updateRequest = function () {
+      
+        // define variables
+      var data;
+      var date;
+      var request = self.worker.editRequest();
+
+      if (request.client !== undefined) self.worker.editClient(request.client);
+      if (request.product_area !== undefined) {
+        self.worker.selectedProductArea(request.product_area);
+      }
+
+      if (self.worker.isDate(request.target_date)) {
+
+        var oldDate = request.target_date;
+        var dateArray = oldDate.split("-");
+        date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+
+      } else self.worker.message({error: "The date has the wrong format"});
+
+      if (request.title.length < 3) self.worker.message({error: "Title is too short"});
+      if (request.description.length < 3) self.worker.message({error: "Description is too short"});
+      if (request.target_date === undefined) self.worker.message({error: "Must have a date"});
+      if (Number(self.worker.editClient().client_priority) < 1) self.worker.message({error: "Must have a priority"});
+
+      var msg = self.worker.message();
+
+      if (msg === undefined || msg.error === undefined) {
+        data = {
+          id: request.id,
+          title: request.title,
+          description: request.description,
+          client: self.worker.editClient(),
+          target_date: date,
+          product_area: self.worker.selectedProductArea()
+        };
+        request.client_priority = self.worker.editClient().client_priority;
+        request.client = self.worker.editClient();
+        request.product_area = self.worker.selectedProductArea();
+        self.worker.editRequest(request);
+
+        self.worker.location.post('/requests/edit', data,
+          function (res) {
+            if (res.error) {
+              self.worker.message({error: res.error});
+            }
+            else {
+              self.worker.requests(res);
+              self.worker.message({info: "Request was updated"});
+              location.hash = '#profile/requests';
+            }
+          }, self.err)
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
