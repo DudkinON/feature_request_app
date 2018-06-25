@@ -604,7 +604,7 @@
     };
 
     self.removeRequest = function () {
-
+      /** Sends POST request to back-end to remove a request */
       var data = {id: self.worker.removeRequest()['id']};
       self.worker.location.post('/requests/delete', data, function (res) {
         if (res.error === undefined) {
