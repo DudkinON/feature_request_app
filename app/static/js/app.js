@@ -482,6 +482,14 @@
       }
     };
 
+    self.removeProductArea = function (area) {
+
+      self.worker.location.post('/areas/delete', area,
+        function (res) {
+          self.worker.areas(res);
+        }, self.err);
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
