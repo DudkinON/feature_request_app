@@ -558,6 +558,11 @@
     // TODO: create a link for error message object
     self.err = self.worker.err;
 
+    // TODO: open login form
+    self.modalLogin = function () {
+      $('#modalLogin').modal();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
