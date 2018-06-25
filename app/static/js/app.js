@@ -492,7 +492,7 @@
 
     // TODO: route functions
     self.onProfilePath = function () {
-
+      /** On display profile page */
       self.routeName(null);
       self.data({name: 'profile'});
       self.actionName(null);
