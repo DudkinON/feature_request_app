@@ -813,6 +813,15 @@
       }
     };
 
+    self.tooltip = function () {
+
+      if ('ontouchstart' in document.documentElement) {
+        // Block tooltip event on touch devices
+        return null;
+      } else {
+        $('.tltip').tooltip();
+      }
+    }
   };
   ko.applyBindings(new ViewModel());
 }());
