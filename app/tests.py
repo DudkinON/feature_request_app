@@ -976,6 +976,16 @@ class TestApp(TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue('error' in r.json())
 
+        # test case for removal of client that is using id in request
+        r = self.post('/clients/delete', storage.get_client()[0])
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
+        # test case for removal of product area using id in request
+        r = self.post('/areas/delete', storage.get_product_area())
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue('error' in r.json())
+
         # remove requests
         for request in requests:
             r = self.post('/requests/delete', request)
