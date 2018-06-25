@@ -529,6 +529,15 @@
       self.tooltip();
     };
 
+    self.onAction = function () {
+
+      self.routeName(this.params.route);
+      self.data({name: 'profile'});
+      self.actionName(this.params.action);
+      self.checkAuth();
+      self.tooltip();
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
