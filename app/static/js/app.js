@@ -705,6 +705,15 @@
       }
     };
 
+    self.openRequest = function (request) {
+
+      // define request info
+      self.worker.requestInfo(request);
+
+      // redirect user
+      location.hash = '#profile/requests/info';
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
