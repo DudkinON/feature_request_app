@@ -614,6 +614,17 @@
       });
     };
 
+    self.markRequest = function () {
+
+      var data = {id: self.worker.markRequest()['id']};
+      self.worker.location.post('/requests/complete', data, function (res) {
+        if (res.error === undefined) {
+          self.worker.requests(res);
+          self.updateCompletedRequests();
+        } else self.worker.message({error: res.error});
+      }, self.err)
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
