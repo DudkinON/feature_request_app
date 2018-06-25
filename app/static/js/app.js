@@ -825,7 +825,9 @@
   };
 
   $(document).ready(function () {
-
+    /**
+     * When page is loaded display content and run tooltip method
+     */
     $('#body').removeClass('hide');
     if ('ontouchstart' in document.documentElement) {
       // Block tooltip event on touch devices
