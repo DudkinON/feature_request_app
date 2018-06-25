@@ -626,12 +626,12 @@
     };
 
     self.goTo = function (route) {
-
+      /** Redirect user to a route */
       location.hash = '#profile/' + route;
     };
 
     self.openLink = function (path) {
-
+      /** Run tooltip and redirect user to route */
       return function () {
         self.tooltip();
         location.hash = '#profile' + path;
@@ -639,7 +639,7 @@
     };
 
     self.goToAction = function (path) {
-
+      /** Redirect user with given path */
       return function () {
         location.hash = '#profile/' + path;
       }
