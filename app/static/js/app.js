@@ -756,7 +756,10 @@
     };
 
     self.updateRequest = function () {
-      
+      /**
+       * Validate users input, and sends POST request to the back-end
+       */
+
         // define variables
       var data;
       var date;
