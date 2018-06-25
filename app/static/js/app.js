@@ -645,6 +645,64 @@
       }
     };
 
+    self.addRequest = function () {
+
+      var request = self.worker.newRequest();
+
+      if (request.title.length < 3) {
+        self.worker.message({error: "Title too short"});
+      }
+
+      if (request.description.length < 10) {
+        self.worker.message({error: "Description too short"});
+      }
+
+      var client = self.worker.chosenClient();
+
+      if (client && !client.client_priority) {
+        self.worker.message({error: "Client priority can't be empty"});
+      }
+
+      if (client && Number(client.client_priority) < 1) {
+        self.worker.message({error: "Client priority can't be 0"});
+      }
+
+      if (!request.target_date) {
+        self.worker.message({error: "Set up target date"})
+      }
+
+      if (self.worker.isDate(request.target_date)) {
+
+        var oldDate = request.target_date;
+        var dateArray = oldDate.split("-");
+        var newDate = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+
+        self.worker.newRequest({
+          title: request.title,
+          description: request.description,
+          client: self.worker.chosenClient(),
+          target_date: newDate,
+          product_area: request.product_area
+        });
+      } else self.worker.message({error: "The date has the wrong format"});
+
+      var msg = self.worker.message();
+
+      if (msg === undefined || msg.error === undefined) {
+        self.worker.location.post('/requests/new', self.worker.newRequest(),
+          function (res) {
+            if (res.error) self.worker.message({error: res.error});
+            else {
+              self.getClients();
+              self.worker.initRequest();
+              self.worker.requests(res);
+              self.worker.chosenClient(null);
+              location.hash = '#profile/requests';
+            }
+          });
+      }
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
