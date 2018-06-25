@@ -550,6 +550,11 @@
       });
     }).run();
 
+    // TODO: close alert messages
+    self.closeAlert = function () {
+      self.worker.message({error: null, info: null});
+    };
+
   };
   ko.applyBindings(new ViewModel());
 }());
