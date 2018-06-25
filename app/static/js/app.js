@@ -519,7 +519,7 @@
     };
 
     self.onRoute = function () {
-
+      /** On display any route */
       self.routeName(this.params.route);
       self.data({name: 'profile'});
       self.actionName(null);
