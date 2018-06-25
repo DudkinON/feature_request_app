@@ -113,7 +113,12 @@ def update_client(client_info):
 
 
 def check_client_relation(client_id):
+    """
+    Check that every request does not use current client
 
+    :param client_id: integer
+    :return bool:
+    """
     return len(query(Request).filter_by(client=client_id).all()) > 0
 
 
