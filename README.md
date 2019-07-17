@@ -1,7 +1,6 @@
 # Feature Request App
 
->This is an implementation of the assignment for
-[a request feature app](https://github.com/IntuitiveWebSolutions/EngineeringMidLevel)
+>This is an implementation of the assignment for a request feature app
 The app is a single page application that uses KnockoutJS on front-end
 side, and Flask, SQLAlchemy for the RESTFul back-end. In addition
 to all project requirements, Google auth, CSRF protection, HTTP
